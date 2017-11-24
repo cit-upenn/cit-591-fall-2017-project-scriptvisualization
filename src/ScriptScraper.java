@@ -36,14 +36,23 @@ public class ScriptScraper {
 	 * @throws IOException
 	 */
 	private Script scrapeScript(String url) throws IOException {
-		 
 		Document doc = Jsoup.connect(url).get();
-		Elements scriptContent = doc.getElementsByTag("pre");
+		//remove emty tags
+		for (Element element : doc.select("*")) {
+		    if (!element.hasText()) {
+		        element.remove();
+		    }
+		}
+		//remove script tags
+		doc.getElementsByTag("script").remove();
+		//remove title tags
+		doc.getElementsByTag("title").remove();
+		Elements scriptContent = doc.getElementsByClass("scrtext");
 		StringBuilder scripts = new StringBuilder();
 		for(Element script : scriptContent) {
 			scripts.append(script.html());
 		}
-		return new Script(scripts.toString());
+		return new Script(scripts.toString().replaceAll("[\\n]+", "\n"));
 	}
 	
 	
