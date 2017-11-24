@@ -19,13 +19,24 @@ public class MovieLists {
 	HashMap<String, String> availableMovies;
 	
 	/**
-	 * The constructor initializes all instance variables
+	 * The constructor initializes all instance variables given searchKey
 	 * @param searchKey
 	 * @throws IOException
 	 */
 	public MovieLists(String searchKey) throws IOException {
 		availableMovies = new HashMap<>();
 		moviesPage = Jsoup.connect("http://www.imsdb.com/search.php?query="+ searchKey).get();
+		getAvailableMovies();
+	}
+	
+	/**
+	 * The constructor initializes all instance variables given genre
+	 * @param searchKey
+	 * @throws IOException
+	 */
+	public MovieLists(Genre genre) throws IOException {
+		availableMovies = new HashMap<>();
+		moviesPage = Jsoup.connect("http://www.imsdb.com/genre/"+ genre).get();
 		getAvailableMovies();
 	}
 

@@ -7,7 +7,7 @@ public class Test {
 		try {
 			ScriptScraper ss = new ScriptScraper("http://www.imsdb.com/transcripts/South-Park-South-Park-Is-Gay!.html");
 			ss.writeScriptToFile();
-			MovieLists ml = new MovieLists("back");
+			MovieLists ml = new MovieLists(Genre.FILMNOIR);
 			ml.printMovieList();
 		} catch (IOException e) {
 			e.printStackTrace();
