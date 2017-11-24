@@ -2,6 +2,15 @@
 public enum Genre {
 	
 	ACTION,ADVENTURE, ANIMATION, COMEDY, CRIME, DRAMA, FAMILY, FANTASY, 
-	FILMNOIR, HORROR, MUSICAL, MYSTERY, ROMANCE, SCIFI,SHORT, THRILLER,WAR,WESTERN
+	FILMNOIR{
+		public String toString() {
+			return "FILM-NOIR";
+		}
+	}, HORROR, MUSICAL, MYSTERY, ROMANCE, 
+	SCIFI{
+		public String toString() {
+			return "SCI-FI";
+		}
+	},SHORT, THRILLER,WAR,WESTERN
 
 }
