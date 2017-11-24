@@ -5,10 +5,11 @@ public class Test {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			ScriptScraper ss = new ScriptScraper("http://www.imsdb.com/scripts/La-La-Land.html");
+			ScriptScraper ss = new ScriptScraper("http://www.imsdb.com/transcripts/South-Park-South-Park-Is-Gay!.html");
 			ss.writeScriptToFile();
+			MovieLists ml = new MovieLists("back");
+			ml.printMovieList();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
