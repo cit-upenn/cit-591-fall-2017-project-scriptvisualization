@@ -1,0 +1,17 @@
+{
+  "language": "en",
+  "usage": {
+    "features": 1
+  },
+  "entities": [
+    {
+      "type": "Person",
+      "relevance": 0.907835,
+      "count": 64,
+      "text": "Rafe",
+      "sentiment": {
+        "score": -0.225633
+      }
+    }
+  ]
+}
