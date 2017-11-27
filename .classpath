@@ -5,5 +5,6 @@
 	<classpathentry kind="lib" path="/Users/yueyin/Desktop/jsoup-1.11.2.jar"/>
 	<classpathentry kind="lib" path="/Users/syou/Downloads/java-sdk-4.0.0-jar-with-dependencies.jar"/>
 	<classpathentry kind="lib" path="/Users/yueyin/eclipse-workspace/scriptVisualization/jsoup-1.11.2.jar"/>
+	<classpathentry kind="lib" path="/Users/yueyin/eclipse-workspace/scriptVisualization/java-sdk-4.0.0-jar-with-dependencies.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

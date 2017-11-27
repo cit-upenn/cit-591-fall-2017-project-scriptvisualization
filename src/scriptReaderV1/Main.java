@@ -1,4 +1,4 @@
-package v1;
+package scriptReaderV1;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,7 +23,7 @@ public class Main {
 		
 		NaturalLangUnderstanding nlu = new NaturalLangUnderstanding();
 		PrintWriter pw2 = new PrintWriter ("SampleNaturalLangUnderstanding.txt");
-		pw2.println(nlu.getNaturalLangUnderstanding(inputFile));
+		//pw2.println(nlu.getNaturalLangUnderstanding(inputFile));
 		pw2.close();
 	}
 }
