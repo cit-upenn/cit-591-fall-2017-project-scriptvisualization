@@ -139,7 +139,7 @@ public class ScriptReader {
 		
 
 //		System.out.println(roleLines);
-		System.out.println(roleLines.get("DANNY"));
+//		System.out.println(roleLines.get("DANNY"));
 		return roleLines;
 	}
 }
