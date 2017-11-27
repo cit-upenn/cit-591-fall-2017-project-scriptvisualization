@@ -125,6 +125,7 @@ public class ScriptReader {
 //			 System.out.println(s);
 //			 System.out.println("======");
 			for (String name : getNames(inputFile).keySet()) {
+				//this part has flaws, not done yet
 				if (s.trim().startsWith(name)&&!s.contains("'S")) {
 					if (roleLines.get(name) == null) {
 						roleLines.put(name, s.replaceAll(name, "").replaceAll("</b>", "").trim());
