@@ -4,3 +4,5 @@ movielists： 把搜索关键词作为constructor的参数，返回一个hashmap
 
 Siyang Note:
 I have not combined my java file with Yue's yet.
+
+Sample output text files are rough outputs and may contain unnecessary details. Will polish them.
