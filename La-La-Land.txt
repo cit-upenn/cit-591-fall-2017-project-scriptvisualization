@@ -1,3 +1,5 @@
+<pre>
+
 <b>                              LA LA LAND
 </b>
 
@@ -4748,4 +4750,14 @@ D148     -- and emerge into NIGHTTIME PARIS. All painted. Mia and
 <b>      IRIS FADE OUT.
 </b>
 <b>                               THE END
-</b>
+</b></pre> 
+<table width="85%" border="0" align="center" cellpadding="5" cellspacing="0" class="body" style="BORDER-TOP: #000000 1px solid; BORDER-RIGHT: #000000 1px solid; BORDER-LEFT: #000000 1px solid; BORDER-BOTTOM: #000000 1px solid;"> 
+ <tbody>
+  <tr> 
+   <td><h1>La La Land</h1> <b>Writers</b> : &nbsp;&nbsp;<a href="/writer.php?w=Damien Chazelle" title="Scripts by Damien Chazelle">Damien Chazelle</a> <b>Genres</b> : &nbsp;&nbsp;<a href="/genre/Comedy" title="Comedy Scripts">Comedy</a>&nbsp;&nbsp;<a href="/genre/Drama" title="Drama Scripts">Drama</a>&nbsp;&nbsp;<a href="/genre/Musical" title="Musical Scripts">Musical</a> <a href="http://www.imsdb.com/Movie Scripts/La La Land Script.html#comments" title="La La Land comments">User Comments</a> </td> 
+  </tr>
+ </tbody>
+</table>  
+<div align="center"> 
+ <a href="http://www.imsdb.com" title="Internet Movie Script Database"> Back to IMSDb</a> 
+</div>
