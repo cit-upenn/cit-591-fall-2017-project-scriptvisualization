@@ -1,5 +1,10 @@
 package scriptReaderV1;
-
+/**
+ * This class reads in scripts.
+ * Gets names of key roles and their occurrences in the script.
+ * Gets characters' lines.
+ * @author syou
+ */
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,10 +21,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ScriptReader {
+	/**
+	 * Constructor without parameter
+	 */
 	public ScriptReader() {
 
 	}
 
+	/**
+	 * This method gets top ten most important character names and their occurrences in the script
+	 * @param inputFile input script txt file
+	 * @return TreeMap, key - character name, value - number of occurrences
+	 * @throws IOException
+	 */
 	public TreeMap<String, Integer> getNames(String inputFile) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(inputFile));
 		StringBuilder sb = new StringBuilder();
@@ -77,6 +91,12 @@ public class ScriptReader {
 
 	}
 
+	/**
+	 * This method gets all lines of a character in a script 
+	 * @param inputFile input script txt file
+	 * @return HashMap, key - character name, value - character lines
+	 * @throws IOException
+	 */
 	public HashMap<String, String> getLines(String inputFile) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(inputFile));
 		StringBuilder sb = new StringBuilder();
