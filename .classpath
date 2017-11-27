@@ -2,9 +2,7 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="/Users/yueyin/Desktop/jsoup-1.11.2.jar"/>
-	<classpathentry kind="lib" path="/Users/syou/Downloads/java-sdk-4.0.0-jar-with-dependencies.jar"/>
-	<classpathentry kind="lib" path="/Users/yueyin/eclipse-workspace/scriptVisualization/jsoup-1.11.2.jar"/>
-	<classpathentry kind="lib" path="/Users/yueyin/eclipse-workspace/scriptVisualization/java-sdk-4.0.0-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="jsoup-1.11.2.jar"/>
+	<classpathentry kind="lib" path="java-sdk-4.0.0-jar-with-dependencies.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
