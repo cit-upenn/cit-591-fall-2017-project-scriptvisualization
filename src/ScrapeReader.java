@@ -4,11 +4,11 @@ import java.util.ArrayList;
  * @author yueyin
  *
  */
-public class ScrapeReader2 {
+public class ScrapeReader {
 	
 	ArrayList<ScriptChunk> scriptChunks = new ArrayList<>();
 	
-	public ScrapeReader2(String content) {
+	public ScrapeReader(String content) {
 		// TODO Auto-generated constructor stub
 		splitScriptToChunks(content);
 	}

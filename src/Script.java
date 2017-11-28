@@ -12,7 +12,7 @@ public class Script {
 	
 	public Script(String content) {
 		this.content = content;
-		ScrapeReader2 scriptReader = new ScrapeReader2(content);
+		ScrapeReader scriptReader = new ScrapeReader(content);
 		characters = scriptReader.getCharacters();
 	}
 	
