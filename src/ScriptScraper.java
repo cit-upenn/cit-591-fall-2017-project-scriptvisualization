@@ -1,6 +1,8 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -47,15 +49,15 @@ public class ScriptScraper {
 		doc.getElementsByTag("script").remove();
 		//remove title tags
 		doc.getElementsByTag("title").remove();
-		Elements scriptContent = doc.getElementsByClass("scrtext");
+		Elements scriptContent = doc.getElementsByTag("pre");
 		StringBuilder scripts = new StringBuilder();
 		for(Element script : scriptContent) {
 			scripts.append(script.html());
 		}
-		return new Script(scripts.toString().replaceAll("[\\n]+", "\n"));
+		return new Script(scripts.toString().replaceAll("[\\n]+", "\n").replaceAll("</b>|<pre>|</pre>", "").trim()); 
 	}
 	
-	
+
 	/**
 	 * Write the script to a file, file name is the movie name
 	 * @throws FileNotFoundException
