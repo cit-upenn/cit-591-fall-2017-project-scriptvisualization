@@ -54,7 +54,7 @@ public class ScriptScraper {
 		for(Element script : scriptContent) {
 			scripts.append(script.html());
 		}
-		return new Script(scripts.toString().replaceAll("[\\n]+", "\n").replaceAll("</b>|<pre>|</pre>", "").trim()); 
+		return new Script(scripts.toString().replaceAll("[\\n]+", "\n").replaceAll("</b>|<pre>|</pre>", "").replaceAll("\\n[\\s]+\\n", "\n").trim()); 
 	}
 	
 
