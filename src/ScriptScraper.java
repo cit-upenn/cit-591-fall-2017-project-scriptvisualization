@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,37 +10,21 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 /**
- * This class can extract a script from given url and write it out to a txt file
+ * This class can scrape scripts from http://www.imsdb.com/ 
  * @author yueyin
  *
  */
 public class ScriptScraper {
-	
-	String url;
-	Script script;
-	String scriptName;
-	
-	/**
-	 * The constructor initialize url, scripname and script
-	 * @param url
-	 * @throws IOException
-	 */
-	public ScriptScraper(String url) throws IOException {
-		this.url = url;
-		scriptName = getScriptName();
-		script = scrapeScript(url);
-		 
-	}
 
 	/**
-	 * Extract script from given url, create  and return an object of Script out of the scraped content
+	 * Extract script from given url, return string of the script 
 	 * @param url
 	 * @return
 	 * @throws IOException
 	 */
-	private Script scrapeScript(String url) throws IOException {
+	public String scrapeScript(String url) throws IOException {
 		Document doc = Jsoup.connect(url).get();
-		//remove emty tags
+		//remove empty tags
 		for (Element element : doc.select("*")) {
 		    if (!element.hasText()) {
 		        element.remove();
@@ -54,29 +39,8 @@ public class ScriptScraper {
 		for(Element script : scriptContent) {
 			scripts.append(script.html());
 		}
-		return new Script(scripts.toString().replaceAll("[\\n]+", "\n").replaceAll("</b>|<pre>|</pre>", "").replaceAll("\\n[\\s]+\\n", "\n").trim()); 
-	}
-	
-
-	/**
-	 * Write the script to a file, file name is the movie name
-	 * @throws FileNotFoundException
-	 */
-	public void writeScriptToFile() throws FileNotFoundException {
-		PrintWriter out = new PrintWriter(scriptName + ".txt");
-		out.print(script.getContent());
-		out.close();
-	}
-	
-	/**
-	 * mutate scriptScaper with a new url
-	 * @param url
-	 * @throws IOException
-	 */
-	public void scrape(String url) throws IOException {
-		this.url = url;
-		scriptName = getScriptName();
-		script = scrapeScript(url);
+		//clean format
+		return scripts.toString().replaceAll("[\\n]+", "\n").replaceAll("</b>|<pre>|</pre>", "").replaceAll("\\n[\\s]+\\n", "\n").trim(); 
 	}
 	
 	
@@ -84,9 +48,90 @@ public class ScriptScraper {
 	 * Get the name of the movie from given url
 	 * @return
 	 */
-	private String getScriptName() {
+	public String getScriptName(String url) {
 		String[] splitUrl = url.split("/");
 		return splitUrl[splitUrl.length - 1].replaceAll(".html", "");
-		
 	}
+	
+	/**
+	 * get all available movies along with their scripts given searchKey
+	 * @param searchKey
+	 * @return movie name and script url
+	 * @throws IOException
+	 */
+	public HashMap<String, String> getMoviesFromSearchKey(String searchKey) throws IOException{
+		Document moviesPage = Jsoup.connect("http://www.imsdb.com/search.php?query="+ searchKey).get();
+		return getAvailableMovies(moviesPage);
+	}
+	
+	/**
+	 * get all available movies along with their scripts given genre
+	 * @param genre
+	 * @return movie name and script url
+	 * @throws IOException
+	 */
+	public HashMap<String, String> getMoviesFromSearchKey(Genre genre) throws IOException{
+		Document moviesPage = Jsoup.connect("http://www.imsdb.com/genre/"+ genre).get();
+		return getAvailableMovies(moviesPage);
+	}
+	
+	/**
+	 * this function finds all movies with available scripts from the retrieved html and put the movie name and script url into a hash map
+	 * @throws IOException
+	 */
+	private HashMap<String, String> getAvailableMovies(Document moviesPage) throws IOException {
+		HashMap<String, String> movies = new HashMap<>();
+		Elements tables = moviesPage.getElementsByAttributeValue("valign", "top");
+		Elements childrenOfTable = tables.last().children();
+		for(Element child : childrenOfTable) {
+			if(child.tagName() == "p") {
+				String url = getUrlFromElement(child);
+				Document doc = Jsoup.connect(url).get();
+				Elements links = doc.getElementsByAttributeValueMatching("href", "/(scripts|transcripts)/.+.html");
+				if(links != null && !links.isEmpty()) {
+					String scriptLink = "http://www.imsdb.com" + links.first().attr("href");
+					movies.put(getScriptName(scriptLink), scriptLink);
+				}
+			}
+		}
+		return movies;
+
+	}
+ 
+
+	/**
+	 * get a url from a <a> tag
+	 * @param child
+	 * @return value of href attribute
+	 * @throws IOException
+	 */
+	private String getUrlFromElement(Element child) throws IOException {
+		// TODO Auto-generated method stub
+		Pattern p = Pattern.compile("href=\"(.*\\.html)\"");
+		Matcher match = p.matcher(child.html());
+		if(match.find()) {
+			String movieLink = "http://www.imsdb.com" + match.group(1);
+			return movieLink ;
+		}
+		return null;
+	}
+	
+	
+	//========================test function
+	public void writeScriptToFile(String content, String scriptName) throws FileNotFoundException {
+		PrintWriter out = new PrintWriter(scriptName);
+		out.print(content);
+		out.close();
+	}
+	
+	/**
+	 * print all available movie names and url of their script
+	 */
+	public void printMovieList(HashMap<String, String> availableMovies) {
+		for(String s : availableMovies.keySet()) {
+			System.out.println(s +"\n" + availableMovies.get(s));
+		}
+	}
+	
+	
 }
