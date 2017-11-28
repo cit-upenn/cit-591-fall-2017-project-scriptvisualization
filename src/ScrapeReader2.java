@@ -42,9 +42,9 @@ public class ScrapeReader2 {
 			
 			ScriptChunk schunk = new ScriptChunk(name, dialog.toString(), narra.toString());
 			scriptChunks.add(schunk);
-			System.out.println("name " + schunk.getName());
-			System.out.println("dia " + schunk.getDialogue());
-			System.out.println("narr " + schunk.getNarrative());
+			System.out.println("name " + schunk.name);
+			System.out.println("dia " + schunk.dialogue);
+			System.out.println("narr " + schunk.narrative);
 			System.out.println("=============");
 			 
 		}
@@ -69,6 +69,24 @@ public class ScrapeReader2 {
 	public ArrayList<Persona> getCharacters() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	/**
+	 * This class represents a chunk of a script
+	 * @author yueyin
+	 *
+	 */
+	private class ScriptChunk {
+		
+		String name;
+		String dialogue;
+		String narrative;
+		
+		public ScriptChunk(String name, String dialogue, String narrative) {
+			this.name = name;
+			this.dialogue = dialogue;
+			this.narrative = narrative;
+		}
 	}
 
 }

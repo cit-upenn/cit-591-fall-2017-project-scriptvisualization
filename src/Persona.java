@@ -4,7 +4,7 @@ import java.util.HashMap;
 public class Persona {
 	
 	String name;
-	ArrayList<Line> lines;
+	ArrayList<String> lines;
 	HashMap<String, Double> personality;
 	HashMap<Persona, Integer> relationships;
 	
