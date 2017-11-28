@@ -1,8 +1,13 @@
-scriptscaper: 把有剧本的那个网址放在作为constructor的参数 比如"http://www.imsdb.com/scripts/10-Things-I-Hate-About-You.html" 可以返回一个Script，script里有这个剧本的全部内容，scriptscaper.writetofile 可以把这个剧本output到一个txt文档
+Yue Yin:
 
-movielists： 把搜索关键词作为constructor的参数，返回一个hashmap，key是电影名称，value是包含这个电影剧本的网址。 也可以把一种genre 作为参数，返回该genre的所有电影及剧本
+scriptscaper: put url of the script as parameter of constructor, such as"http://www.imsdb.com/scripts/10-Things-I-Hate-About-You.html", it can scrape whole script from web
+
+movielists： put search key as constructor parameter ，return a map, mapping from movie name to script url. Also can use a genre name to construct an object.
 
 Siyang Note:
 I have not combined my java file with Yue's yet.
 
 Sample output text files are rough outputs and may contain unnecessary details. Will polish them.
+
+Yue Yin
+ScriptReader2 cut scripts into chunks, I think it makes more sense to add this function to scriptReader while scriptScripter is only responsible for scraping whole script from web.
