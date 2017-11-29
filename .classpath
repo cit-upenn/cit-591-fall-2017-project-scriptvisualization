@@ -11,8 +11,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="jsoup-1.11.2.jar"/>
-	<classpathentry kind="lib" path="java-sdk-4.0.0-jar-with-dependencies.jar"/>
+	 
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
