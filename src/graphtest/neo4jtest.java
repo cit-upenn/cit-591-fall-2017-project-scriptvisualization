@@ -1,4 +1,4 @@
-package neo4j;
+package graphtest;
 
 import java.io.File;
 import java.io.IOException;
