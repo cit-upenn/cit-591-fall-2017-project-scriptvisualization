@@ -6,7 +6,7 @@ import org.jgrapht.graph.SimpleGraph;
  
 
 public class graphtest {
-	SimpleGraph<Persona, Relationship> graph = new SimpleGraph<Persona, Relationship>(Relationship.class);
+	
 	
 	public void add() {
 		Persona p1 = new Persona("Rose");
@@ -23,13 +23,6 @@ public class graphtest {
 		
 	}
 	
-	public class Relationship extends DefaultEdge{
-		int close;
-		double relation;
-		public Relationship(int close, double score) {
-			this.close = close;
-			relation = score;
-		}
-	}
+	
 
 }

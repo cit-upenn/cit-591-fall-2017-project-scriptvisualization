@@ -1,12 +1,47 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-
+/**
+ * This class represents a character in a script
+ * @author yueyin
+ *
+ */
 public class Persona {
 	
-	String name;
-	ArrayList<String> lines;
-	HashMap<String, Double> personality;
-	HashMap<Persona, Integer> relationships;
+	private int occurrence;  //occurrence of the character in the script
+	private String name;    // name of the character
+	private ArrayList<String> lines;  // all lines belong to this character
+	private HashMap<String, Double> personality;
+	 
+	
+	public Persona(String name) {
+		// TODO Auto-generated constructor stub
+		lines = new ArrayList<>();
+		this.name = name;
+	}
+	
+	public ArrayList<String> getLines(){
+		return lines;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public int getOccurrence() {
+		return occurrence;
+	}
+	
+	public void setOccurrence(int number) {
+		this.occurrence = number;
+	}
+	
+	public String toString() {
+		String person = "name = " + name + "\n" + " ocurrance = " + occurrence + "\n";
+		for(String s : lines) {
+			person += s;
+		}
+		return person;
+	}
 	
 
 }

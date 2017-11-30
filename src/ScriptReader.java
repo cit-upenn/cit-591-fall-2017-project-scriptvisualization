@@ -1,18 +1,80 @@
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 /**
  * This class takes in content of a script and analyze it's content
  * @author yueyin
  *
  */
-public class ScrapeReader {
+public class ScriptReader {
 	
-	ArrayList<ScriptChunk> scriptChunks = new ArrayList<>();
+	ArrayList<ScriptChunk> scriptChunks;
+	Relationships relationgraph;
+	ArrayList<String> stoplist;
 	
-	public ScrapeReader(String content) {
+	/**
+	 * The constructor initialize instance variables and build a graph out of the given script
+	 * @param content
+	 */
+	public ScriptReader(String content) {
 		// TODO Auto-generated constructor stub
+		scriptChunks = new ArrayList<>();
 		splitScriptToChunks(content);
+		this.relationgraph = new Relationships();
+		stoplist = new ArrayList<String>();
+		addStoplist();
+		analysizeChunks();
+		
 	}
 	
+	/**
+	 * This function add some words that are impossible to be a name
+	 */
+	private void addStoplist() {
+		// TODO Auto-generated method stub
+		stoplist.add("omit");
+		stoplist.add("dissovle");
+		stoplist.add("fade");
+		stoplist.add("ext");
+		stoplist.add("int");
+		stoplist.add("day");
+		stoplist.add("...");
+		stoplist.add("cut");
+	}
+
+	/**
+	 * This function analyzes the script chunk by chunk
+	 */
+	private void analysizeChunks() {
+		 Persona prev = null;
+		 for(ScriptChunk chunk : scriptChunks) {
+			 //continue if the name is invalid
+			 if(!isValidName(chunk.name)) {
+				 continue;
+			 }
+			 Persona curr = relationgraph.createVertex(chunk.name);
+			 curr.getLines().add(chunk.dialogue);
+			 if(prev != null && prev != curr) {
+				 double relation = 0.5;
+				 relationgraph.createEdge(prev, curr, relation);
+			 }
+			 prev = curr;
+		 }
+		
+	}
+
+	//determine whether the name is valid
+	private boolean isValidName(String name) {
+		 
+		// TODO Auto-generated method stub
+		String lowerName = name.toLowerCase();
+		for(String s : stoplist) {
+			if(lowerName.contains(s)) return false;
+		}
+		//if contains number, return false;
+		return true;
+	}
+
+
 	/**
 	 * This method but whole script into chunks. Each chunk is composed of name, dialogue and narrative
 	 * @param content
@@ -23,7 +85,6 @@ public class ScrapeReader {
 			//System.out.print("==========================\n"+ chunk);
 			if(chunk.length() == 0) continue;
 			chunk = chunk.replaceAll("\\(.+\\)", "").replaceAll("\\n[\\s]+\\n", "\n");
-			//对【0】进行判断，不合适的chunk省掉
 			String[] splitChunk = chunk.split("\\n");
 			String name = splitChunk[0].trim();
 			StringBuilder dialog = new StringBuilder();
@@ -42,10 +103,6 @@ public class ScrapeReader {
 			
 			ScriptChunk schunk = new ScriptChunk(name, dialog.toString(), narra.toString());
 			scriptChunks.add(schunk);
-			System.out.println("name " + schunk.name);
-			System.out.println("dia " + schunk.dialogue);
-			System.out.println("narr " + schunk.narrative);
-			System.out.println("=============");
 			 
 		}
 	}
@@ -66,10 +123,6 @@ public class ScrapeReader {
 		return countSpace;
 	}
 
-	public ArrayList<Persona> getCharacters() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	/**
 	 * This class represents a chunk of a script
@@ -87,6 +140,7 @@ public class ScrapeReader {
 			this.dialogue = dialogue;
 			this.narrative = narrative;
 		}
+		
 	}
 
 }

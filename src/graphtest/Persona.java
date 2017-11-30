@@ -13,5 +13,6 @@ public class Persona {
 	HashMap<String, Double> personality;
 	HashMap<Persona, Integer> relationships;
 	
+	
 
 }

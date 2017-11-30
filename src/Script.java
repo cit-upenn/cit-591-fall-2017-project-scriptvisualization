@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+ 
 
 /**
  * This class represents a script, a script has content and charaters
@@ -8,12 +8,12 @@ import java.util.ArrayList;
 public class Script {
 	
 	String content;
-	ArrayList<Persona> characters;
+	Relationships relationgraph;
 	
 	public Script(String content) {
 		this.content = content;
-		ScrapeReader scriptReader = new ScrapeReader(content);
-		characters = scriptReader.getCharacters();
+		
+		 
 	}
 	
 	public String getContent() {
