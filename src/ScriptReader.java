@@ -49,6 +49,7 @@ public class ScriptReader {
 		 for(ScriptChunk chunk : scriptChunks) {
 			 //continue if the name is invalid
 			 if(!isValidName(chunk.name)) {
+				 prev = null;
 				 continue;
 			 }
 			 Persona curr = relationgraph.createVertex(chunk.name);
