@@ -5,7 +5,7 @@ import java.util.HashMap;
  * @author yueyin
  *
  */
-public class Persona {
+public class Persona implements Comparable<Persona> {
 	
 	private int occurrence;  //occurrence of the character in the script
 	private String name;    // name of the character
@@ -42,6 +42,15 @@ public class Persona {
 		}
 		return person;
 	}
+
+	@Override
+	public int compareTo(Persona o) {
+		// TODO Auto-generated method stub
+		int num = o.occurrence - this.occurrence;
+		int num2 = num == 0 ? this.name.compareTo(o.name): num;		
+		return num2;
+	}
+
 	
 
 }
