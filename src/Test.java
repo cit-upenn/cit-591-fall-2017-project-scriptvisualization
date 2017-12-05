@@ -1,6 +1,8 @@
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
  
@@ -10,10 +12,10 @@ import java.util.Set;
 
 public class Test {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws GeneralSecurityException {
 		// TODO Auto-generated method stub
 		try {
-			ScriptScraper ss = new ScriptScraper();
+			/*ScriptScraper ss = new ScriptScraper();
 			ScriptReader ar = new ScriptReader(ss.scrapeScript("http://www.imsdb.com/scripts/Titanic.html"));
 			Set<Persona> persons = ar.relationgraph.graph.vertexSet();
 			ArrayList<Persona> main = new ArrayList<>();
@@ -23,7 +25,7 @@ public class Test {
 					System.out.println(p);
 					 
 				}
-			}
+			}*/
 			
 			
 			
@@ -56,6 +58,12 @@ public class Test {
 				System.out.println(edges);
 			}*/
 			//ss.printMovieList(ss.getMoviesFromSearchKey("day"));
+			
+			ImageScraper is = new ImageScraper();
+			List<String> urls = is.getImageUrlsFromGoogle("carl titanic");
+			for(String s : urls) {
+				System.out.println(s);
+			}
 			
 		} catch (IOException e) {
 			e.printStackTrace();
