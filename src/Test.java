@@ -18,15 +18,16 @@ public class Test {
 			Set<Persona> persons = ar.relationgraph.graph.vertexSet();
 			ArrayList<Persona> main = new ArrayList<>();
 			for(Persona p : persons) {
-				if(p.getOccurrence() > 50) {
+				if(p.getOccurrence() > 20) {
 					main.add(p);
+					System.out.println(p);
 					 
 				}
 			}
 			
 			
 			
-			for(int i = 0; i <main.size() - 1; i++) {
+			/*for(int i = 0; i <main.size() - 1; i++) {
 				for(int j = i + 1; j < main.size(); j++) {
 					
 					
@@ -45,7 +46,7 @@ public class Test {
 					System.out.println("==================");
 					}
 				}
-			}
+			}*/
 			 
 			
 			
