@@ -60,10 +60,7 @@ public class Test {
 			//ss.printMovieList(ss.getMoviesFromSearchKey("day"));
 			
 			ImageScraper is = new ImageScraper();
-			List<String> urls = is.getImageUrlsFromGoogle("carl titanic");
-			for(String s : urls) {
-				System.out.println(s);
-			}
+			System.out.println(is.getPostPathFromTMDB("500 days with summer"));
 			
 		} catch (IOException e) {
 			e.printStackTrace();
