@@ -16,12 +16,24 @@ import com.google.api.services.customsearch.Customsearch;
 import com.google.api.services.customsearch.CustomsearchRequestInitializer;
 import com.google.api.services.customsearch.model.Result;
 import com.google.api.services.customsearch.model.Search;
-
+/**
+ * This class retrieves images from Google using Google Customer Search API
+ * @author yueyin
+ *
+ */
 public class ImageScraper {
 	
 	private final String searchEngineID = "016310474112609901486:dlk05n5m1fm";
 	private final String APIkey = "AIzaSyBsUA3Jt08xohiLevUttDAG5SYpg75kCdE";
 	
+	
+	/**
+	 * Get a list of images' urls given search key
+	 * @param searchQuery
+	 * @return list of urls
+	 * @throws GeneralSecurityException
+	 * @throws IOException
+	 */
 	public List<String> getImageUrlsFromGoogle(String searchQuery) throws GeneralSecurityException, IOException {
 		 
         List<String> images = new LinkedList<>();
@@ -44,6 +56,12 @@ public class ImageScraper {
          
 	}
 	
+	/**
+	 * get image given url
+	 * @param link
+	 * @return image
+	 * @throws IOException
+	 */
 	public Image getImageGivenUrl(String link) throws IOException {
 		URL url = new URL(link);
 		Image image = ImageIO.read(url);
