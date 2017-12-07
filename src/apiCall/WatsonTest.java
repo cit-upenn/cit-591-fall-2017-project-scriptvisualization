@@ -47,27 +47,47 @@ public class WatsonTest {
 		WatsonCaller wc = new WatsonCaller();
 		WatsonAnalyzer wa = new WatsonAnalyzer();
 
-		for (String s : mainRoles.get(0).getLines()) {
-			DocumentAnalysis chunkTone = wc.getToneOfLines(s);
-			HashMap<String, Double> lineEmoScore = wa.lineEmotionToneAnalyzer(chunkTone);
-			lineEmotionTone.put(s, lineEmoScore);
-			HashMap<String, Double> lineLangScore = wa.lineLangToneAnalyzer(chunkTone);
-			lineLangTone.put(s, lineLangScore);
+		// for (String s : mainRoles.get(0).getLines()) {
+		// DocumentAnalysis chunkTone = wc.getToneOfLines(s);
+		// HashMap<String, Double> lineEmoScore = wa.lineEmotionToneAnalyzer(chunkTone);
+		// lineEmotionTone.put(s, lineEmoScore);
+		// HashMap<String, Double> lineLangScore = wa.lineLangToneAnalyzer(chunkTone);
+		// lineLangTone.put(s, lineLangScore);
+		// }
+		// PrintWriter pw = new PrintWriter("testEmoReport.txt");
+		// PrintWriter pw2 = new PrintWriter("testLangReport.txt");
+		PrintWriter pw3 = new PrintWriter("sampleNaturalLangReport.txt");
+		// // to get emotion tone timeline of a character
+		// for (String s : lineEmotionTone.keySet()) {
+		// pw.println(s);
+		// pw.println(lineEmotionTone.get(s));
+		// }
+		// pw.close();
+		// // to get language tone timeline of a character
+		// for (String s : lineLangTone.keySet()) {
+		// pw2.println(s);
+		// pw2.println(lineLangTone.get(s));
+		// }
+		// pw2.close();
+
+		String s = mainRoles.get(0).getLines().toString();
+		// wa.personalityAnalyzer(wc.getPersonality(s));
+
+		String content = ss.scrapeScript(urlName);
+		HashMap<String, HashMap<String, Double>> naturalLangUnderstanding = wa
+				.naturalLangAnalyzer(wc.NaturalLangUnderstanding(content));
+		for (String str: naturalLangUnderstanding.keySet()) {
+			System.out.println(str);
+			for (String str2: naturalLangUnderstanding.get(str).keySet()) {
+				System.out.print("\t" + str2 + "\t");
+				System.out.println(naturalLangUnderstanding.get(str).get(str2));
+			}
 		}
-		PrintWriter pw = new PrintWriter("testEmoReport.txt");
-		PrintWriter pw2 = new PrintWriter("testLangReport.txt");
-		// to get emotion tone timeline of a character
-		for (String s : lineEmotionTone.keySet()) {
-			pw.println(s);
-			pw.println(lineEmotionTone.get(s));
-		}
-		pw.close();
-		// to get language tone timeline of a character
-		for (String s : lineLangTone.keySet()) {
-			pw2.println(s);
-			pw2.println(lineLangTone.get(s));
-		}
-		pw2.close();
+		
+		
+//		pw3.println(naturalLangUnderstanding);
+//		pw3.close();
+		// wa.naturalLangAnalyzer(wc.NaturalLangUnderstanding(content));
 
 	}
 }

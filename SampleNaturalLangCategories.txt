@@ -1,0 +1,20 @@
+{
+  "language": "en",
+  "usage": {
+    "features": 1
+  },
+  "categories": [
+    {
+      "label": "/news",
+      "score": 0.706945
+    },
+    {
+      "label": "/law, govt and politics/armed forces/air force",
+      "score": 0.47438
+    },
+    {
+      "label": "/art and entertainment/humor",
+      "score": 0.1941
+    }
+  ]
+}

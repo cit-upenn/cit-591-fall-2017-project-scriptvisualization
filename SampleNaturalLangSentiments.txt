@@ -1,0 +1,11 @@
+{
+  "language": "en",
+  "usage": {
+    "features": 1
+  },
+  "sentiment": {
+    "document": {
+      "score": -0.166365
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "language": "en",
+  "usage": {
+    "features": 1
+  },
+  "keywords": [
+    {
+      "relevance": 0.96819,
+      "text": "rafe",
+      "emotion": {
+        "anger": 0.109333,
+        "disgust": 0.103025,
+        "fear": 0.128378,
+        "joy": 0.499819,
+        "sadness": 0.479996
+      },
+      "sentiment": {
+        "score": -0.00707722
+      }
+    },
+    {
+      "relevance": 0.83074,
+      "text": "danny",
+      "emotion": {
+        "anger": 0.111883,
+        "disgust": 0.067778,
+        "fear": 0.122825,
+        "joy": 0.538615,
+        "sadness": 0.156442
+      },
+      "sentiment": {
+        "score": -0.0242062
+      }
+    },
+    {
+      "relevance": 0.678832,
+      "text": "rafe mccawley",
+      "emotion": {
+        "anger": 0.135226,
+        "disgust": 0.048837,
+        "fear": 0.016093,
+        "joy": 0.719946,
+        "sadness": 0.069193
+      },
+      "sentiment": {
+        "score": 0.237211
+      }
+    },
+    {
+      "relevance": 0.606624,
+      "text": "pearl harbor",
+      "emotion": {
+        "anger": 0.112571,
+        "disgust": 0.084931,
+        "fear": 0.419353,
+        "joy": 0.169258,
+        "sadness": 0.145947
+      },
+      "sentiment": {
+        "score": 0.1681
+      }
+    },
+    {
+      "relevance": 0.597769,
+      "text": "10-year-old Rafe",
+      "emotion": {
+        "anger": 0.072858,
+        "disgust": 0.254264,
+        "fear": 0.041096,
+        "joy": 0.203778,
+        "sadness": 0.540148
+      },
+      "sentiment": {
+        "score": 0.0
+      }
+    }
+  ]
+}
