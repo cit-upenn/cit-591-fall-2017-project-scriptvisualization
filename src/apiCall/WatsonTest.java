@@ -11,8 +11,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
-import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.DocumentAnalysis;
-
 import script.Persona;
 import script.ScriptReader;
 import script.ScriptScraper;

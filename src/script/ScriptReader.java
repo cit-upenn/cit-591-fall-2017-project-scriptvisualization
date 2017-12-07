@@ -1,3 +1,5 @@
+package script;
+
 import java.awt.Image;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -167,5 +169,17 @@ public class ScriptReader {
 		}
 		
 	}
+
+
+	public Relationships getRelationgraph() {
+		return relationgraph;
+	}
+
+	public void setRelationgraph(Relationships relationgraph) {
+		this.relationgraph = relationgraph;
+	}
+
+
+
 
 }

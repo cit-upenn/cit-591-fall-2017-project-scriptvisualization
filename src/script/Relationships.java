@@ -1,3 +1,5 @@
+package script;
+
 
 
 import java.util.HashMap;
@@ -86,6 +88,15 @@ public class Relationships {
 		}
 		
 	}
+
+	public SimpleGraph<Persona, Relationship> getGraph() {
+		return graph;
+	}
+
+	public void setGraph(SimpleGraph<Persona, Relationship> graph) {
+		this.graph = graph;
+	}
+
 
 	 
 

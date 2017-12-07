@@ -1,3 +1,5 @@
+package script;
+
 import java.awt.Image;
 import java.util.Set;
 
