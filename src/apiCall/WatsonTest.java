@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 import script.Persona;
+import script.Script;
 import script.ScriptReader;
 import script.ScriptScraper;
 
@@ -23,7 +24,10 @@ public class WatsonTest {
 		// + ".html";
 		String urlName = "http://www.imsdb.com/scripts/Pearl-Harbor.html";
 		ScriptScraper ss = new ScriptScraper();
-		ScriptReader sr = new ScriptReader(ss.scrapeScript(urlName));
+//		ScriptReader sr = new ScriptReader(ss.scrapeScript(urlName));
+		ScriptReader sr = new ScriptReader();
+		Script script = sr.readScript(ss.scrapeScript(urlName), "Pearl Harbor");
+//		System.out.println(script.getContent());
 		Set<Persona> characterName = sr.getRelationgraph().getGraph().vertexSet();
 		ArrayList<Persona> characters = new ArrayList<Persona>();
 		ArrayList<Persona> mainRoles = new ArrayList<Persona>();
@@ -71,16 +75,16 @@ public class WatsonTest {
 		String s = mainRoles.get(0).getLines().toString();
 		// wa.personalityAnalyzer(wc.getPersonality(s));
 
-		String content = ss.scrapeScript(urlName);
-		HashMap<String, HashMap<String, Double>> naturalLangUnderstanding = wa
-				.naturalLangAnalyzer(wc.NaturalLangUnderstanding(content));
-		for (String str: naturalLangUnderstanding.keySet()) {
-			System.out.println(str);
-			for (String str2: naturalLangUnderstanding.get(str).keySet()) {
-				System.out.print("\t" + str2 + "\t");
-				System.out.println(naturalLangUnderstanding.get(str).get(str2));
-			}
-		}
+//		String content = ss.scrapeScript(urlName);
+//		HashMap<String, HashMap<String, Double>> naturalLangUnderstanding = wa
+//				.naturalLangAnalyzer(wc.NaturalLangUnderstanding(content));
+//		for (String str: naturalLangUnderstanding.keySet()) {
+//			System.out.println(str);
+//			for (String str2: naturalLangUnderstanding.get(str).keySet()) {
+//				System.out.print("\t" + str2 + "\t");
+//				System.out.println(naturalLangUnderstanding.get(str).get(str2));
+//			}
+//		}
 		
 		
 //		pw3.println(naturalLangUnderstanding);

@@ -61,8 +61,13 @@ public class Test {
 			}*/
 			//ss.printMovieList(ss.getMoviesFromSearchKey("day"));
 			
-			ImageScraper is = new ImageScraper();
-			System.out.println(is.getPostPathFromTMDB("500 days with summer"));
+//			ImageScraper is = new ImageScraper();
+//			System.out.println(is.getPostPathFromTMDB("500 days with summer"));
+			
+			ScriptScraper ss = new ScriptScraper();
+			ScriptReader sr = new ScriptReader();
+			sr.readScript(ss.scrapeScript("http://www.imsdb.com/scripts/Titanic.html"), "Titanic");
+			sr.getMainCharacters();
 			
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -3,7 +3,12 @@ package script;
 import java.awt.Image;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Set;
+
+import apiCall.WatsonAnalyzer;
+import apiCall.WatsonCaller;
  
  
 /**
@@ -18,6 +23,8 @@ public class ScriptReader {
 	ArrayList<String> stoplist;
 	String scriptName;
 	ImageScraper imageScraper = new ImageScraper();
+	WatsonCaller wc = new WatsonCaller();
+	WatsonAnalyzer wa = new WatsonAnalyzer();
 	/**
 	 * This function returns an analyzed script
 	 * @param content
@@ -33,10 +40,14 @@ public class ScriptReader {
 		stoplist = new ArrayList<String>();
 		addStoplist();
 		analysizeChunks();
-		Image post = imageScraper.getImageGivenUrl(imageScraper.getPostPathFromTMDB(scriptName));
-		Set<Persona> mainCharacters = getMainCharacters();
+		Image poster = imageScraper.getImageGivenUrl(imageScraper.getPostPathFromTMDB(scriptName));
+		//changed mainCharacters to type ArrayList
+		ArrayList<Persona> mainCharacters = getMainCharacters();
+		HashMap<String, HashMap<String, Double>> naturalLangUnderstanding = wa
+				.naturalLangAnalyzer(wc.NaturalLangUnderstanding(content));
 		String[] tags = getTags();
-		Script script = new Script(scriptName, content, relationgraph, post, tags, mainCharacters);
+		Script script = new Script(scriptName, content, relationgraph, poster, mainCharacters, naturalLangUnderstanding);
+				
 		return script;
 	}
 	
@@ -47,9 +58,19 @@ public class ScriptReader {
 	}
 
 	//sort all characters and get top 10 occurrence
-	private Set<Persona> getMainCharacters() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Persona> getMainCharacters() {
+		Set<Persona> characterName = getRelationgraph().getGraph().vertexSet();
+		ArrayList<Persona> characters = new ArrayList<Persona>();
+		ArrayList<Persona> mainRoles = new ArrayList<Persona>();
+		for (Persona p : characterName) {
+			characters.add(p);
+		}
+		Collections.sort(characters);
+
+		for (int i = 0; i < 10; i++) {
+			mainRoles.add(characters.get(i));
+		}
+		return mainRoles;
 	}
 
 	/**
