@@ -1,10 +1,6 @@
-package script;
  
 import java.awt.Image;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.util.LinkedList;
@@ -24,8 +20,7 @@ import com.google.api.services.customsearch.Customsearch;
 import com.google.api.services.customsearch.CustomsearchRequestInitializer;
 import com.google.api.services.customsearch.model.Result;
 import com.google.api.services.customsearch.model.Search;
-
-import org.jsoup.nodes.Element;
+ 
 import org.jsoup.select.Elements;
 /**
  * This class retrieves images from Google using Google Customer Search API

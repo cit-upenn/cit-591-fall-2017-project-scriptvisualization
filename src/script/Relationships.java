@@ -1,4 +1,3 @@
-package script;
 
 
 import java.util.HashMap;
@@ -86,14 +85,6 @@ public class Relationships {
 			graph.addEdge(prev, curr, edge);
 		}
 		
-	}
-
-	public SimpleGraph<Persona, Relationship> getGraph() {
-		return graph;
-	}
-
-	public void setGraph(SimpleGraph<Persona, Relationship> graph) {
-		this.graph = graph;
 	}
 
 	 

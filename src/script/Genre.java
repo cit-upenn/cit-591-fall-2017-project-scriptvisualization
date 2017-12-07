@@ -1,4 +1,3 @@
-package script;
 
 public enum Genre {
 	

@@ -1,4 +1,4 @@
-package script;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
 /**
@@ -44,6 +44,15 @@ public class Persona implements Comparable<Persona> {
 		}
 		return person;
 	}
+
+	@Override
+	public int compareTo(Persona o) {
+		// TODO Auto-generated method stub
+		int num = o.occurrence - this.occurrence;
+		int num2 = num == 0 ? this.name.compareTo(o.name): num;		
+		return num2;
+	}
+
 	
 	public void setImage(Image image) {
 		personaImage = image;
@@ -51,14 +60,6 @@ public class Persona implements Comparable<Persona> {
 	
 	public Image getImage() {
 		return personaImage;
-	}
-
-	@Override
-	public int compareTo(Persona o) {
-		// TODO Auto-generated method stub
-		int num = o.occurrence - this.occurrence;
-		int num2 = num == 0 ? this.name.compareTo(o.name) : num;
-		return num2;
 	}
 	
 

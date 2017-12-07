@@ -1,6 +1,9 @@
-package script;
+import java.awt.Image;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
+import java.util.Set;
+ 
+ 
 /**
  * This class takes in content of a script and analyze it's content
  * @author yueyin
@@ -11,22 +14,42 @@ public class ScriptReader {
 	ArrayList<ScriptChunk> scriptChunks;
 	Relationships relationgraph;
 	ArrayList<String> stoplist;
-	
+	String scriptName;
+	ImageScraper imageScraper = new ImageScraper();
 	/**
-	 * The constructor initialize instance variables and build a graph out of the given script
+	 * This function returns an analyzed script
 	 * @param content
+	 * @return Script
+	 * @throws IOException 
 	 */
-	public ScriptReader(String content) {
-		// TODO Auto-generated constructor stub
+	public Script readScript(String content, String scriptName) throws IOException {
+		
+		this.scriptName = scriptName;
 		scriptChunks = new ArrayList<>();
 		splitScriptToChunks(content);
 		this.relationgraph = new Relationships();
 		stoplist = new ArrayList<String>();
 		addStoplist();
 		analysizeChunks();
-		
+		Image post = imageScraper.getImageGivenUrl(imageScraper.getPostPathFromTMDB(scriptName));
+		Set<Persona> mainCharacters = getMainCharacters();
+		String[] tags = getTags();
+		Script script = new Script(scriptName, content, relationgraph, post, tags, mainCharacters);
+		return script;
 	}
 	
+	//natural language processing
+	private String[] getTags() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	//sort all characters and get top 10 occurrence
+	private Set<Persona> getMainCharacters() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/**
 	 * This function add some words that are impossible to be a name
 	 */
@@ -144,17 +167,5 @@ public class ScriptReader {
 		}
 		
 	}
-
-
-	public Relationships getRelationgraph() {
-		return relationgraph;
-	}
-
-	public void setRelationgraph(Relationships relationgraph) {
-		this.relationgraph = relationgraph;
-	}
-
-
-
 
 }
