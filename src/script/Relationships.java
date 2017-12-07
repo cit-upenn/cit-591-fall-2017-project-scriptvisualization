@@ -17,14 +17,14 @@ public class Relationships {
 	
 	SimpleGraph<Persona, Relationship> graph;
 	//assume there are no duplicated names in a movie script
-	HashMap<String, Persona> persons;
+	HashMap<String, Persona> characterNames;
 	
 	/**
 	 * The constructor initializes graph and hashmap
 	 */
 	public Relationships() {
 		graph = new SimpleGraph<Persona, Relationship>(Relationship.class);
-		persons = new HashMap<>();
+		characterNames = new HashMap<>();
 	}
 	
 	/**
@@ -55,14 +55,14 @@ public class Relationships {
 	 */
 	public Persona createVertex(String name) {
 		// TODO Auto-generated method stub
-		if(persons.containsKey(name)) {
-			Persona curr = persons.get(name);
+		if(characterNames.containsKey(name)) {
+			Persona curr = characterNames.get(name);
 			curr.setOccurrence(curr.getOccurrence() + 1);
 			return curr;
 		}
 		else {
 			Persona newPersona = new Persona(name);
-			persons.put(name, newPersona);
+			characterNames.put(name, newPersona);
 			graph.addVertex(newPersona);
 			return newPersona;
 		}

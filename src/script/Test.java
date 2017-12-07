@@ -67,7 +67,10 @@ public class Test {
 			ScriptScraper ss = new ScriptScraper();
 			ScriptReader sr = new ScriptReader();
 			sr.readScript(ss.scrapeScript("http://www.imsdb.com/scripts/Titanic.html"), "Titanic");
-			sr.getMainCharacters();
+			for (Persona p: sr.relationgraph.graph.vertexSet()) {
+				System.out.println(p.getName());
+			}
+			System.out.println(sr.relationgraph.graph.edgeSet());
 			
 		} catch (IOException e) {
 			e.printStackTrace();

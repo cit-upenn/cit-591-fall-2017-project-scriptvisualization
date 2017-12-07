@@ -45,18 +45,12 @@ public class ScriptReader {
 		ArrayList<Persona> mainCharacters = getMainCharacters();
 		HashMap<String, HashMap<String, Double>> naturalLangUnderstanding = wa
 				.naturalLangAnalyzer(wc.NaturalLangUnderstanding(content));
-		String[] tags = getTags();
 		Script script = new Script(scriptName, content, relationgraph, poster, mainCharacters, naturalLangUnderstanding);
 				
 		return script;
 	}
-	
-	//natural language processing
-	private String[] getTags() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
+	
 	//sort all characters and get top 10 occurrence
 	public ArrayList<Persona> getMainCharacters() {
 		Set<Persona> characterName = getRelationgraph().getGraph().vertexSet();
