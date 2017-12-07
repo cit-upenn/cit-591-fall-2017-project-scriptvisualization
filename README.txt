@@ -14,10 +14,26 @@ Relationships: maintain a graph that stores all characters and their relationshi
 
 Gui: visualize script object
 
- 
-Siyang Note:
-I have not combined my java file with Yue's yet.
+Siyang:
+Natural Language Understanding Output
+Takes about 40-50 seconds to retrieve result of a movie.
+Refer to SampleNaturalLangReport to see sample output of HashMap<String, HashMap<String, Double>> naturalLangUnderstanding.
 
-Sample output text files are rough outputs and may contain unnecessary details. Will polish them.
+	sentiment
+		Review the overall sentiment and targeted sentiment of the content.
 
+	emotion
+		Analyze the overall emotion and the targeted emotion of the content.
+
+	keywords
+		Determine important keywords ranked by relevance.
+
+	concepts
+		Identifies general concepts that may not be directly referenced in the text.
+
+	entities
+		Extract people, companies, organizations, cities, geographic features, and other information from the content.
+
+	categories
+		Classify content into a hierarchy that's five levels deep with a score.
  

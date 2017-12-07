@@ -58,7 +58,6 @@ public class WatsonTest {
 		// }
 		// PrintWriter pw = new PrintWriter("testEmoReport.txt");
 		// PrintWriter pw2 = new PrintWriter("testLangReport.txt");
-		PrintWriter pw3 = new PrintWriter("sampleNaturalLangReport.txt");
 		// // to get emotion tone timeline of a character
 		// for (String s : lineEmotionTone.keySet()) {
 		// pw.println(s);
@@ -75,20 +74,18 @@ public class WatsonTest {
 		String s = mainRoles.get(0).getLines().toString();
 		// wa.personalityAnalyzer(wc.getPersonality(s));
 
-//		String content = ss.scrapeScript(urlName);
-//		HashMap<String, HashMap<String, Double>> naturalLangUnderstanding = wa
-//				.naturalLangAnalyzer(wc.NaturalLangUnderstanding(content));
-//		for (String str: naturalLangUnderstanding.keySet()) {
-//			System.out.println(str);
-//			for (String str2: naturalLangUnderstanding.get(str).keySet()) {
-//				System.out.print("\t" + str2 + "\t");
-//				System.out.println(naturalLangUnderstanding.get(str).get(str2));
-//			}
-//		}
+		String content = ss.scrapeScript(urlName);
+		HashMap<String, HashMap<String, Double>> naturalLangUnderstanding = wa
+				.naturalLangAnalyzer(wc.NaturalLangUnderstanding(content));
+		for (String str: naturalLangUnderstanding.keySet()) {
+			System.out.println(str);
+			for (String str2: naturalLangUnderstanding.get(str).keySet()) {
+				System.out.print("\t" + str2 + "\t");
+				System.out.println(naturalLangUnderstanding.get(str).get(str2));
+			}
+		}
 		
 		
-//		pw3.println(naturalLangUnderstanding);
-//		pw3.close();
 		// wa.naturalLangAnalyzer(wc.NaturalLangUnderstanding(content));
 
 	}
