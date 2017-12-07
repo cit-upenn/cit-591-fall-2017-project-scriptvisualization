@@ -7,7 +7,8 @@ scriptReader: responsible for analyzing script, return a script after analyzing
 Step1: cut script to chunks
 Step2: cut each chunk to name, dialogue and narrative
 Step3: analyze each chunk, create a Persona if it doesn’t exist, otherwise update it. Create an edge if it doesn’t exist, otherwise update it
-imageScraper: get images from google using Google Customer Search API
+imageScraper: get images of characters from google using Google Customer Search API
+Get movie post from moviedb
 Relationships: maintain a graph that stores all characters and their relationships
 
 
