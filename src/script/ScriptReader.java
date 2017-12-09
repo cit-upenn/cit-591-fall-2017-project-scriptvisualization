@@ -33,8 +33,9 @@ public class ScriptReader {
 	 * @param content
 	 * @return Script
 	 * @throws IOException
+	 * @throws GeneralSecurityException 
 	 */
-	public Script readScript(String content, String scriptName) throws IOException {
+	public Script readScript(String content, String scriptName) throws IOException, GeneralSecurityException {
 
 		this.scriptName = scriptName;
 		scriptChunks = new ArrayList<>();
@@ -55,19 +56,27 @@ public class ScriptReader {
 	}
 
 	// sort all characters and get top 10 occurrence
+	/**
+	 * get top 10 occurrence and set personal image
+	 * @return
+	 * @throws IOException
+	 * @throws GeneralSecurityException
+	 */
 	public ArrayList<Persona> getMainCharacters() throws IOException, GeneralSecurityException {
 		Set<Persona> characterName = getRelationgraph().getGraph().vertexSet();
 		ArrayList<Persona> characters = new ArrayList<Persona>();
 		ArrayList<Persona> mainRoles = new ArrayList<Persona>();
 		for (Persona p : characterName) {
-			BufferedImage personaImage = ImageScraper.getImageGivenUrl(ImageScraper.getImageUrlsFromGoogle(p.getName() + " " + scriptName).get(0));
-			p.setImage(personaImage);
 			characters.add(p);
 		}
 		Collections.sort(characters);
 
 		for (int i = 0; i < 10; i++) {
-			mainRoles.add(characters.get(i));
+			Persona curr = characters.get(i);
+			BufferedImage personaImage = ImageScraper.getImageGivenUrl(ImageScraper.getImageUrlsFromGoogle(curr.getName() + " " + scriptName).get(0));
+			curr.setImage(personaImage);
+			
+			mainRoles.add(curr);
 		}
 		return mainRoles;
 	}

@@ -157,7 +157,7 @@ public class ScriptGui {
 						 
 						movieButtons.get(i).setText(movieName);
 						Image post = posts.get(movieName).getScaledInstance(label.getWidth()	, label.getHeight(), Image.SCALE_SMOOTH);
-						System.out.println(post);
+						 
 						label.setIcon(new ImageIcon(post));
 					}
 					 
