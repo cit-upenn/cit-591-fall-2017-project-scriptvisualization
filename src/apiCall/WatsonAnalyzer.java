@@ -94,16 +94,36 @@ public class WatsonAnalyzer {
 			concepts.put(cr.getText(), cr.getRelevance());
 		}
 
-		
 		naturalLangUnderstanding.put("sentiment", sentiment);
 		naturalLangUnderstanding.put("categories", categories);
 		naturalLangUnderstanding.put("emotion", emotion);
 		naturalLangUnderstanding.put("keywords", keywords);
 		naturalLangUnderstanding.put("entities", entities);
 		naturalLangUnderstanding.put("concepts", concepts);
-		
 
 		return naturalLangUnderstanding;
+
+	}
+
+	public HashMap<String, HashMap<String, Double>> relationshipAnalyzer(
+			HashMap<String, AnalysisResults> analysisResults) {
+		// System.out.println(results);
+		HashMap<String, HashMap<String, Double>> relationIndicator = new HashMap<String, HashMap<String, Double>>();
+		HashMap<String, Double> sentiment = new HashMap<String, Double>();
+//		HashMap<String, Double> emotion = new HashMap<String, Double>();
+
+		sentiment.put("general", analysisResults.get("sentiment").getSentiment().getDocument().getScore());
+
+//		emotion.put("anger", analysisResults.get("emotion").getEmotion().getDocument().getEmotion().getAnger());
+//		emotion.put("disgust", analysisResults.get("emotion").getEmotion().getDocument().getEmotion().getDisgust());
+//		emotion.put("fear", analysisResults.get("emotion").getEmotion().getDocument().getEmotion().getFear());
+//		emotion.put("joy", analysisResults.get("emotion").getEmotion().getDocument().getEmotion().getJoy());
+//		emotion.put("sadness", analysisResults.get("emotion").getEmotion().getDocument().getEmotion().getSadness());
+
+		relationIndicator.put("sentiment", sentiment);
+//		relationIndicator.put("emotion", emotion);
+
+		return relationIndicator;
 
 	}
 

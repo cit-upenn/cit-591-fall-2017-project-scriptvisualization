@@ -2,10 +2,8 @@ package script;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+
+import script.Relationships.Relationship;
 
  
 
@@ -64,13 +62,20 @@ public class Test {
 //			ImageScraper is = new ImageScraper();
 //			System.out.println(is.getPostPathFromTMDB("500 days with summer"));
 			
+			long start = System.currentTimeMillis();
+			
 			ScriptScraper ss = new ScriptScraper();
 			ScriptReader sr = new ScriptReader();
-			sr.readScript(ss.scrapeScript("http://www.imsdb.com/scripts/Titanic.html"), "Titanic");
-			for (Persona p: sr.relationgraph.graph.vertexSet()) {
-				System.out.println(p.getName());
-			}
-			System.out.println(sr.relationgraph.graph.edgeSet());
+			sr.readScript(ss.scrapeScript("http://www.imsdb.com/scripts/La-La-Land.html"), "La La Land");
+			
+
+			
+//			System.out.println(sr.relationgraph.graph.vertexSet());
+//			System.out.println(sr.relationgraph.graph.edgeSet());
+			System.out.println(sr.relationgraph.graph);
+			
+			long end = System.currentTimeMillis();
+			System.out.println(end - start);
 			
 		} catch (IOException e) {
 			e.printStackTrace();
