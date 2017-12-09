@@ -25,7 +25,7 @@ public class ScriptScraper {
 	 * @return
 	 * @throws IOException
 	 */
-	public String scrapeScript(String url) throws IOException {
+	public static String scrapeScript(String url) throws IOException {
 		Document doc = Jsoup.connect(url).get();
 		//remove empty tags
 		for (Element element : doc.select("*")) {
@@ -51,7 +51,7 @@ public class ScriptScraper {
 	 * Get the name of the movie from given url
 	 * @return
 	 */
-	public String getScriptName(String url) {
+	public static String getScriptName(String url) {
 		String[] splitUrl = url.split("/");
 		return splitUrl[splitUrl.length - 1].replaceAll(".html", "");
 	}
@@ -62,7 +62,7 @@ public class ScriptScraper {
 	 * @return movie name and script url
 	 * @throws IOException
 	 */
-	public HashMap<String, String> getMoviesFromSearchKey(String searchKey) throws IOException{
+	public static HashMap<String, String> getMoviesFromSearchKey(String searchKey) throws IOException{
 		Document moviesPage = Jsoup.connect("http://www.imsdb.com/search.php?query="+ searchKey).get();
 		return getAvailableMovies(moviesPage);
 	}
@@ -73,7 +73,7 @@ public class ScriptScraper {
 	 * @return movie name and script url
 	 * @throws IOException
 	 */
-	public HashMap<String, Image> getMoviesPostsFromSearchKey(String searchKey) throws IOException{
+	public static HashMap<String, Image> getMoviesPostsFromSearchKey(String searchKey) throws IOException{
 		Document moviesPage = Jsoup.connect("http://www.imsdb.com/search.php?query="+ searchKey).get();
 		HashMap<String, Image> movies = new HashMap<>();
 		Elements tables = moviesPage.getElementsByAttributeValue("valign", "top");
@@ -100,7 +100,7 @@ public class ScriptScraper {
 	 * @return movie name and script url
 	 * @throws IOException
 	 */
-	public HashMap<String, String> getMoviesFromSearchKey(Genre genre) throws IOException{
+	public static HashMap<String, String> getMoviesFromSearchKey(Genre genre) throws IOException{
 		Document moviesPage = Jsoup.connect("http://www.imsdb.com/genre/"+ genre).get();
 		return getAvailableMovies(moviesPage);
 	}
@@ -109,7 +109,7 @@ public class ScriptScraper {
 	 * this function finds all movies with available scripts from the retrieved html and put the movie name and script url into a hash map
 	 * @throws IOException
 	 */
-	private HashMap<String, String> getAvailableMovies(Document moviesPage) throws IOException {
+	private static HashMap<String, String> getAvailableMovies(Document moviesPage) throws IOException {
 		HashMap<String, String> movies = new HashMap<>();
 		Elements tables = moviesPage.getElementsByAttributeValue("valign", "top");
 		Elements childrenOfTable = tables.last().children();
@@ -135,7 +135,7 @@ public class ScriptScraper {
 	 * @return value of href attribute
 	 * @throws IOException
 	 */
-	private String getUrlFromElement(Element child) throws IOException {
+	private static String getUrlFromElement(Element child) throws IOException {
 		// TODO Auto-generated method stub
 		Pattern p = Pattern.compile("href=\"(.*\\.html)\"");
 		Matcher match = p.matcher(child.html());
