@@ -4,6 +4,7 @@ package script;
  
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.util.LinkedList;
@@ -98,7 +99,11 @@ public class ImageScraper {
 	 */
 	public static BufferedImage getImageGivenUrl(String link) throws IOException {
 		URL url = new URL(link);
-		BufferedImage bufferImage = ImageIO.read(url);
+	 
+		 HttpURLConnection httpcon = (HttpURLConnection) url.openConnection(); 
+		 httpcon.addRequestProperty("User-Agent", ""); 
+		 BufferedImage bufferImage = ImageIO.read(httpcon.getInputStream());
+		  
 		return bufferImage;
 	}
 

@@ -71,7 +71,7 @@ public class ScriptReader {
 		}
 		Collections.sort(characters);
 
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 3; i++) {
 			Persona curr = characters.get(i);
 			BufferedImage personaImage = ImageScraper.getImageGivenUrl(ImageScraper.getImageUrlsFromGoogle(curr.getName() + " " + scriptName).get(0));
 			curr.setImage(personaImage);

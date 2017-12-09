@@ -58,6 +58,16 @@ public class ScriptScraper {
 	}
 	
 	/**
+	 * Get the name of the movie from given url
+	 * @return
+	 */
+	public static String getScriptUrl(String name) {
+		
+		return "http://www.imsdb.com/scripts/" + name.replace(" ", "-") + ".html";
+		 
+	}
+	
+	/**
 	 * get all available movies along with their scripts given searchKey
 	 * @param searchKey
 	 * @return movie name and script url

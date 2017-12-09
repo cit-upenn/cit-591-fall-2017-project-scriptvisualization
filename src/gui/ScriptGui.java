@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
+import script.Persona;
+import script.Script;
+import script.ScriptReader;
 import script.ScriptScraper;
 
 import java.awt.BorderLayout;
@@ -19,6 +22,7 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.awt.event.ActionEvent;
@@ -29,6 +33,8 @@ public class ScriptGui {
 
 	private JFrame frame;
 	private JTextField searchBox;
+	private JTextField description;
+	private JTextField movieTag;
 	 
 
 	/**
@@ -101,6 +107,7 @@ public class ScriptGui {
 		choose.add(moviePost3);
 		
 		JButton movieButton1 = new JButton("New button");
+		
 		movieButton1.setBounds(77, 338, 117, 29);
 		choose.add(movieButton1);
 		movieButton1.setVisible(false);
@@ -119,6 +126,44 @@ public class ScriptGui {
 		JPanel graph = new JPanel();
 		frame.getContentPane().add(graph, "name_20177380893280");
 		graph.setLayout(null);
+		
+		JLabel moviePost = new JLabel(" ");
+		moviePost.setBounds(609, 21, 117, 159);
+		graph.add(moviePost);
+		
+		JLabel persona1 = new JLabel(" ");
+		persona1.setBounds(34, 388, 86, 100);
+		graph.add(persona1);
+		
+		JLabel persona2 = new JLabel("");
+		persona2.setBounds(614, 388, 86, 100);
+		graph.add(persona2);
+		
+		JLabel p2 = new JLabel("");
+		p2.setBounds(121, 243, 61, 67);
+		graph.add(p2);
+		
+		description = new JTextField();
+		description.setColumns(10);
+		description.setBounds(121, 410, 463, 78);
+		graph.add(description);
+		
+		movieTag = new JTextField();
+		movieTag.setColumns(10);
+		movieTag.setBounds(588, 194, 130, 165);
+		graph.add(movieTag);
+		
+		JLabel p3 = new JLabel("");
+		p3.setBounds(377, 243, 61, 67);
+		graph.add(p3);
+		
+		JLabel p1 = new JLabel(" ");
+		p1.setBounds(243, 51, 61, 67);
+		graph.add(p1);
+		
+		JLabel relation = new JLabel("");
+		relation.setBounds(235, 130, 117, 124);
+		graph.add(relation);
 		
 		ArrayList<JLabel> labels = new ArrayList<>();
 		labels.add(moviePost1);
@@ -170,8 +215,27 @@ public class ScriptGui {
 				 
 			}
 		});
+		
+		movieButton1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ScriptReader sr = new ScriptReader();
+				String url = ScriptScraper.getScriptUrl(movieButton1.getText());
+				Script script = new Script();
+				try {
+					script = sr.readScript(ScriptScraper.scrapeScript(url), movieButton1.getText());
+				} catch (IOException | GeneralSecurityException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				moviePost.setIcon(labels.get(0).getIcon());
+				
+				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
+				cardLayout.next(frame.getContentPane());
+				
+			}
+		});
 	}
 	
 	 
-
 }
