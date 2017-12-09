@@ -1,0 +1,543 @@
+([name: T I T A N I C; occurrance: 0
+, name: 1 BLACKNESS; occurrance: 0
+, name: ANATOLY; occurrance: 2
+, name: BODINE; occurrance: 27
+, name: LOVETT; occurrance: 55
+, name: CAMERAMAN; occurrance: 0
+, name: BUELL; occurrance: 7
+, name: 16 INSERT; occurrance: 0
+, name: ANNOUNCER; occurrance: 0
+, name: CNN REPORTER; occurrance: 0
+, name: ROSE; occurrance: 217
+, name: REPORTER; occurrance: 0
+, name: TIGHT ON THE SCREEN.; occurrance: 0
+, name: LIZZY; occurrance: 13
+, name: ; occurrance: 7
+, name: MATCH DISSOLVE:; occurrance: 0
+, name: CAL; occurrance: 91
+, name: RUTH; occurrance: 28
+, name: PORTER; occurrance: 1
+, name: LOVEJOY; occurrance: 17
+, name: DANIEL; occurrance: 0
+, name: MAN; occurrance: 5
+, name: OLD ROSE; occurrance: 18
+, name: OLAF; occurrance: 0
+, name: SVEN; occurrance: 0
+, name: JACK; occurrance: 181
+, name: FABRIZIO; occurrance: 15
+, name: FABRIZIO/JACK; occurrance: 0
+, name: L'AMERICA!!!; occurrance: 0
+, name: PUBKEEPER; occurrance: 1
+, name: MOODY; occurrance: 4
+, name: ROWE; occurrance: 2
+, name: BJORN; occurrance: 0
+, name: TRUDY; occurrance: 1
+, name: WOMAN; occurrance: 4
+, name: WILLIAM MURDOCH.; occurrance: 0
+, name: CAPTAIN SMITH; occurrance: 0
+, name: CHIEF ENGINEER BELL; occurrance: 0
+, name: FIRST OFFICER MURDOCH; occurrance: 2
+, name: SMITH; occurrance: 26
+, name: ISMAY; occurrance: 14
+, name: ANDREWS; occurrance: 24
+, name: MOLLY; occurrance: 27
+, name: TOMMY; occurrance: 10
+, name: HELP! HELP!!; occurrance: 0
+, name: GRACIE; occurrance: 6
+, name: MASTER AT ARMS; occurrance: 3
+, name: COLONEL GRACIE; occurrance: 2
+, name: TRANSITION; occurrance: 0
+, name: BROCK; occurrance: 7
+, name: DISSOLVE TO:; occurrance: 4
+, name: HELGA; occurrance: 0
+, name: MARVIN; occurrance: 1
+, name: STEWARD; occurrance: 11
+, name: SIR COSMO; occurrance: 1
+, name: ASTOR; occurrance: 0
+, name: MADELEINE; occurrance: 0
+, name: CLOSE ON RUTH.; occurrance: 0
+, name: GUGGENHEIM; occurrance: 1
+, name: WAITER; occurrance: 0
+, name: JACK/ROSE; occurrance: 0
+, name: MCCAULEY; occurrance: 0
+, name: BRIDE; occurrance: 4
+, name: LIGHTOLLER; occurrance: 16
+, name: FLEET; occurrance: 9
+, name: TRANSITION:; occurrance: 1
+, name: PHILLIPS; occurrance: 2
+, name: GROVES.; occurrance: 0
+, name: EVANS; occurrance: 1
+, name: GROVES; occurrance: 0
+, name: FRAME--; occurrance: 0
+, name: LEE; occurrance: 2
+, name: BOTH LOCKED IN YOUR SAFE, ROSE".; occurrance: 0
+, name: MURDOCH; occurrance: 11
+, name: BELL; occurrance: 1
+, name: BARRETT; occurrance: 1
+, name: I--; occurrance: 0
+, name: TOMMMY; occurrance: 0
+, name: STEWARD #1; occurrance: 0
+, name: STEWARD BARNES; occurrance: 3
+, name: HUTCHINSON; occurrance: 1
+, name: GENTLEMAN; occurrance: 0
+, name: YALEY; occurrance: 0
+, name: SEAMAN; occurrance: 0
+, name: STEWARD #2; occurrance: 4
+, name: YOUNG STEWARD.; occurrance: 0
+, name: YOUNG STEWARD; occurrance: 0
+, name: CREWMAN; occurrance: 0
+, name: HARTLEY; occurrance: 2
+, name: WOMAN IN CROWD; occurrance: 0
+, name: LITTLE BOY; occurrance: 0
+, name: LOWE; occurrance: 7
+, name: 6.; occurrance: 0
+, name: HITCHINS; occurrance: 4
+, name: OPERATOR; occurrance: 0
+, name: LUCILE; occurrance: 0
+, name: JACK AND ROSE; occurrance: 0
+, name: IRISHWOMAN; occurrance: 0
+, name: IRISHMAN; occurrance: 0
+, name: ISADOR; occurrance: 0
+, name: IDA; occurrance: 1
+, name: CARDPLAYER; occurrance: 0
+, name: BLAM! BLAM!; occurrance: 0
+, name: HUSBAND; occurrance: 1
+, name: PURSER MCELROY; occurrance: 0
+, name: THE HYMN PLAYS OVER THE FOLLOWING SEQUENCE:; occurrance: 0
+, name: JOUGHIN; occurrance: 1
+, name: FATHER BYLES; occurrance: 2
+, name: MOTHER; occurrance: 0
+, name: MOLLY BROWN; occurrance: 0
+, name: SEVERAL PEOPLE; occurrance: 0
+, name: FIREMAN HENDRICKSON; occurrance: 0
+, name: SLOW MOTION.; occurrance: 0
+, name: CARPATHIA STEWARD; occurrance: 0
+, name: IMMIGRATION OFFICER; occurrance: 0
+, name: YURI; occurrance: 0
+, name: BLACKNESS; occurrance: 0
+, name: THE END; occurrance: 0
+], [contacts = 1 relation = 0.5={name: T I T A N I C; occurrance: 0
+,name: 1 BLACKNESS; occurrance: 0
+}, contacts = 1 relation = 0.5={name: BODINE; occurrance: 27
+,name: ANATOLY; occurrance: 2
+}, contacts = 3 relation = 1.5={name: ANATOLY; occurrance: 2
+,name: LOVETT; occurrance: 55
+}, contacts = 23 relation = 11.5={name: LOVETT; occurrance: 55
+,name: BODINE; occurrance: 27
+}, contacts = 2 relation = 1.0={name: LOVETT; occurrance: 55
+,name: CAMERAMAN; occurrance: 0
+}, contacts = 7 relation = 3.5={name: LOVETT; occurrance: 55
+,name: BUELL; occurrance: 7
+}, contacts = 1 relation = 0.5={name: 16 INSERT; occurrance: 0
+,name: ANNOUNCER; occurrance: 0
+}, contacts = 1 relation = 0.5={name: ANNOUNCER; occurrance: 0
+,name: LOVETT; occurrance: 55
+}, contacts = 2 relation = 1.0={name: LOVETT; occurrance: 55
+,name: CNN REPORTER; occurrance: 0
+}, contacts = 29 relation = 14.5={name: LOVETT; occurrance: 55
+,name: ROSE; occurrance: 217
+}, contacts = 1 relation = 0.5={name: ROSE; occurrance: 217
+,name: REPORTER; occurrance: 0
+}, contacts = 1 relation = 0.5={name: REPORTER; occurrance: 0
+,name: TIGHT ON THE SCREEN.; occurrance: 0
+}, contacts = 1 relation = 0.5={name: TIGHT ON THE SCREEN.; occurrance: 0
+,name: LOVETT; occurrance: 55
+}, contacts = 1 relation = 0.5={name: ROSE; occurrance: 217
+,name: BUELL; occurrance: 7
+}, contacts = 2 relation = 1.0={name: BODINE; occurrance: 27
+,name: BUELL; occurrance: 7
+}, contacts = 6 relation = 3.0={name: ROSE; occurrance: 217
+,name: LIZZY; occurrance: 13
+}, contacts = 10 relation = 5.0={name: LOVETT; occurrance: 55
+,name: LIZZY; occurrance: 13
+}, contacts = 2 relation = 1.0={name: LOVETT; occurrance: 55
+,name: ; occurrance: 7
+}, contacts = 6 relation = 3.0={name: ROSE; occurrance: 217
+,name: BODINE; occurrance: 27
+}, contacts = 1 relation = 0.5={name: ROSE; occurrance: 217
+,name: MATCH DISSOLVE:; occurrance: 0
+}, contacts = 42 relation = 21.0={name: ROSE; occurrance: 217
+,name: CAL; occurrance: 91
+}, contacts = 8 relation = 4.0={name: CAL; occurrance: 91
+,name: RUTH; occurrance: 28
+}, contacts = 3 relation = 1.5={name: CAL; occurrance: 91
+,name: PORTER; occurrance: 1
+}, contacts = 2 relation = 1.0={name: CAL; occurrance: 91
+,name: ; occurrance: 7
+}, contacts = 1 relation = 0.5={name: PORTER; occurrance: 1
+,name: LOVEJOY; occurrance: 17
+}, contacts = 9 relation = 4.5={name: LOVEJOY; occurrance: 17
+,name: CAL; occurrance: 91
+}, contacts = 2 relation = 1.0={name: CAL; occurrance: 91
+,name: DANIEL; occurrance: 0
+}, contacts = 2 relation = 1.0={name: CAL; occurrance: 91
+,name: MAN; occurrance: 5
+}, contacts = 2 relation = 1.0={name: CAL; occurrance: 91
+,name: OLD ROSE; occurrance: 18
+}, contacts = 1 relation = 0.5={name: OLAF; occurrance: 0
+,name: SVEN; occurrance: 0
+}, contacts = 1 relation = 0.5={name: SVEN; occurrance: 0
+,name: JACK; occurrance: 181
+}, contacts = 11 relation = 5.5={name: JACK; occurrance: 181
+,name: FABRIZIO; occurrance: 15
+}, contacts = 1 relation = 0.5={name: JACK; occurrance: 181
+,name: FABRIZIO/JACK; occurrance: 0
+}, contacts = 1 relation = 0.5={name: FABRIZIO/JACK; occurrance: 0
+,name: L'AMERICA!!!; occurrance: 0
+}, contacts = 1 relation = 0.5={name: L'AMERICA!!!; occurrance: 0
+,name: JACK; occurrance: 181
+}, contacts = 2 relation = 1.0={name: FABRIZIO; occurrance: 15
+,name: ; occurrance: 7
+}, contacts = 1 relation = 0.5={name: FABRIZIO; occurrance: 15
+,name: PUBKEEPER; occurrance: 1
+}, contacts = 2 relation = 1.0={name: PUBKEEPER; occurrance: 1
+,name: JACK; occurrance: 181
+}, contacts = 3 relation = 1.5={name: JACK; occurrance: 181
+,name: MOODY; occurrance: 4
+}, contacts = 1 relation = 0.5={name: MOODY; occurrance: 4
+,name: ROWE; occurrance: 2
+}, contacts = 2 relation = 1.0={name: ROWE; occurrance: 2
+,name: JACK; occurrance: 181
+}, contacts = 4 relation = 2.0={name: CAL; occurrance: 91
+,name: TRUDY; occurrance: 1
+}, contacts = 1 relation = 0.5={name: WOMAN; occurrance: 4
+,name: OLD ROSE; occurrance: 18
+}, contacts = 1 relation = 0.5={name: WILLIAM MURDOCH.; occurrance: 0
+,name: CAPTAIN SMITH; occurrance: 0
+}, contacts = 1 relation = 0.5={name: CAPTAIN SMITH; occurrance: 0
+,name: CHIEF ENGINEER BELL; occurrance: 0
+}, contacts = 1 relation = 0.5={name: CHIEF ENGINEER BELL; occurrance: 0
+,name: FIRST OFFICER MURDOCH; occurrance: 2
+}, contacts = 1 relation = 0.5={name: FIRST OFFICER MURDOCH; occurrance: 2
+,name: SMITH; occurrance: 26
+}, contacts = 1 relation = 0.5={name: SMITH; occurrance: 26
+,name: FABRIZIO; occurrance: 15
+}, contacts = 1 relation = 0.5={name: FABRIZIO; occurrance: 15
+,name: ISMAY; occurrance: 14
+}, contacts = 6 relation = 3.0={name: ISMAY; occurrance: 14
+,name: ANDREWS; occurrance: 24
+}, contacts = 1 relation = 0.5={name: ANDREWS; occurrance: 24
+,name: MOLLY; occurrance: 27
+}, contacts = 9 relation = 4.5={name: MOLLY; occurrance: 27
+,name: RUTH; occurrance: 28
+}, contacts = 2 relation = 1.0={name: CAL; occurrance: 91
+,name: MOLLY; occurrance: 27
+}, contacts = 2 relation = 1.0={name: MOLLY; occurrance: 27
+,name: ISMAY; occurrance: 14
+}, contacts = 3 relation = 1.5={name: ISMAY; occurrance: 14
+,name: ROSE; occurrance: 217
+}, contacts = 19 relation = 9.5={name: ROSE; occurrance: 217
+,name: RUTH; occurrance: 28
+}, contacts = 6 relation = 3.0={name: TOMMY; occurrance: 10
+,name: JACK; occurrance: 181
+}, contacts = 166 relation = 83.0={name: JACK; occurrance: 181
+,name: ROSE; occurrance: 217
+}, contacts = 1 relation = 0.5={name: ROSE; occurrance: 217
+,name: HELP! HELP!!; occurrance: 0
+}, contacts = 1 relation = 0.5={name: HELP! HELP!!; occurrance: 0
+,name: JACK; occurrance: 181
+}, contacts = 5 relation = 2.5={name: CAL; occurrance: 91
+,name: GRACIE; occurrance: 6
+}, contacts = 1 relation = 0.5={name: GRACIE; occurrance: 6
+,name: MASTER AT ARMS; occurrance: 3
+}, contacts = 4 relation = 2.0={name: MASTER AT ARMS; occurrance: 3
+,name: JACK; occurrance: 181
+}, contacts = 1 relation = 0.5={name: JACK; occurrance: 181
+,name: COLONEL GRACIE; occurrance: 2
+}, contacts = 1 relation = 0.5={name: COLONEL GRACIE; occurrance: 2
+,name: CAL; occurrance: 91
+}, contacts = 13 relation = 6.5={name: CAL; occurrance: 91
+,name: JACK; occurrance: 181
+}, contacts = 7 relation = 3.5={name: JACK; occurrance: 181
+,name: LOVEJOY; occurrance: 17
+}, contacts = 1 relation = 0.5={name: OLD ROSE; occurrance: 18
+,name: TRANSITION; occurrance: 0
+}, contacts = 4 relation = 2.0={name: OLD ROSE; occurrance: 18
+,name: ROSE; occurrance: 217
+}, contacts = 3 relation = 1.5={name: BUELL; occurrance: 7
+,name: BROCK; occurrance: 7
+}, contacts = 7 relation = 3.5={name: BROCK; occurrance: 7
+,name: LIZZY; occurrance: 13
+}, contacts = 2 relation = 1.0={name: LIZZY; occurrance: 13
+,name: ; occurrance: 7
+}, contacts = 1 relation = 0.5={name: ROSE; occurrance: 217
+,name: DISSOLVE TO:; occurrance: 4
+}, contacts = 1 relation = 0.5={name: FABRIZIO; occurrance: 15
+,name: HELGA; occurrance: 0
+}, contacts = 1 relation = 0.5={name: HELGA; occurrance: 0
+,name: ROSE; occurrance: 217
+}, contacts = 7 relation = 3.5={name: ISMAY; occurrance: 14
+,name: SMITH; occurrance: 26
+}, contacts = 1 relation = 0.5={name: ROSE; occurrance: 217
+,name: MARVIN; occurrance: 1
+}, contacts = 1 relation = 0.5={name: RUTH; occurrance: 28
+,name: OLD ROSE; occurrance: 18
+}, contacts = 1 relation = 0.5={name: OLD ROSE; occurrance: 18
+,name: MOLLY; occurrance: 27
+}, contacts = 4 relation = 2.0={name: MOLLY; occurrance: 27
+,name: ROSE; occurrance: 217
+}, contacts = 5 relation = 2.5={name: MOLLY; occurrance: 27
+,name: JACK; occurrance: 181
+}, contacts = 1 relation = 0.5={name: ROSE; occurrance: 217
+,name: SIR COSMO; occurrance: 1
+}, contacts = 1 relation = 0.5={name: SIR COSMO; occurrance: 1
+,name: CAL; occurrance: 91
+}, contacts = 1 relation = 0.5={name: GRACIE; occurrance: 6
+,name: RUTH; occurrance: 28
+}, contacts = 1 relation = 0.5={name: ROSE; occurrance: 217
+,name: ASTOR; occurrance: 0
+}, contacts = 1 relation = 0.5={name: ASTOR; occurrance: 0
+,name: JACK; occurrance: 181
+}, contacts = 1 relation = 0.5={name: JACK; occurrance: 181
+,name: MADELEINE; occurrance: 0
+}, contacts = 1 relation = 0.5={name: CLOSE ON RUTH.; occurrance: 0
+,name: RUTH; occurrance: 28
+}, contacts = 7 relation = 3.5={name: RUTH; occurrance: 28
+,name: JACK; occurrance: 181
+}, contacts = 3 relation = 1.5={name: CAL; occurrance: 91
+,name: GUGGENHEIM; occurrance: 1
+}, contacts = 1 relation = 0.5={name: GUGGENHEIM; occurrance: 1
+,name: WAITER; occurrance: 0
+}, contacts = 1 relation = 0.5={name: WAITER; occurrance: 0
+,name: CAL; occurrance: 91
+}, contacts = 1 relation = 0.5={name: MOLLY; occurrance: 27
+,name: COLONEL GRACIE; occurrance: 2
+}, contacts = 1 relation = 0.5={name: COLONEL GRACIE; occurrance: 2
+,name: ROSE; occurrance: 217
+}, contacts = 2 relation = 1.0={name: JACK; occurrance: 181
+,name: GRACIE; occurrance: 6
+}, contacts = 15 relation = 7.5={name: ROSE; occurrance: 217
+,name: ANDREWS; occurrance: 24
+}, contacts = 4 relation = 2.0={name: ROSE; occurrance: 217
+,name: GRACIE; occurrance: 6
+}, contacts = 1 relation = 0.5={name: FABRIZIO; occurrance: 15
+,name: ROSE; occurrance: 217
+}, contacts = 1 relation = 0.5={name: ROSE; occurrance: 217
+,name: TOMMY; occurrance: 10
+}, contacts = 1 relation = 0.5={name: JACK/ROSE; occurrance: 0
+,name: ROSE; occurrance: 217
+}, contacts = 4 relation = 2.0={name: ROSE; occurrance: 217
+,name: ; occurrance: 7
+}, contacts = 3 relation = 1.5={name: STEWARD; occurrance: 11
+,name: JACK; occurrance: 181
+}, contacts = 1 relation = 0.5={name: LOVEJOY; occurrance: 17
+,name: STEWARD; occurrance: 11
+}, contacts = 8 relation = 4.0={name: STEWARD; occurrance: 11
+,name: ROSE; occurrance: 217
+}, contacts = 1 relation = 0.5={name: CAL; occurrance: 91
+,name: MCCAULEY; occurrance: 0
+}, contacts = 1 relation = 0.5={name: MCCAULEY; occurrance: 0
+,name: RUTH; occurrance: 28
+}, contacts = 1 relation = 0.5={name: RUTH; occurrance: 28
+,name: ANDREWS; occurrance: 24
+}, contacts = 1 relation = 0.5={name: TOMMY; occurrance: 10
+,name: FABRIZIO; occurrance: 15
+}, contacts = 4 relation = 2.0={name: BRIDE; occurrance: 4
+,name: SMITH; occurrance: 26
+}, contacts = 6 relation = 3.0={name: SMITH; occurrance: 26
+,name: LIGHTOLLER; occurrance: 16
+}, contacts = 1 relation = 0.5={name: LIGHTOLLER; occurrance: 16
+,name: FIRST OFFICER MURDOCH; occurrance: 2
+}, contacts = 4 relation = 2.0={name: ANDREWS; occurrance: 24
+,name: CAL; occurrance: 91
+}, contacts = 1 relation = 0.5={name: JACK; occurrance: 181
+,name: FLEET; occurrance: 9
+}, contacts = 1 relation = 0.5={name: ROSE; occurrance: 217
+,name: BROCK; occurrance: 7
+}, contacts = 2 relation = 1.0={name: BROCK; occurrance: 7
+,name: BODINE; occurrance: 27
+}, contacts = 1 relation = 0.5={name: BROCK; occurrance: 7
+,name: TRANSITION:; occurrance: 1
+}, contacts = 3 relation = 1.5={name: OLD ROSE; occurrance: 18
+,name: BODINE; occurrance: 27
+}, contacts = 2 relation = 1.0={name: BRIDE; occurrance: 4
+,name: PHILLIPS; occurrance: 2
+}, contacts = 1 relation = 0.5={name: GROVES.; occurrance: 0
+,name: EVANS; occurrance: 1
+}, contacts = 2 relation = 1.0={name: EVANS; occurrance: 1
+,name: GROVES; occurrance: 0
+}, contacts = 1 relation = 0.5={name: JACK; occurrance: 181
+,name: OLD ROSE; occurrance: 18
+}, contacts = 5 relation = 2.5={name: FLEET; occurrance: 9
+,name: LEE; occurrance: 2
+}, contacts = 1 relation = 0.5={name: BOTH LOCKED IN YOUR SAFE, ROSE".; occurrance: 0
+,name: CAL; occurrance: 91
+}, contacts = 1 relation = 0.5={name: ROSE; occurrance: 217
+,name: FLEET; occurrance: 9
+}, contacts = 3 relation = 1.5={name: FLEET; occurrance: 9
+,name: MOODY; occurrance: 4
+}, contacts = 2 relation = 1.0={name: MOODY; occurrance: 4
+,name: MURDOCH; occurrance: 11
+}, contacts = 1 relation = 0.5={name: BELL; occurrance: 1
+,name: BARRETT; occurrance: 1
+}, contacts = 2 relation = 1.0={name: BARRETT; occurrance: 1
+,name: MURDOCH; occurrance: 11
+}, contacts = 1 relation = 0.5={name: BARRETT; occurrance: 1
+,name: MOLLY; occurrance: 27
+}, contacts = 6 relation = 3.0={name: MURDOCH; occurrance: 11
+,name: SMITH; occurrance: 26
+}, contacts = 1 relation = 0.5={name: MURDOCH; occurrance: 11
+,name: I--; occurrance: 0
+}, contacts = 1 relation = 0.5={name: I--; occurrance: 0
+,name: SMITH; occurrance: 26
+}, contacts = 1 relation = 0.5={name: FABRIZIO; occurrance: 15
+,name: TOMMMY; occurrance: 0
+}, contacts = 1 relation = 0.5={name: WOMAN; occurrance: 4
+,name: STEWARD #1; occurrance: 0
+}, contacts = 4 relation = 2.0={name: STEWARD BARNES; occurrance: 3
+,name: CAL; occurrance: 91
+}, contacts = 2 relation = 1.0={name: SMITH; occurrance: 26
+,name: HUTCHINSON; occurrance: 1
+}, contacts = 1 relation = 0.5={name: HUTCHINSON; occurrance: 1
+,name: ISMAY; occurrance: 14
+}, contacts = 1 relation = 0.5={name: GENTLEMAN; occurrance: 0
+,name: YALEY; occurrance: 0
+}, contacts = 1 relation = 0.5={name: YALEY; occurrance: 0
+,name: SMITH; occurrance: 26
+}, contacts = 1 relation = 0.5={name: HUTCHINSON; occurrance: 1
+,name: JACK; occurrance: 181
+}, contacts = 2 relation = 1.0={name: CAL; occurrance: 91
+,name: MASTER AT ARMS; occurrance: 3
+}, contacts = 1 relation = 0.5={name: ROSE; occurrance: 217
+,name: STEWARD BARNES; occurrance: 3
+}, contacts = 1 relation = 0.5={name: LOVEJOY; occurrance: 17
+,name: MASTER AT ARMS; occurrance: 3
+}, contacts = 7 relation = 3.5={name: ANDREWS; occurrance: 24
+,name: SMITH; occurrance: 26
+}, contacts = 1 relation = 0.5={name: ANDREWS; occurrance: 24
+,name: SEAMAN; occurrance: 0
+}, contacts = 2 relation = 1.0={name: CAL; occurrance: 91
+,name: STEWARD; occurrance: 11
+}, contacts = 2 relation = 1.0={name: PHILLIPS; occurrance: 2
+,name: SMITH; occurrance: 26
+}, contacts = 1 relation = 0.5={name: ANDREWS; occurrance: 24
+,name: MURDOCH; occurrance: 11
+}, contacts = 1 relation = 0.5={name: YOUNG STEWARD.; occurrance: 0
+,name: MOLLY; occurrance: 27
+}, contacts = 1 relation = 0.5={name: MOLLY; occurrance: 27
+,name: YOUNG STEWARD; occurrance: 0
+}, contacts = 1 relation = 0.5={name: YOUNG STEWARD; occurrance: 0
+,name: CAL; occurrance: 91
+}, contacts = 1 relation = 0.5={name: CREWMAN; occurrance: 0
+,name: LOVEJOY; occurrance: 17
+}, contacts = 2 relation = 1.0={name: LIGHTOLLER; occurrance: 16
+,name: HARTLEY; occurrance: 2
+}, contacts = 1 relation = 0.5={name: LIGHTOLLER; occurrance: 16
+,name: WOMAN IN CROWD; occurrance: 0
+}, contacts = 1 relation = 0.5={name: WOMAN IN CROWD; occurrance: 0
+,name: RUTH; occurrance: 28
+}, contacts = 1 relation = 0.5={name: STEWARD #2; occurrance: 4
+,name: STEWARD; occurrance: 11
+}, contacts = 1 relation = 0.5={name: STEWARD; occurrance: 11
+,name: LITTLE BOY; occurrance: 0
+}, contacts = 1 relation = 0.5={name: LITTLE BOY; occurrance: 0
+,name: WOMAN; occurrance: 4
+}, contacts = 4 relation = 2.0={name: ISMAY; occurrance: 14
+,name: LOWE; occurrance: 7
+}, contacts = 2 relation = 1.0={name: LOWE; occurrance: 7
+,name: ; occurrance: 7
+}, contacts = 1 relation = 0.5={name: 6.; occurrance: 0
+,name: LIGHTOLLER; occurrance: 16
+}, contacts = 1 relation = 0.5={name: LIGHTOLLER; occurrance: 16
+,name: MARVIN; occurrance: 1
+}, contacts = 1 relation = 0.5={name: MARVIN; occurrance: 1
+,name: MOLLY; occurrance: 27
+}, contacts = 1 relation = 0.5={name: ROSE; occurrance: 217
+,name: LIGHTOLLER; occurrance: 16
+}, contacts = 1 relation = 0.5={name: LIGHTOLLER; occurrance: 16
+,name: RUTH; occurrance: 28
+}, contacts = 5 relation = 2.5={name: HITCHINS; occurrance: 4
+,name: MOLLY; occurrance: 27
+}, contacts = 1 relation = 0.5={name: OPERATOR; occurrance: 0
+,name: ROSE; occurrance: 217
+}, contacts = 1 relation = 0.5={name: STEWARD; occurrance: 11
+,name: JACK AND ROSE; occurrance: 0
+}, contacts = 1 relation = 0.5={name: JACK AND ROSE; occurrance: 0
+,name: IRISHWOMAN; occurrance: 0
+}, contacts = 1 relation = 0.5={name: IRISHWOMAN; occurrance: 0
+,name: IRISHMAN; occurrance: 0
+}, contacts = 1 relation = 0.5={name: WOMAN; occurrance: 4
+,name: ANDREWS; occurrance: 24
+}, contacts = 4 relation = 2.0={name: ANDREWS; occurrance: 24
+,name: LIGHTOLLER; occurrance: 16
+}, contacts = 1 relation = 0.5={name: ANDREWS; occurrance: 24
+,name: LOVEJOY; occurrance: 17
+}, contacts = 1 relation = 0.5={name: CAL; occurrance: 91
+,name: ISADOR; occurrance: 0
+}, contacts = 1 relation = 0.5={name: ISADOR; occurrance: 0
+,name: IDA; occurrance: 1
+}, contacts = 2 relation = 1.0={name: IDA; occurrance: 1
+,name: ; occurrance: 7
+}, contacts = 1 relation = 0.5={name: IDA; occurrance: 1
+,name: LIGHTOLLER; occurrance: 16
+}, contacts = 1 relation = 0.5={name: JACK; occurrance: 181
+,name: STEWARD #2; occurrance: 4
+}, contacts = 1 relation = 0.5={name: STEWARD #2; occurrance: 4
+,name: TOMMY; occurrance: 10
+}, contacts = 2 relation = 1.0={name: SMITH; occurrance: 26
+,name: HITCHINS; occurrance: 4
+}, contacts = 1 relation = 0.5={name: LIGHTOLLER; occurrance: 16
+,name: LOWE; occurrance: 7
+}, contacts = 1 relation = 0.5={name: LOWE; occurrance: 7
+,name: BLAM! BLAM!; occurrance: 0
+}, contacts = 1 relation = 0.5={name: GRACIE; occurrance: 6
+,name: TOMMY; occurrance: 10
+}, contacts = 5 relation = 2.5={name: CAL; occurrance: 91
+,name: MURDOCH; occurrance: 11
+}, contacts = 2 relation = 1.0={name: MURDOCH; occurrance: 11
+,name: LOVEJOY; occurrance: 17
+}, contacts = 1 relation = 0.5={name: LIGHTOLLER; occurrance: 16
+,name: HUSBAND; occurrance: 1
+}, contacts = 1 relation = 0.5={name: HUSBAND; occurrance: 1
+,name: MAN; occurrance: 5
+}, contacts = 5 relation = 2.5={name: MAN; occurrance: 5
+,name: JACK; occurrance: 181
+}, contacts = 3 relation = 1.5={name: CAL; occurrance: 91
+,name: LIGHTOLLER; occurrance: 16
+}, contacts = 1 relation = 0.5={name: LIGHTOLLER; occurrance: 16
+,name: JACK; occurrance: 181
+}, contacts = 1 relation = 0.5={name: TOMMY; occurrance: 10
+,name: MURDOCH; occurrance: 11
+}, contacts = 1 relation = 0.5={name: MURDOCH; occurrance: 11
+,name: PURSER MCELROY; occurrance: 0
+}, contacts = 1 relation = 0.5={name: PURSER MCELROY; occurrance: 0
+,name: CAL; occurrance: 91
+}, contacts = 2 relation = 1.0={name: ANDREWS; occurrance: 24
+,name: JACK; occurrance: 181
+}, contacts = 1 relation = 0.5={name: HARTLEY; occurrance: 2
+,name: THE HYMN PLAYS OVER THE FOLLOWING SEQUENCE:; occurrance: 0
+}, contacts = 1 relation = 0.5={name: CAL; occurrance: 91
+,name: HARTLEY; occurrance: 2
+}, contacts = 1 relation = 0.5={name: JACK; occurrance: 181
+,name: FATHER BYLES; occurrance: 2
+}, contacts = 2 relation = 1.0={name: FATHER BYLES; occurrance: 2
+,name: MOTHER; occurrance: 0
+}, contacts = 1 relation = 0.5={name: SEVERAL PEOPLE; occurrance: 0
+,name: JACK; occurrance: 181
+}, contacts = 2 relation = 1.0={name: JACK; occurrance: 181
+,name: JOUGHIN; occurrance: 1
+}, contacts = 2 relation = 1.0={name: CAL; occurrance: 91
+,name: FABRIZIO; occurrance: 15
+}, contacts = 1 relation = 0.5={name: ROSE; occurrance: 217
+,name: WOMAN; occurrance: 4
+}, contacts = 1 relation = 0.5={name: WOMAN; occurrance: 4
+,name: MAN; occurrance: 5
+}, contacts = 1 relation = 0.5={name: HITCHINS; occurrance: 4
+,name: FIREMAN HENDRICKSON; occurrance: 0
+}, contacts = 1 relation = 0.5={name: FIREMAN HENDRICKSON; occurrance: 0
+,name: SIR COSMO; occurrance: 1
+}, contacts = 1 relation = 0.5={name: ROSE; occurrance: 217
+,name: LOWE; occurrance: 7
+}, contacts = 1 relation = 0.5={name: LOWE; occurrance: 7
+,name: DISSOLVE TO:; occurrance: 4
+}, contacts = 1 relation = 0.5={name: OLD ROSE; occurrance: 18
+,name: DISSOLVE TO:; occurrance: 4
+}, contacts = 1 relation = 0.5={name: SLOW MOTION.; occurrance: 0
+,name: DISSOLVE TO:; occurrance: 4
+}, contacts = 1 relation = 0.5={name: CARPATHIA STEWARD; occurrance: 0
+,name: ROSE; occurrance: 217
+}, contacts = 1 relation = 0.5={name: OLD ROSE; occurrance: 18
+,name: IMMIGRATION OFFICER; occurrance: 0
+}, contacts = 1 relation = 0.5={name: IMMIGRATION OFFICER; occurrance: 0
+,name: ROSE; occurrance: 217
+}])
