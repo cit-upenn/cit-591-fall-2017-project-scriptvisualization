@@ -2,6 +2,7 @@ package script;
 
  
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.security.GeneralSecurityException;
@@ -95,10 +96,10 @@ public class ImageScraper {
 	 * @return image
 	 * @throws IOException
 	 */
-	public static Image getImageGivenUrl(String link) throws IOException {
+	public static BufferedImage getImageGivenUrl(String link) throws IOException {
 		URL url = new URL(link);
-		Image image = ImageIO.read(url);
-		return image;
+		BufferedImage bufferImage = ImageIO.read(url);
+		return bufferImage;
 	}
 
 }
