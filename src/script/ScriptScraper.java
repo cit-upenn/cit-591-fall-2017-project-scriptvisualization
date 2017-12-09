@@ -1,5 +1,6 @@
 package script;
 
+import java.awt.Image;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -64,6 +65,33 @@ public class ScriptScraper {
 	public HashMap<String, String> getMoviesFromSearchKey(String searchKey) throws IOException{
 		Document moviesPage = Jsoup.connect("http://www.imsdb.com/search.php?query="+ searchKey).get();
 		return getAvailableMovies(moviesPage);
+	}
+	
+	/**
+	 * get all available movies posts along with their scripts given searchKey
+	 * @param searchKey
+	 * @return movie name and script url
+	 * @throws IOException
+	 */
+	public HashMap<String, Image> getMoviesPostsFromSearchKey(String searchKey) throws IOException{
+		Document moviesPage = Jsoup.connect("http://www.imsdb.com/search.php?query="+ searchKey).get();
+		HashMap<String, Image> movies = new HashMap<>();
+		Elements tables = moviesPage.getElementsByAttributeValue("valign", "top");
+		Elements childrenOfTable = tables.last().children();
+		for(Element child : childrenOfTable) {
+			if(child.tagName() == "p") {
+				String url = getUrlFromElement(child);
+				Document doc = Jsoup.connect(url).get();
+				Elements links = doc.getElementsByAttributeValueMatching("href", "/(scripts|transcripts)/.+.html");
+				if(links != null && !links.isEmpty()) {
+					String scriptLink = "http://www.imsdb.com" + links.first().attr("href");
+					String movieName = getScriptName(scriptLink);
+					Image post = ImageScraper.getImageGivenUrl(ImageScraper.getPostPathFromTMDB(movieName));
+					movies.put(movieName, post);
+				}
+			}
+		}
+		return movies;
 	}
 	
 	/**
