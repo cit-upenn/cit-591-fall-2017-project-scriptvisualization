@@ -71,7 +71,7 @@ public class ScriptReader {
 		}
 		Collections.sort(characters);
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 5; i++) {
 			Persona curr = characters.get(i);
 			BufferedImage personaImage = ImageScraper.getImageGivenUrl(ImageScraper.getImageUrlsFromGoogle(curr.getName() + " " + scriptName).get(0));
 			curr.setImage(personaImage);
@@ -103,7 +103,8 @@ public class ScriptReader {
 	 */
 	private void analysizeChunks() throws IOException {
 		Persona prev = null;
-		for (ScriptChunk chunk : scriptChunks) {
+		for (int i = 0; i < 100; i++) {
+			ScriptChunk chunk = scriptChunks.get(i);
 			// continue if the name is invalid
 			if (!isValidName(chunk.name)) {
 				prev = null;

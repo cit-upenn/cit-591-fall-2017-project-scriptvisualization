@@ -103,19 +103,22 @@ public class ScriptGui {
 		JButton movieButton1 = new JButton("New button");
 		movieButton1.setBounds(77, 338, 117, 29);
 		choose.add(movieButton1);
+		movieButton1.setVisible(false);
 		
 		JButton movieButton2 = new JButton("New button");
 		movieButton2.setBounds(316, 338, 117, 29);
 		choose.add(movieButton2);
+		movieButton2.setVisible(false);
 		
 		JButton movieButton3 = new JButton("New button");
 		movieButton3.setBounds(535, 338, 117, 29);
 		choose.add(movieButton3);
+		movieButton3.setVisible(false);
 		
 		
 		JPanel graph = new JPanel();
 		frame.getContentPane().add(graph, "name_20177380893280");
-		graph.setLayout(new BorderLayout(0, 0));
+		graph.setLayout(null);
 		
 		ArrayList<JLabel> labels = new ArrayList<>();
 		labels.add(moviePost1);
@@ -154,8 +157,9 @@ public class ScriptGui {
 					for(int i = 0; i < Math.min(movieNames.length, 3); i++) {
 						JLabel label = labels.get(i);
 						String movieName = movieNames[i];
-						 
+						
 						movieButtons.get(i).setText(movieName);
+						movieButtons.get(i).setVisible(true);
 						Image post = posts.get(movieName).getScaledInstance(label.getWidth()	, label.getHeight(), Image.SCALE_SMOOTH);
 						 
 						label.setIcon(new ImageIcon(post));
