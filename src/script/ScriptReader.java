@@ -1,7 +1,9 @@
 package script;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -22,7 +24,6 @@ public class ScriptReader {
 	Relationships relationgraph;
 	ArrayList<String> stoplist;
 	String scriptName;
-	ImageScraper imageScraper = new ImageScraper();
 	WatsonCaller wc = new WatsonCaller();
 	WatsonAnalyzer wa = new WatsonAnalyzer();
 
@@ -42,7 +43,7 @@ public class ScriptReader {
 		stoplist = new ArrayList<String>();
 		addStoplist();
 		analysizeChunks();
-		Image poster = imageScraper.getImageGivenUrl(imageScraper.getPostPathFromTMDB(scriptName));
+		BufferedImage poster = ImageScraper.getImageGivenUrl(ImageScraper.getPostPathFromTMDB(scriptName));
 		// changed mainCharacters to type ArrayList
 		ArrayList<Persona> mainCharacters = getMainCharacters();
 		HashMap<String, HashMap<String, Double>> naturalLangUnderstanding = wa
@@ -54,11 +55,13 @@ public class ScriptReader {
 	}
 
 	// sort all characters and get top 10 occurrence
-	public ArrayList<Persona> getMainCharacters() {
+	public ArrayList<Persona> getMainCharacters() throws IOException, GeneralSecurityException {
 		Set<Persona> characterName = getRelationgraph().getGraph().vertexSet();
 		ArrayList<Persona> characters = new ArrayList<Persona>();
 		ArrayList<Persona> mainRoles = new ArrayList<Persona>();
 		for (Persona p : characterName) {
+			BufferedImage personaImage = ImageScraper.getImageGivenUrl(ImageScraper.getImageUrlsFromGoogle(p.getName() + " " + scriptName).get(0));
+			p.setImage(personaImage);
 			characters.add(p);
 		}
 		Collections.sort(characters);
