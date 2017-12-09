@@ -62,6 +62,8 @@ public class Test {
 //			ImageScraper is = new ImageScraper();
 //			System.out.println(is.getPostPathFromTMDB("500 days with summer"));
 			
+			long start = System.currentTimeMillis();
+			
 			ScriptScraper ss = new ScriptScraper();
 			ScriptReader sr = new ScriptReader();
 			sr.readScript(ss.scrapeScript("http://www.imsdb.com/scripts/La-La-Land.html"), "La La Land");
@@ -71,6 +73,9 @@ public class Test {
 //			System.out.println(sr.relationgraph.graph.vertexSet());
 //			System.out.println(sr.relationgraph.graph.edgeSet());
 			System.out.println(sr.relationgraph.graph);
+			
+			long end = System.currentTimeMillis();
+			System.out.println(end - start);
 			
 		} catch (IOException e) {
 			e.printStackTrace();

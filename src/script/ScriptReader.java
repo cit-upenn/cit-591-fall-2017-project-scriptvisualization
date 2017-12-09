@@ -103,7 +103,7 @@ public class ScriptReader {
 				double relation;
 				// need to get relation here.param: chunk.dialogue
 				try {
-						relation = wa.naturalLangAnalyzer(wc.NaturalLangUnderstanding(chunk.dialogue)).get("sentiment")
+						relation = wa.relationshipAnalyzer(wc.getRelationshipIndicator(chunk.dialogue)).get("sentiment")
 								.get("general");
 				}
 				// catch something like unsupported text language
