@@ -33,7 +33,6 @@ public class ScriptGui {
 
 	private JFrame frame;
 	private JTextField searchBox;
-	private JTextField description;
 	private JTextField movieTag;
 	 
 
@@ -131,18 +130,9 @@ public class ScriptGui {
 		moviePost.setBounds(609, 21, 117, 159);
 		graph.add(moviePost);
 		
-		JLabel persona1 = new JLabel(" ");
-		persona1.setBounds(34, 388, 86, 100);
-		graph.add(persona1);
-		
 		JLabel p2 = new JLabel("");
 		p2.setBounds(121, 243, 61, 67);
 		graph.add(p2);
-		
-		description = new JTextField();
-		description.setColumns(10);
-		description.setBounds(121, 410, 463, 78);
-		graph.add(description);
 		
 		movieTag = new JTextField();
 		movieTag.setColumns(10);
@@ -161,13 +151,7 @@ public class ScriptGui {
 		characters.add(p1);
 		characters.add(p2);
 		characters.add(p3);
-		
-		
-		JLabel relation = new JLabel("");
-		relation.setBounds(235, 130, 117, 124);
-		graph.add(relation);
 		Image relationImg = frame.getToolkit().getImage("image/relation.png");
-		relation.setIcon(new ImageIcon(relationImg));
 		
 		JButton backButton2 = new JButton("Back");
 		backButton2.addActionListener(new ActionListener() {
