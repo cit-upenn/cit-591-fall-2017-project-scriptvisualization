@@ -10,7 +10,6 @@ import script.Script;
 import script.ScriptReader;
 import script.ScriptScraper;
 
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
  
@@ -31,6 +30,8 @@ import java.awt.event.ActionEvent;
 
 public class ScriptGui {
 
+	ScriptScraper ss = new ScriptScraper();
+	ScriptReader sr = new ScriptReader();
 	private JFrame frame;
 	private JTextField searchBox;
 	private JTextField movieTag;
@@ -68,6 +69,7 @@ public class ScriptGui {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new CardLayout(0, 0));
 		
+		//search page
 		JPanel search = new JPanel();
 		frame.getContentPane().add(search, "name_20161426369847");
 		search.setLayout(null);
@@ -79,7 +81,6 @@ public class ScriptGui {
 		searchBox.setColumns(10);
 		
 		JButton searchButton = new JButton("ScriptGo");
-		
 		searchButton.setBounds(292, 306, 117, 29);
 		search.add(searchButton);
 		
@@ -89,6 +90,7 @@ public class ScriptGui {
 		searchLabel.setBounds(292, 97, 117, 93);
 		search.add(searchLabel);
 		
+		//choose page
 		JPanel choose = new JPanel();
 		frame.getContentPane().add(choose, "name_20169639935065");
 		choose.setLayout(null);
@@ -121,7 +123,7 @@ public class ScriptGui {
 		choose.add(movieButton3);
 		movieButton3.setVisible(false);
 		
-		
+		//graph page
 		JPanel graph = new JPanel();
 		frame.getContentPane().add(graph, "name_20177380893280");
 		graph.setLayout(null);
@@ -147,22 +149,14 @@ public class ScriptGui {
 		p1.setBounds(243, 51, 61, 67);
 		graph.add(p1);
 		
-		ArrayList<JLabel> characters = new ArrayList<>();
-		characters.add(p1);
-		characters.add(p2);
-		characters.add(p3);
-		Image relationImg = frame.getToolkit().getImage("image/relation.png");
-		
 		JButton backButton2 = new JButton("Back");
-		backButton2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
-				cardLayout.first(frame.getContentPane());
-				
-			}
-		});
+		
 		backButton2.setBounds(609, 455, 117, 29);
 		graph.add(backButton2);
+		
+		JButton BackButton = new JButton("Back");
+		BackButton.setBounds(316, 443, 117, 29);
+		choose.add(BackButton);
 		
 		ArrayList<JLabel> labels = new ArrayList<>();
 		labels.add(moviePost1);
@@ -174,30 +168,24 @@ public class ScriptGui {
 		movieButtons.add(movieButton2);
 		movieButtons.add(movieButton3);
 		
-		JButton BackButton = new JButton("Back");
-		BackButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
-				cardLayout.first(frame.getContentPane());
-			}
-		});
-		BackButton.setBounds(316, 443, 117, 29);
-		choose.add(BackButton);
-		
+		ArrayList<JLabel> characters = new ArrayList<>();
+		characters.add(p1);
+		characters.add(p2);
+		characters.add(p3);
 		
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ScriptScraper ss = new ScriptScraper();
 				HashMap<String, BufferedImage> posts = new HashMap<>();
 				try {
-					posts = ScriptScraper.getMoviesPostsFromSearchKey(searchBox.getText());
+					ss.getMoviesFromSearchKey(searchBox.getText());
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				posts = ss.getMoviePosts();
 				String[] movieNames = new String[posts.keySet().size()];
 				posts.keySet().toArray(movieNames);
-				 
-				 
 					for(int i = 0; i < Math.min(movieNames.length, 3); i++) {
 						JLabel label = labels.get(i);
 						String movieName = movieNames[i];
@@ -218,7 +206,7 @@ public class ScriptGui {
 		movieButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ScriptReader sr = new ScriptReader();
-				String url = ScriptScraper.getScriptUrl(movieButton1.getText());
+				String url = ss.getMovieList().get(movieButton1.getText());
 				Script script = new Script();
 				try {
 					script = sr.readScript(ScriptScraper.scrapeScript(url), movieButton1.getText());
@@ -240,5 +228,23 @@ public class ScriptGui {
 				
 			}
 		});
+		
+		BackButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
+				cardLayout.first(frame.getContentPane());
+			}
+		});
+		
+		
+		backButton2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
+				cardLayout.first(frame.getContentPane());
+				
+			}
+		});
+		
+		
 	}
 }

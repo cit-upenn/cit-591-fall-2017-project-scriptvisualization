@@ -27,7 +27,7 @@ public class WatsonTest {
 		ScriptScraper ss = new ScriptScraper();
 //		ScriptReader sr = new ScriptReader(ss.scrapeScript(urlName));
 		ScriptReader sr = new ScriptReader();
-		Script script = sr.readScript(ss.scrapeScript(urlName), "Pearl Harbor");
+		Script script = sr.readScript(ScriptScraper.scrapeScript(urlName), "Pearl Harbor");
 //		System.out.println(script.getContent());
 		Set<Persona> characterName = sr.getRelationgraph().getGraph().vertexSet();
 		ArrayList<Persona> characters = new ArrayList<Persona>();
