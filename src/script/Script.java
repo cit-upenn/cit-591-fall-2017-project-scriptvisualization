@@ -1,6 +1,7 @@
 package script;
 
-import java.awt.Image;
+ 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -15,7 +16,7 @@ public class Script {
 	private String name;
 	private String content;
 	private Relationships relationgraph;
-	private Image poster;
+	private BufferedImage poster;
 
 	private ArrayList<Persona> mainCharacters;
 	private HashMap<String, HashMap<String, Double>> naturalLangUnderstanding;
@@ -32,7 +33,7 @@ public class Script {
 
 	}
 
-	public Script(String name, String content, Relationships relationgraph, Image post,
+	public Script(String name, String content, Relationships relationgraph, BufferedImage post,
 			ArrayList<Persona> mainCharacters, HashMap<String, HashMap<String, Double>> naturalLangUnderstanding) {
 		super();
 		this.name = name;
@@ -85,7 +86,7 @@ public class Script {
 	/**
 	 * @return the post
 	 */
-	public Image getPost() {
+	public BufferedImage getPost() {
 		return poster;
 	}
 
@@ -93,7 +94,7 @@ public class Script {
 	 * @param post
 	 *            the post to set
 	 */
-	public void setPost(Image post) {
+	public void setPost(BufferedImage post) {
 		this.poster = post;
 	}
 

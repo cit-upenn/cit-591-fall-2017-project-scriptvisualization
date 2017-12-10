@@ -1,11 +1,16 @@
 package script;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
+
+ 
 
 import apiCall.WatsonAnalyzer;
 import apiCall.WatsonCaller;
@@ -22,7 +27,6 @@ public class ScriptReader {
 	Relationships relationgraph;
 	ArrayList<String> stoplist;
 	String scriptName;
-	ImageScraper imageScraper = new ImageScraper();
 	WatsonCaller wc = new WatsonCaller();
 	WatsonAnalyzer wa = new WatsonAnalyzer();
 
@@ -32,8 +36,9 @@ public class ScriptReader {
 	 * @param content
 	 * @return Script
 	 * @throws IOException
+	 * @throws GeneralSecurityException 
 	 */
-	public Script readScript(String content, String scriptName) throws IOException {
+	public Script readScript(String content, String scriptName) throws IOException, GeneralSecurityException {
 
 		this.scriptName = scriptName;
 		scriptChunks = new ArrayList<>();
@@ -42,7 +47,7 @@ public class ScriptReader {
 		stoplist = new ArrayList<String>();
 		addStoplist();
 		analysizeChunks();
-		Image poster = imageScraper.getImageGivenUrl(imageScraper.getPostPathFromTMDB(scriptName));
+		BufferedImage poster = ImageScraper.getImageGivenUrl(ImageScraper.getPostPathFromTMDB(scriptName));
 		// changed mainCharacters to type ArrayList
 		ArrayList<Persona> mainCharacters = getMainCharacters();
 		HashMap<String, HashMap<String, Double>> naturalLangUnderstanding = wa
@@ -54,7 +59,13 @@ public class ScriptReader {
 	}
 
 	// sort all characters and get top 10 occurrence
-	public ArrayList<Persona> getMainCharacters() {
+	/**
+	 * get top 10 occurrence and set personal image
+	 * @return
+	 * @throws IOException
+	 * @throws GeneralSecurityException
+	 */
+	public ArrayList<Persona> getMainCharacters() throws IOException, GeneralSecurityException {
 		Set<Persona> characterName = getRelationgraph().getGraph().vertexSet();
 		ArrayList<Persona> characters = new ArrayList<Persona>();
 		ArrayList<Persona> mainRoles = new ArrayList<Persona>();
@@ -62,9 +73,21 @@ public class ScriptReader {
 			characters.add(p);
 		}
 		Collections.sort(characters);
-
-		for (int i = 0; i < 10; i++) {
-			mainRoles.add(characters.get(i));
+		
+		for (int i = 0; i < 3; i++) {
+			Persona curr = characters.get(i);
+			List<String> images = ImageScraper.getImageUrlsFromGoogle(curr.getName() + " " + scriptName);
+			int index = 0;
+			BufferedImage personaImage;
+			while(true) {
+				String url = images.get(index++);
+				personaImage = ImageScraper.getImageGivenUrl(url);
+				if(personaImage != null)  break;
+				
+			}
+			
+			curr.setImage(personaImage);
+			mainRoles.add(curr);
 		}
 		return mainRoles;
 	}
@@ -82,6 +105,10 @@ public class ScriptReader {
 		stoplist.add("day");
 		stoplist.add("...");
 		stoplist.add("cut");
+		stoplist.add("close");
+		stoplist.add("med");
+		stoplist.add("-");
+		stoplist.add("shot");
 	}
 
 	/**
@@ -91,7 +118,8 @@ public class ScriptReader {
 	 */
 	private void analysizeChunks() throws IOException {
 		Persona prev = null;
-		for (ScriptChunk chunk : scriptChunks) {
+		for (int i = 0; i < 100; i++) {
+			ScriptChunk chunk = scriptChunks.get(i);
 			// continue if the name is invalid
 			if (!isValidName(chunk.name)) {
 				prev = null;

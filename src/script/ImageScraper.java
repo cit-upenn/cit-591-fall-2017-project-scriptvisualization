@@ -1,8 +1,10 @@
 package script;
 
  
-import java.awt.Image;
+ 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.util.LinkedList;
@@ -31,9 +33,9 @@ import org.jsoup.select.Elements;
  */
 public class ImageScraper {
 	
-	private final String searchEngineID = "016310474112609901486:dlk05n5m1fm";
-	private final String googleAPIkey = "AIzaSyBsUA3Jt08xohiLevUttDAG5SYpg75kCdE";
-	private final String moviedbKey = "edf1b9d248b7dee1398bb1159e9f19cc";
+	private static final String searchEngineID = "016310474112609901486:dlk05n5m1fm";
+	private static final String googleAPIkey = "AIzaSyBsUA3Jt08xohiLevUttDAG5SYpg75kCdE";
+	private static final String moviedbKey = "edf1b9d248b7dee1398bb1159e9f19cc";
 	
 	
 	/**
@@ -43,7 +45,7 @@ public class ImageScraper {
 	 * @throws GeneralSecurityException
 	 * @throws IOException
 	 */
-	public List<String> getImageUrlsFromGoogle(String searchQuery) throws GeneralSecurityException, IOException {
+	public static List<String> getImageUrlsFromGoogle(String searchQuery) throws GeneralSecurityException, IOException {
 		 
         List<String> images = new LinkedList<>();
         Customsearch cs = new Customsearch.Builder(GoogleNetHttpTransport.newTrustedTransport(), JacksonFactory.getDefaultInstance(), null) 
@@ -71,10 +73,9 @@ public class ImageScraper {
 	 * @return
 	 * @throws IOException
 	 */
-	public String getPostPathFromTMDB(String moviename) throws IOException{
+	public static String getPostPathFromTMDB(String moviename) throws IOException{
 		
 		String query = "https://api.themoviedb.org/3/search/movie?api_key=" + moviedbKey + "&query=" + moviename;
-		System.out.println(query);
 		Document doc = Jsoup.connect(query).ignoreContentType(true).get();
 		Elements json = doc.getElementsByTag("body");
 		String result = "";
@@ -96,10 +97,13 @@ public class ImageScraper {
 	 * @return image
 	 * @throws IOException
 	 */
-	public Image getImageGivenUrl(String link) throws IOException {
+	public static BufferedImage getImageGivenUrl(String link) throws IOException {
 		URL url = new URL(link);
-		Image image = ImageIO.read(url);
-		return image;
+	 
+		 HttpURLConnection httpcon = (HttpURLConnection) url.openConnection(); 
+		 httpcon.addRequestProperty("User-Agent", ""); 
+		 BufferedImage bufferImage = ImageIO.read(httpcon.getInputStream());
+		return bufferImage;
 	}
 
 }

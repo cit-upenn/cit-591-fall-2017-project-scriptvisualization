@@ -1,6 +1,7 @@
 package script;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 /**
@@ -14,7 +15,7 @@ public class Persona implements Comparable<Persona> {
 	private String name;    // name of the character
 	private ArrayList<String> lines;  // all lines belong to this character
 	private HashMap<String, Double> personality;
-	private Image personaImage;
+	private BufferedImage personaImage;
 	 
 	
 	public Persona(String name) {
@@ -56,7 +57,7 @@ public class Persona implements Comparable<Persona> {
 	}
 
 	
-	public void setImage(Image image) {
+	public void setImage(BufferedImage image) {
 		personaImage = image;
 	}
 	

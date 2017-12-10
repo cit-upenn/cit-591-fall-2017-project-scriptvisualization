@@ -1,8 +1,6 @@
 package script;
-
-import java.io.FileNotFoundException;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,14 +15,28 @@ import org.jsoup.select.Elements;
  *
  */
 public class ScriptScraper {
+	
+	private String content;
+	private String scriptName;
+	private HashMap<String, String> movieList;
+	private HashMap<String, BufferedImage> moviePosts;
 
+	/**
+	 * This constructor initializes instance variables
+	 */
+	public ScriptScraper() {
+		movieList = new HashMap<>();
+		moviePosts = new HashMap<>();
+	}
+	
+	
 	/**
 	 * Extract script from given url, return string of the script 
 	 * @param url
 	 * @return
 	 * @throws IOException
 	 */
-	public String scrapeScript(String url) throws IOException {
+	public static String scrapeScript(String url) throws IOException {
 		Document doc = Jsoup.connect(url).get();
 		//remove empty tags
 		for (Element element : doc.select("*")) {
@@ -45,26 +57,17 @@ public class ScriptScraper {
 		return scripts.toString().replaceAll("[\\n]+", "\n").replaceAll("</b>|<pre>|</pre>", "").replaceAll("\\n[\\s]+\\n", "\n").trim(); 
 	}
 	
-	
-	/**
-	 * Get the name of the movie from given url
-	 * @return
-	 */
-	public String getScriptName(String url) {
-		String[] splitUrl = url.split("/");
-		return splitUrl[splitUrl.length - 1].replaceAll(".html", "");
-	}
-	
 	/**
 	 * get all available movies along with their scripts given searchKey
 	 * @param searchKey
 	 * @return movie name and script url
 	 * @throws IOException
 	 */
-	public HashMap<String, String> getMoviesFromSearchKey(String searchKey) throws IOException{
+	public void getMoviesFromSearchKey(String searchKey) throws IOException{
 		Document moviesPage = Jsoup.connect("http://www.imsdb.com/search.php?query="+ searchKey).get();
-		return getAvailableMovies(moviesPage);
+		getAvailableMovies(moviesPage);
 	}
+	
 	
 	/**
 	 * get all available movies along with their scripts given genre
@@ -72,17 +75,17 @@ public class ScriptScraper {
 	 * @return movie name and script url
 	 * @throws IOException
 	 */
-	public HashMap<String, String> getMoviesFromSearchKey(Genre genre) throws IOException{
+	public void getMoviesFromGenre(Genre genre) throws IOException{
 		Document moviesPage = Jsoup.connect("http://www.imsdb.com/genre/"+ genre).get();
-		return getAvailableMovies(moviesPage);
+		getAvailableMovies(moviesPage);
 	}
 	
 	/**
 	 * this function finds all movies with available scripts from the retrieved html and put the movie name and script url into a hash map
+	 * put movie name and movie poster into another hashmap
 	 * @throws IOException
 	 */
-	private HashMap<String, String> getAvailableMovies(Document moviesPage) throws IOException {
-		HashMap<String, String> movies = new HashMap<>();
+	private void getAvailableMovies(Document moviesPage) throws IOException {
 		Elements tables = moviesPage.getElementsByAttributeValue("valign", "top");
 		Elements childrenOfTable = tables.last().children();
 		for(Element child : childrenOfTable) {
@@ -92,13 +95,27 @@ public class ScriptScraper {
 				Elements links = doc.getElementsByAttributeValueMatching("href", "/(scripts|transcripts)/.+.html");
 				if(links != null && !links.isEmpty()) {
 					String scriptLink = "http://www.imsdb.com" + links.first().attr("href");
-					movies.put(getScriptName(scriptLink), scriptLink);
+					String scriptName = getScriptName(scriptLink);
+					movieList.put(scriptName, scriptLink);
+					String postpath = ImageScraper.getPostPathFromTMDB(scriptName);
+					if(postpath == null) continue;
+					BufferedImage post = ImageScraper.getImageGivenUrl(postpath);
+					moviePosts.put(scriptName, post);
 				}
 			}
 		}
-		return movies;
 
 	}
+	
+	/**
+	 * Get the name of the movie from given url
+	 * @return
+	 */
+	public static String getScriptName(String url) {
+		String[] splitUrl = url.split("/");
+		return splitUrl[splitUrl.length - 1].replaceAll(".html", "").replaceAll("-", " ");
+	}
+	
  
 
 	/**
@@ -118,21 +135,35 @@ public class ScriptScraper {
 		return null;
 	}
 	
-	
-	//========================test function
-	public void writeScriptToFile(String content, String scriptName) throws FileNotFoundException {
-		PrintWriter out = new PrintWriter(scriptName);
-		out.print(content);
-		out.close();
+	/**
+	 * @return the content
+	 */
+	public String getContent() {
+		return content;
+	}
+
+
+	/**
+	 * @return the scriptName
+	 */
+	public String getScriptName() {
+		return scriptName;
+	}
+
+
+	/**
+	 * @return the movieList
+	 */
+	public HashMap<String, String> getMovieList() {
+		return movieList;
 	}
 	
+
 	/**
-	 * print all available movie names and url of their script
+	 * @return the moviePosts
 	 */
-	public void printMovieList(HashMap<String, String> availableMovies) {
-		for(String s : availableMovies.keySet()) {
-			System.out.println(s +"\n" + availableMovies.get(s));
-		}
+	public HashMap<String, BufferedImage> getMoviePosts() {
+		return moviePosts;
 	}
 	
 	
