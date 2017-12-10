@@ -6,6 +6,7 @@ package apiCall;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -17,7 +18,7 @@ import script.ScriptReader;
 import script.ScriptScraper;
 
 public class WatsonTest {
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, GeneralSecurityException {
 
 		// String urlName = "http://www.imsdb.com/scripts/" + scriptName.split(" ")[0] +
 		// "-" + scriptName.split(" ")[1]
