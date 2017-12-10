@@ -72,18 +72,18 @@ public class WatsonTest {
 		// pw2.close();
 
 		String s = mainRoles.get(0).getLines().toString();
-		// wa.personalityAnalyzer(wc.getPersonality(s));
+		 wa.personalityAnalyzer(wc.getPersonality(s));
 
-		String content = ss.scrapeScript(urlName);
-		HashMap<String, HashMap<String, Double>> naturalLangUnderstanding = wa
-				.naturalLangAnalyzer(wc.NaturalLangUnderstanding(content));
-		for (String str: naturalLangUnderstanding.keySet()) {
-			System.out.println(str);
-			for (String str2: naturalLangUnderstanding.get(str).keySet()) {
-				System.out.print("\t" + str2 + "\t");
-				System.out.println(naturalLangUnderstanding.get(str).get(str2));
-			}
-		}
+//		String content = ss.scrapeScript(urlName);
+//		HashMap<String, HashMap<String, Double>> naturalLangUnderstanding = wa
+//				.naturalLangAnalyzer(wc.NaturalLangUnderstanding(content));
+//		for (String str: naturalLangUnderstanding.keySet()) {
+//			System.out.println(str);
+//			for (String str2: naturalLangUnderstanding.get(str).keySet()) {
+//				System.out.print("\t" + str2 + "\t");
+//				System.out.println(naturalLangUnderstanding.get(str).get(str2));
+//			}
+//		}
 		
 		
 		// wa.naturalLangAnalyzer(wc.NaturalLangUnderstanding(content));
