@@ -135,10 +135,6 @@ public class ScriptGui {
 		persona1.setBounds(34, 388, 86, 100);
 		graph.add(persona1);
 		
-		JLabel persona2 = new JLabel("");
-		persona2.setBounds(614, 388, 86, 100);
-		graph.add(persona2);
-		
 		JLabel p2 = new JLabel("");
 		p2.setBounds(121, 243, 61, 67);
 		graph.add(p2);
@@ -161,9 +157,28 @@ public class ScriptGui {
 		p1.setBounds(243, 51, 61, 67);
 		graph.add(p1);
 		
+		ArrayList<JLabel> characters = new ArrayList<>();
+		characters.add(p1);
+		characters.add(p2);
+		characters.add(p3);
+		
+		
 		JLabel relation = new JLabel("");
 		relation.setBounds(235, 130, 117, 124);
 		graph.add(relation);
+		Image relationImg = frame.getToolkit().getImage("image/relation.png");
+		relation.setIcon(new ImageIcon(relationImg));
+		
+		JButton backButton2 = new JButton("Back");
+		backButton2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
+				cardLayout.first(frame.getContentPane());
+				
+			}
+		});
+		backButton2.setBounds(609, 455, 117, 29);
+		graph.add(backButton2);
 		
 		ArrayList<JLabel> labels = new ArrayList<>();
 		labels.add(moviePost1);
@@ -229,13 +244,17 @@ public class ScriptGui {
 				}
 				
 				moviePost.setIcon(labels.get(0).getIcon());
-				
+				ArrayList<Persona> mainCharacters = script.getMainCharacters();
+				for(int i = 0; i < 3; i++) {
+					JLabel label = characters.get(i);
+					Image personalImage = mainCharacters.get(i).getImage().getScaledInstance(label.getWidth()	, label.getHeight(), Image.SCALE_SMOOTH);
+					label.setIcon(new ImageIcon(personalImage));
+				}
+				movieTag.setText(script.getNaturalLangUnderstanding().keySet().toString());
 				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 				cardLayout.next(frame.getContentPane());
 				
 			}
 		});
 	}
-	
-	 
 }
