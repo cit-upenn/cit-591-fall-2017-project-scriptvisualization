@@ -25,6 +25,8 @@ import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
  
 
@@ -65,7 +67,7 @@ public class ScriptGui {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 748, 529);
+		frame.setBounds(100, 100, 485, 479);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new CardLayout(0, 0));
 		
@@ -76,19 +78,26 @@ public class ScriptGui {
 		
 		searchBox = new JTextField();
 		searchBox.setText("Search  for Movie Script");
-		searchBox.setBounds(121, 222, 472, 38);
+		searchBox.setBounds(27, 336, 166, 38);
 		search.add(searchBox);
 		searchBox.setColumns(10);
 		
 		JButton searchButton = new JButton("ScriptGo");
-		searchButton.setBounds(292, 306, 117, 29);
+		searchButton.setBounds(175, 386, 129, 35);
 		search.add(searchButton);
 		
-		JLabel searchLabel = new JLabel("");
+		JComboBox comboBox = new JComboBox();
+		comboBox.setMaximumRowCount(40);
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Genre", "Action", "Adventure", "Animation", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "Horror", "Musical", "Mystery", "Romance", "Sci-Fi", "Short", "Thriller", "War", "Western"}));
+		comboBox.setToolTipText("");
+		comboBox.setBounds(287, 336, 104, 34);
+		search.add(comboBox);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("/Users/yichaoli/Desktop/script1edited.jpg"));
+		lblNewLabel.setBounds(0, 0, 489, 337);
+		search.add(lblNewLabel);
 		Image searchImg = frame.getToolkit().getImage("image/search-small.png");
-		searchLabel.setIcon(new ImageIcon(searchImg));
-		searchLabel.setBounds(292, 97, 117, 93);
-		search.add(searchLabel);
 		
 		//choose page
 		JPanel choose = new JPanel();
