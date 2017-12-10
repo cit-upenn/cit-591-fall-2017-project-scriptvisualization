@@ -7,7 +7,10 @@ import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
+
+ 
 
 import apiCall.WatsonAnalyzer;
 import apiCall.WatsonCaller;
@@ -70,12 +73,20 @@ public class ScriptReader {
 			characters.add(p);
 		}
 		Collections.sort(characters);
-
+		
 		for (int i = 0; i < 3; i++) {
 			Persona curr = characters.get(i);
-			BufferedImage personaImage = ImageScraper.getImageGivenUrl(ImageScraper.getImageUrlsFromGoogle(curr.getName() + " " + scriptName).get(0));
-			curr.setImage(personaImage);
+			List<String> images = ImageScraper.getImageUrlsFromGoogle(curr.getName() + " " + scriptName);
+			int index = 0;
+			BufferedImage personaImage;
+			while(true) {
+				String url = images.get(index++);
+				personaImage = ImageScraper.getImageGivenUrl(url);
+				if(personaImage != null)  break;
+				
+			}
 			
+			curr.setImage(personaImage);
 			mainRoles.add(curr);
 		}
 		return mainRoles;
@@ -94,6 +105,10 @@ public class ScriptReader {
 		stoplist.add("day");
 		stoplist.add("...");
 		stoplist.add("cut");
+		stoplist.add("close");
+		stoplist.add("med");
+		stoplist.add("-");
+		stoplist.add("shot");
 	}
 
 	/**

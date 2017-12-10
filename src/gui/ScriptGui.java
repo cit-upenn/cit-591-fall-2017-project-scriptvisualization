@@ -175,7 +175,7 @@ public class ScriptGui {
 		
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ScriptScraper ss = new ScriptScraper();
+				ss = new ScriptScraper();
 				HashMap<String, BufferedImage> posts = new HashMap<>();
 				try {
 					ss.getMoviesFromSearchKey(searchBox.getText());
@@ -205,7 +205,7 @@ public class ScriptGui {
 		
 		movieButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ScriptReader sr = new ScriptReader();
+				sr = new ScriptReader();
 				String url = ss.getMovieList().get(movieButton1.getText());
 				Script script = new Script();
 				try {
@@ -219,10 +219,13 @@ public class ScriptGui {
 				ArrayList<Persona> mainCharacters = script.getMainCharacters();
 				for(int i = 0; i < 3; i++) {
 					JLabel label = characters.get(i);
+					System.out.println(mainCharacters.get(i).getName());
 					Image personalImage = mainCharacters.get(i).getImage().getScaledInstance(label.getWidth()	, label.getHeight(), Image.SCALE_SMOOTH);
+					
+					System.out.println(personalImage);
 					label.setIcon(new ImageIcon(personalImage));
 				}
-				movieTag.setText(script.getNaturalLangUnderstanding().keySet().toString());
+				//movieTag.setText(script.getNaturalLangUnderstanding().keySet().toString());
 				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 				cardLayout.next(frame.getContentPane());
 				

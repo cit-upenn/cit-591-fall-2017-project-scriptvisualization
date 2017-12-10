@@ -103,7 +103,6 @@ public class ImageScraper {
 		 HttpURLConnection httpcon = (HttpURLConnection) url.openConnection(); 
 		 httpcon.addRequestProperty("User-Agent", ""); 
 		 BufferedImage bufferImage = ImageIO.read(httpcon.getInputStream());
-		  
 		return bufferImage;
 	}
 
