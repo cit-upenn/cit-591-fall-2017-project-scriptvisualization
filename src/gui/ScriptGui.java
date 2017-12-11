@@ -37,6 +37,7 @@ public class ScriptGui {
 	private JFrame frame;
 	private JTextField searchBox;
 	private JTextField movieTag;
+	private JTextField textField;
 	 
 
 	/**
@@ -71,6 +72,7 @@ public class ScriptGui {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new CardLayout(0, 0));
 		
+		
 		//search page
 		JPanel search = new JPanel();
 		frame.getContentPane().add(search, "name_20161426369847");
@@ -85,6 +87,8 @@ public class ScriptGui {
 		JButton searchButton = new JButton("ScriptGo");
 		searchButton.setBounds(175, 386, 129, 35);
 		search.add(searchButton);
+		
+		
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setMaximumRowCount(40);
@@ -132,6 +136,21 @@ public class ScriptGui {
 		choose.add(movieButton3);
 		movieButton3.setVisible(false);
 		
+		/*
+		//loading page
+		
+		JPanel loading = new JPanel();
+		frame.getContentPane().add(loading, "name_710483185881559");
+		loading.setLayout(null);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon("/Users/yichaoli/Documents/study/MCIT_1/591project/image/ajax-loader.gif"));
+		lblNewLabel_1.setBounds(140, 108, 176, 87);
+		loading.add(lblNewLabel_1);
+*/
+		
+	    
+		
 		//graph page
 		JPanel graph = new JPanel();
 		frame.getContentPane().add(graph, "name_20177380893280");
@@ -141,15 +160,33 @@ public class ScriptGui {
 		moviePost.setBounds(609, 21, 117, 159);
 		graph.add(moviePost);
 		
+		ArrayList<JLabel> pp=new ArrayList<>();
+		for(int i=0;i<3;i++){
+			
+			JLabel ppp=new JLabel("");
+			if(i<5){
+				ppp.setBounds(25+i*80,30,61,67);
+			}
+			else{
+				ppp.setBounds(25+(i-5)*80,530,61,67);
+			}
+			graph.add(ppp);
+			pp.add(ppp);
+			
+		}
+		
+		/*
 		JLabel p2 = new JLabel("");
 		p2.setBounds(121, 243, 61, 67);
 		graph.add(p2);
+		*/
 		
 		movieTag = new JTextField();
 		movieTag.setColumns(10);
 		movieTag.setBounds(588, 194, 130, 165);
 		graph.add(movieTag);
 		
+		/*
 		JLabel p3 = new JLabel("");
 		p3.setBounds(377, 243, 61, 67);
 		graph.add(p3);
@@ -157,11 +194,13 @@ public class ScriptGui {
 		JLabel p1 = new JLabel(" ");
 		p1.setBounds(243, 51, 61, 67);
 		graph.add(p1);
-		
+		*/
 		JButton backButton2 = new JButton("Back");
 		
 		backButton2.setBounds(609, 455, 117, 29);
 		graph.add(backButton2);
+		
+	
 		
 		JButton BackButton = new JButton("Back");
 		BackButton.setBounds(316, 443, 117, 29);
@@ -178,9 +217,12 @@ public class ScriptGui {
 		movieButtons.add(movieButton3);
 		
 		ArrayList<JLabel> characters = new ArrayList<>();
-		characters.add(p1);
-		characters.add(p2);
-		characters.add(p3);
+		//characters.add(p1);
+		//characters.add(p2);
+		//characters.add(p3);
+		for(int i=0;i<3;i++){
+			characters.add(pp.get(i));
+		}
 		
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -218,7 +260,12 @@ public class ScriptGui {
 				String url = ss.getMovieList().get(movieButton1.getText());
 				Script script = new Script();
 				try {
+					
 					script = sr.readScript(ScriptScraper.scrapeScript(url), movieButton1.getText());
+					JLabel lblNewLabel_1 = new JLabel("");
+					lblNewLabel_1.setIcon(new ImageIcon("/Users/yichaoli/Documents/study/MCIT_1/591project/image/ajax-loader.gif"));
+					lblNewLabel_1.setBounds(140, 108, 176, 87);
+					choose.add(lblNewLabel_1);
 				} catch (IOException | GeneralSecurityException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -229,7 +276,16 @@ public class ScriptGui {
 				for(int i = 0; i < 3; i++) {
 					JLabel label = characters.get(i);
 					System.out.println(mainCharacters.get(i).getName());
-					Image personalImage = mainCharacters.get(i).getImage().getScaledInstance(label.getWidth()	, label.getHeight(), Image.SCALE_SMOOTH);
+					Image personalImage = mainCharacters.get(i).getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
+					textField = new JTextField();
+					if(i<5) textField.setBounds(25+i*80,100,61,20);
+					else{
+						textField.setBounds(25+(i-5)*80,540,61,20);
+					}
+					textField.setText(mainCharacters.get(i).getName());
+					graph.add(textField);
+					//textField.setColumns(10);
+					
 					
 					System.out.println(personalImage);
 					label.setIcon(new ImageIcon(personalImage));
