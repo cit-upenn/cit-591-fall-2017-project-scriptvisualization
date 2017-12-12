@@ -6,6 +6,7 @@
 .metadata
 bin/
 tmp/
+target/
 *.tmp
 *.bak
 *.swp
@@ -15,6 +16,7 @@ local.properties
 .loadpath
 .recommenders
 Secret.*
+
 
 # External tool builders
 .externalToolBuilders/
