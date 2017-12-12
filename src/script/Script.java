@@ -20,14 +20,6 @@ public class Script {
 
 	private ArrayList<Persona> mainCharacters;
 	private HashMap<String, HashMap<String, Double>> naturalLangUnderstanding;
-	// HashMap<String, Integer> mainCharacters, or TreeMap
-	// Key: name. Value: occurrences.
-	// HashMap<String, HashMap<String, Double>> naturalLangUnderstanding
-	// emotionToneTimeline
-	// HashMap<String, HashMap<String, Double>> lineEmotionTone
-	// langToneTimeline
-	// HashMap<String, HashMap<String, Double>> lineLangTone
-	// Personality of individual characters, type to be determined
 
 	public Script() {
 
