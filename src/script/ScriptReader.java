@@ -43,19 +43,23 @@ public class ScriptReader {
 		this.scriptName = scriptName;
 		scriptChunks = new ArrayList<>();
 		splitScriptToChunks(content);
+		//System.out.println(content);
+		for(ScriptChunk chunk : scriptChunks) {
+			System.out.println(chunk);
+		}
 		this.relationgraph = new Relationships();
 		stoplist = new ArrayList<String>();
 		addStoplist();
 		analysizeChunks();
 		BufferedImage poster = ImageScraper.getImageGivenUrl(ImageScraper.getPostPathFromTMDB(scriptName));
 		// changed mainCharacters to type ArrayList
-		ArrayList<Persona> mainCharacters = getMainCharacters();
+		/*ArrayList<Persona> mainCharacters = getMainCharacters();
 		HashMap<String, HashMap<String, Double>> naturalLangUnderstanding = wa
 				.naturalLangAnalyzer(wc.NaturalLangUnderstanding(content));
 		Script script = new Script(scriptName, content, relationgraph, poster, mainCharacters,
-				naturalLangUnderstanding);
+				naturalLangUnderstanding);*/
 
-		return script;
+		return null;
 	}
 
 	// sort all characters and get top 10 occurrence
@@ -121,16 +125,15 @@ public class ScriptReader {
 		for (int i = 0; i < 100; i++) {
 			ScriptChunk chunk = scriptChunks.get(i);
 			// continue if the name is invalid
-			if (!isValidName(chunk.name)) {
-				prev = null;
-				continue;
-			}
 			Persona curr = relationgraph.createVertex(chunk.name);
 			curr.getLines().add(chunk.dialogue);
+			if (!isValidName(chunk.name)) {
+			     prev = null;
+			}
 			if (prev != null && prev != curr) {
-				double relation;
+				double relation = 0;
 				// need to get relation here.param: chunk.dialogue
-				try {
+				/*try {
 						relation = wa.relationshipAnalyzer(wc.getRelationshipIndicator(chunk.dialogue)).get("sentiment")
 								.get("general");
 				}
@@ -141,7 +144,7 @@ public class ScriptReader {
 				}
 				catch(com.ibm.watson.developer_cloud.service.exception.ServiceResponseException sre) {
 					relation = 0;
-				}
+				}*/
 
 				relationgraph.createEdge(prev, curr, relation);
 			}
@@ -172,27 +175,28 @@ public class ScriptReader {
 	private void splitScriptToChunks(String content) {
 		String[] chunks = content.split("<b>");
 		for (String chunk : chunks) {
-			// System.out.print("==========================\n"+ chunk);
-			if (chunk.length() == 0)
-				continue;
-			chunk = chunk.replaceAll("\\(.+\\)", "").replaceAll("\\n[\\s]+\\n", "\n");
+			if (chunk.length() == 0) continue;
+			chunk = chunk.replaceAll("\\(.+\\)", "");
 			String[] splitChunk = chunk.split("\\n");
+			int i = 0;
+			 for(String line : splitChunk) {
+				 System.out.println("line " + i + ": " + line);
+				 i++;
+			 }
+			if(splitChunk.length < 2) continue;
 			String name = splitChunk[0].trim();
+			
 			StringBuilder dialog = new StringBuilder();
 			StringBuilder narra = new StringBuilder();
-			int previousCountSpace = Integer.MIN_VALUE;
 			int linNumber = 1;
+			while(splitChunk[linNumber].length() == 0) linNumber++;
 			for (; linNumber < splitChunk.length; linNumber++) {
-				int countSpace = countSpace(splitChunk[linNumber]);
-				if (countSpace < previousCountSpace)
-					break;
-				dialog.append(splitChunk[linNumber].trim() + " ");
-				previousCountSpace = countSpace;
+				 if(splitChunk[linNumber].length() == 0) break;
+				 dialog.append(splitChunk[linNumber]);
 			}
 			for (; linNumber < splitChunk.length; linNumber++) {
-				narra.append(splitChunk[linNumber].trim() + " ");
+				 narra.append(splitChunk[linNumber]);
 			}
-
 			ScriptChunk schunk = new ScriptChunk(name, dialog.toString(), narra.toString());
 			scriptChunks.add(schunk);
 
@@ -237,6 +241,14 @@ public class ScriptReader {
 			this.narrative = narrative;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Object#toString()
+		 */
+		@Override
+		public String toString() {
+			return "name= " + name + "\ndialogue= " + dialogue + "\nnarrative= " + narrative;
+		}
+
 	}
 
 	public Relationships getRelationgraph() {
@@ -246,5 +258,6 @@ public class ScriptReader {
 	public void setRelationgraph(Relationships relationgraph) {
 		this.relationgraph = relationgraph;
 	}
+	
 
 }
