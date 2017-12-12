@@ -1,6 +1,5 @@
 package script;
-
-import java.awt.Image;
+ 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -39,30 +38,25 @@ public class ScriptReader {
 	 * @throws GeneralSecurityException 
 	 */
 	public Script readScript(String content, String scriptName) throws IOException, GeneralSecurityException {
-
 		this.scriptName = scriptName;
 		scriptChunks = new ArrayList<>();
 		splitScriptToChunks(content);
-		//System.out.println(content);
-		for(ScriptChunk chunk : scriptChunks) {
-			System.out.println(chunk);
-		}
 		this.relationgraph = new Relationships();
 		stoplist = new ArrayList<String>();
 		addStoplist();
 		analysizeChunks();
 		BufferedImage poster = ImageScraper.getImageGivenUrl(ImageScraper.getPostPathFromTMDB(scriptName));
 		// changed mainCharacters to type ArrayList
-		/*ArrayList<Persona> mainCharacters = getMainCharacters();
+		ArrayList<Persona> mainCharacters = getMainCharacters();
 		HashMap<String, HashMap<String, Double>> naturalLangUnderstanding = wa
 				.naturalLangAnalyzer(wc.NaturalLangUnderstanding(content));
 		Script script = new Script(scriptName, content, relationgraph, poster, mainCharacters,
-				naturalLangUnderstanding);*/
+				naturalLangUnderstanding);
 
-		return null;
+		return script;
 	}
 
-	// sort all characters and get top 10 occurrence
+ 
 	/**
 	 * get top 10 occurrence and set personal image
 	 * @return
@@ -125,15 +119,16 @@ public class ScriptReader {
 		for (int i = 0; i < 100; i++) {
 			ScriptChunk chunk = scriptChunks.get(i);
 			// continue if the name is invalid
-			Persona curr = relationgraph.createVertex(chunk.name);
-			curr.getLines().add(chunk.dialogue);
 			if (!isValidName(chunk.name)) {
 			     prev = null;
+			     continue;
 			}
+			Persona curr = relationgraph.createVertex(chunk.name);
+			curr.getLines().add(chunk.dialogue);
 			if (prev != null && prev != curr) {
 				double relation = 0;
 				// need to get relation here.param: chunk.dialogue
-				/*try {
+				try {
 						relation = wa.relationshipAnalyzer(wc.getRelationshipIndicator(chunk.dialogue)).get("sentiment")
 								.get("general");
 				}
@@ -144,7 +139,7 @@ public class ScriptReader {
 				}
 				catch(com.ibm.watson.developer_cloud.service.exception.ServiceResponseException sre) {
 					relation = 0;
-				}*/
+				}
 
 				relationgraph.createEdge(prev, curr, relation);
 			}
@@ -163,6 +158,7 @@ public class ScriptReader {
 				return false;
 		}
 		// if contains number, return false;
+		if(lowerName.matches(".*\\d.*")) return false;
 		return true;
 	}
 
@@ -178,14 +174,8 @@ public class ScriptReader {
 			if (chunk.length() == 0) continue;
 			chunk = chunk.replaceAll("\\(.+\\)", "");
 			String[] splitChunk = chunk.split("\\n");
-			int i = 0;
-			 for(String line : splitChunk) {
-				 System.out.println("line " + i + ": " + line);
-				 i++;
-			 }
 			if(splitChunk.length < 2) continue;
 			String name = splitChunk[0].trim();
-			
 			StringBuilder dialog = new StringBuilder();
 			StringBuilder narra = new StringBuilder();
 			int linNumber = 1;
@@ -203,25 +193,6 @@ public class ScriptReader {
 		}
 	}
 
-	/**
-	 * This method count whitespace a string starts with
-	 * 
-	 * @param string
-	 * @return
-	 */
-	private int countSpace(String string) {
-		// TODO Auto-generated method stub
-		int countSpace = 0;
-		for (int i = 0; i < string.length(); i++) {
-			if (string.charAt(i) == ' ')
-				countSpace++;
-			if (string.charAt(i) == '\t')
-				countSpace += 4;
-			else
-				break;
-		}
-		return countSpace;
-	}
 
 	/**
 	 * This class represents a chunk of a script

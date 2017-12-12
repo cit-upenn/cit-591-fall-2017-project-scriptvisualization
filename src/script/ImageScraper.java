@@ -33,9 +33,9 @@ import org.jsoup.select.Elements;
  */
 public class ImageScraper {
 	
-	private static final String searchEngineID = "016310474112609901486:dlk05n5m1fm";
-	private static final String googleAPIkey = "AIzaSyBsUA3Jt08xohiLevUttDAG5SYpg75kCdE";
-	private static final String moviedbKey = "edf1b9d248b7dee1398bb1159e9f19cc";
+	private static final String searchEngineID = Secret.searchEngineID;
+	private static final String googleAPIkey = Secret.googleAPIkey;
+	private static final String moviedbKey = Secret.moviedbKey;
 	
 	
 	/**
