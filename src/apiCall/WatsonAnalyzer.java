@@ -58,10 +58,7 @@ public class WatsonAnalyzer {
 	}
 
 	public void personalityAnalyzer(Profile jsonData) throws FileNotFoundException {
-		PrintWriter pw = new PrintWriter("personality.json");
-		pw.println(jsonData);
-		pw.close();
-//		System.out.println(jsonData);
+		//HashMap<>
 	}
 
 	public HashMap<String, HashMap<String, Double>> naturalLangAnalyzer(

@@ -12,12 +12,14 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
+import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.DocumentAnalysis;
+
 import script.Persona;
 import script.Script;
 import script.ScriptReader;
 import script.ScriptScraper;
 
-public class WatsonTest {
+public class WatsonTester {
 	public static void main(String[] args) throws IOException, GeneralSecurityException {
 
 		// String urlName = "http://www.imsdb.com/scripts/" + scriptName.split(" ")[0] +
@@ -50,13 +52,13 @@ public class WatsonTest {
 		WatsonCaller wc = new WatsonCaller();
 		WatsonAnalyzer wa = new WatsonAnalyzer();
 
-		// for (String s : mainRoles.get(0).getLines()) {
-		// DocumentAnalysis chunkTone = wc.getToneOfLines(s);
-		// HashMap<String, Double> lineEmoScore = wa.lineEmotionToneAnalyzer(chunkTone);
-		// lineEmotionTone.put(s, lineEmoScore);
-		// HashMap<String, Double> lineLangScore = wa.lineLangToneAnalyzer(chunkTone);
-		// lineLangTone.put(s, lineLangScore);
-		// }
+		 for (String s : mainRoles.get(0).getLines()) {
+		 DocumentAnalysis chunkTone = wc.getToneOfLines(s);
+		 HashMap<String, Double> lineEmoScore = wa.lineEmotionToneAnalyzer(chunkTone);
+		 lineEmotionTone.put(s, lineEmoScore);
+		 HashMap<String, Double> lineLangScore = wa.lineLangToneAnalyzer(chunkTone);
+		 lineLangTone.put(s, lineLangScore);
+		 }
 		// PrintWriter pw = new PrintWriter("testEmoReport.txt");
 		// PrintWriter pw2 = new PrintWriter("testLangReport.txt");
 		// // to get emotion tone timeline of a character
@@ -65,6 +67,11 @@ public class WatsonTest {
 		// pw.println(lineEmotionTone.get(s));
 		// }
 		// pw.close();
+//		PrintWriter pw1 = new PrintWriter("EmotionTimeline.txt");
+		for (String s: lineEmotionTone.keySet()) {
+			System.out.println(lineEmotionTone.get(s));
+		}
+		
 		// // to get language tone timeline of a character
 		// for (String s : lineLangTone.keySet()) {
 		// pw2.println(s);
@@ -72,8 +79,8 @@ public class WatsonTest {
 		// }
 		// pw2.close();
 
-		String s = mainRoles.get(0).getLines().toString();
-		 wa.personalityAnalyzer(wc.getPersonality(s));
+//		String s = mainRoles.get(0).getLines().toString();
+//		 wa.personalityAnalyzer(wc.getPersonality(s));
 
 //		String content = ss.scrapeScript(urlName);
 //		HashMap<String, HashMap<String, Double>> naturalLangUnderstanding = wa
