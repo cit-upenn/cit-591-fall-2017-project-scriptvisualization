@@ -16,7 +16,6 @@ import org.jsoup.select.Elements;
  */
 public class ScriptScraper {
 	
-	private String content;
 	private String scriptName;
 	private HashMap<String, String> movieList;
 	private HashMap<String, BufferedImage> moviePosts;
@@ -135,13 +134,6 @@ public class ScriptScraper {
 		return null;
 	}
 	
-	/**
-	 * @return the content
-	 */
-	public String getContent() {
-		return content;
-	}
-
 
 	/**
 	 * @return the scriptName

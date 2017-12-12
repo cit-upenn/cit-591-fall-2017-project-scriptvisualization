@@ -63,7 +63,7 @@ public class ScriptReader {
 	 * @throws IOException
 	 * @throws GeneralSecurityException
 	 */
-	public ArrayList<Persona> getMainCharacters() throws IOException, GeneralSecurityException {
+	private ArrayList<Persona> getMainCharacters() throws IOException, GeneralSecurityException {
 		Set<Persona> characterName = getRelationgraph().getGraph().vertexSet();
 		ArrayList<Persona> characters = new ArrayList<Persona>();
 		ArrayList<Persona> mainRoles = new ArrayList<Persona>();

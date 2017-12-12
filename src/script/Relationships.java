@@ -93,12 +93,6 @@ public class Relationships {
 		return graph;
 	}
 
-	public void setGraph(SimpleGraph<Persona, Relationship> graph) {
-		this.graph = graph;
-	}
-
-
-
 	 
 
 }
