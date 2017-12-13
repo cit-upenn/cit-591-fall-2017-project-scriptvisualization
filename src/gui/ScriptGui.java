@@ -11,6 +11,8 @@ import script.ScriptReader;
 import script.ScriptScraper;
 
 import java.awt.CardLayout;
+import java.awt.Desktop;
+
 import javax.swing.JPanel;
  
 import java.awt.Image;
@@ -21,6 +23,9 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.FileSystems;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -164,8 +169,13 @@ public class ScriptGui {
 				cardLayout.next(frame.getContentPane());
 			}
 		});
-		btnGraphgo.setBounds(152, 368, 117, 29);
+		btnGraphgo.setBounds(42, 379, 117, 29);
 		graph.add(btnGraphgo);
+		
+		JButton Visualize = new JButton("Visualize");
+	
+		Visualize.setBounds(289, 379, 117, 29);
+		graph.add(Visualize);
 		
 		/*
 		JLabel moviePost = new JLabel(" ");
@@ -290,16 +300,12 @@ public class ScriptGui {
 				try {
 					
 					script = sr.readScript(ScriptScraper.scrapeScript(url), movieButton1.getText());
-<<<<<<< HEAD
+ 
 					JLabel lblNewLabel_1 = new JLabel("");
 					lblNewLabel_1.setIcon(new ImageIcon("/Users/yichaoli/Documents/study/MCIT_1/591project/image/ajax-loader.gif"));
 					lblNewLabel_1.setBounds(140, 108, 176, 87);
 					choose.add(lblNewLabel_1);
-=======
-					
-					
-					
->>>>>>> 9d11dd7f8a556deb5c7e18167c5196c761c16c00
+ 
 				} catch (IOException | GeneralSecurityException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -347,6 +353,25 @@ public class ScriptGui {
 			}
 		});
 		
+		Visualize.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(Desktop.isDesktopSupported()) {
+					String absolutePath = FileSystems.getDefault().getPath("data/index.html").normalize().toAbsolutePath().toString();
+						    try {
+								Desktop.getDesktop().browse(new URI("file:///"+absolutePath));
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (URISyntaxException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						}
+			}
+		});
+		
 		
 	}
+	
+	
 }

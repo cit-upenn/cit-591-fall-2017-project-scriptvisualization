@@ -1,6 +1,7 @@
 package script;
 
 import java.io.IOException;
+import java.nio.file.FileSystems;
 import java.security.GeneralSecurityException;
 
 import script.Relationships.Relationship;
@@ -13,32 +14,42 @@ import script.Relationships.Relationship;
 public class Test {
 
 	public static void main(String[] args) throws GeneralSecurityException, IOException {
-		// TODO Auto-generated method stub
-			System.out.println(ImageScraper.getImageGivenUrl("https://media.defense.gov/2017/Jan/13/2001687103/600/400/0/170106-N-KC128-0092.JPG"));
-			//ScriptReader sr = new ScriptReader();
-			//sr.readScript(ScriptScraper.scrapeScript("http://www.imsdb.com/scripts/Titanic.html"), "titanic");
-			/* String s = " SEBASTIAN (CONT'D)\n" + 
-			 		"                Welcome to Seb's.\n" + 
-			 		"\n" + 
-			 		"      More applause. Sebastian sits at the piano. Looks at the keys.\n" + 
-			 		"\n" + 
-			 		"      He seems uncertain -- perhaps unsure what to play. He looks at\n" + 
-			 		"      Mia. Takes the sight in. Beat. Then looks at his fellow\n" + 
-			 		"      musicians. Murmurs to them. Then turns back to the keys --";
-			 StringBuilder dialog = new StringBuilder();
-				StringBuilder narra = new StringBuilder();
-				String[] splitChunk = s.split("\\n");
-				int linNumber = 1;
-				while(splitChunk[linNumber].length() == 0) linNumber++;
-				for (; linNumber < splitChunk.length; linNumber++) {
-					 if(splitChunk[linNumber].length() == 0) break;
-					 dialog.append(splitChunk[linNumber]);
-				}
-				for (; linNumber < splitChunk.length; linNumber++) {
-					 narra.append(splitChunk[linNumber]);
-				}
-				System.out.println(dialog.toString());
-				System.out.println(narra.toString());*/
+		String url = "http://www.google.com";
+		String os = System.getProperty("os.name").toLowerCase();
+	        Runtime rt = Runtime.getRuntime();
+
+		try{
+
+		    if (os.indexOf( "win" ) >= 0) {
+
+		        // this doesn't support showing urls in the form of "page.html#nameLink"
+		        rt.exec( "rundll32 url.dll,FileProtocolHandler " + url);
+
+		    } else if (os.indexOf( "mac" ) >= 0) {
+
+		        rt.exec( "open " + url);
+
+	            } else if (os.indexOf( "nix") >=0 || os.indexOf( "nux") >=0) {
+
+		        // Do a best guess on unix until we get a platform independent way
+		        // Build a list of browsers to try, in this order.
+		        String[] browsers = {"firefox", "chrome", "mozilla", "konqueror",
+		       			             "netscape","opera","links","lynx"};
+
+		        // Build a command string which looks like "browser1 "url" || browser2 "url" ||..."
+		        StringBuffer cmd = new StringBuffer();
+		        for (int i=0; i<browsers.length; i++)
+		            cmd.append( (i==0  ? "" : " || " ) + browsers[i] +" \"" + url + "\" ");
+
+		        rt.exec(new String[] { "sh", "-c", cmd.toString() });
+
+	           } else {
+	                return;
+	           }
+	       }catch (Exception e){
+		    return;
+	       }
+	      return;
 		 
 		 
 	}
