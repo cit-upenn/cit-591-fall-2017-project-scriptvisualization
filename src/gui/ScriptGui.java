@@ -156,10 +156,22 @@ public class ScriptGui {
 		frame.getContentPane().add(graph, "name_20177380893280");
 		graph.setLayout(null);
 		
+		
+		JButton btnGraphgo = new JButton("GraphGo!");
+		btnGraphgo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
+				cardLayout.next(frame.getContentPane());
+			}
+		});
+		btnGraphgo.setBounds(152, 368, 117, 29);
+		graph.add(btnGraphgo);
+		
+		/*
 		JLabel moviePost = new JLabel(" ");
 		moviePost.setBounds(609, 21, 117, 159);
 		graph.add(moviePost);
-		
+		*/
 		ArrayList<JLabel> pp=new ArrayList<>();
 		for(int i=0;i<3;i++){
 			
@@ -175,6 +187,18 @@ public class ScriptGui {
 			
 		}
 		
+		//post and keywords page
+		JPanel keywords = new JPanel();
+		frame.getContentPane().add(keywords, "name_787538052254394");
+		keywords.setLayout(null);
+		
+		JLabel moviePost = new JLabel(" ");
+		moviePost.setBounds(33, 18, 152, 213);
+		keywords.add(moviePost);
+		
+		
+		
+		
 		/*
 		JLabel p2 = new JLabel("");
 		p2.setBounds(121, 243, 61, 67);
@@ -184,7 +208,7 @@ public class ScriptGui {
 		movieTag = new JTextField();
 		movieTag.setColumns(10);
 		movieTag.setBounds(588, 194, 130, 165);
-		graph.add(movieTag);
+		keywords.add(movieTag);
 		
 		/*
 		JLabel p3 = new JLabel("");
@@ -195,10 +219,12 @@ public class ScriptGui {
 		p1.setBounds(243, 51, 61, 67);
 		graph.add(p1);
 		*/
-		JButton backButton2 = new JButton("Back");
 		
-		backButton2.setBounds(609, 455, 117, 29);
-		graph.add(backButton2);
+		
+		
+		JButton backButton2 = new JButton("Back");
+		backButton2.setBounds(172, 395, 132, 37);
+		keywords.add(backButton2);
 		
 	
 		
@@ -215,6 +241,8 @@ public class ScriptGui {
 		movieButtons.add(movieButton1);
 		movieButtons.add(movieButton2);
 		movieButtons.add(movieButton3);
+		
+		
 		
 		ArrayList<JLabel> characters = new ArrayList<>();
 		//characters.add(p1);
