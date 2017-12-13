@@ -45,7 +45,8 @@ public class ScriptReader {
 		stoplist = new ArrayList<String>();
 		addStoplist();
 		analysizeChunks();
-		BufferedImage poster = ImageScraper.getImageGivenUrl(ImageScraper.getPostPathFromTMDB(scriptName));
+		//BufferedImage poster = ImageScraper.getImageGivenUrl(ImageScraper.getPostPathFromTMDB(scriptName));
+		BufferedImage poster = null;
 		// changed mainCharacters to type ArrayList
 		ArrayList<Persona> mainCharacters = getMainCharacters();
 		HashMap<String, HashMap<String, Double>> naturalLangUnderstanding = wa
@@ -72,11 +73,13 @@ public class ScriptReader {
 		}
 		Collections.sort(characters);
 		
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 10; i++) {
 			Persona curr = characters.get(i);
-			List<String> images = ImageScraper.getImageUrlsFromGoogle(curr.getName() + " " + scriptName);
+//			List<String> images = ImageScraper.getImageUrlsFromGoogle(curr.getName() + " " + scriptName);
+			List<String> images = null;
 			int index = 0;
 			BufferedImage personaImage;
+			/*
 			while(true) {
 				String url = images.get(index++);
 				personaImage = ImageScraper.getImageGivenUrl(url);
@@ -85,6 +88,7 @@ public class ScriptReader {
 			}
 			
 			curr.setImage(personaImage);
+			*/
 			mainRoles.add(curr);
 		}
 		return mainRoles;
@@ -116,8 +120,9 @@ public class ScriptReader {
 	 */
 	private void analysizeChunks() throws IOException {
 		Persona prev = null;
-		for (int i = 0; i < 100; i++) {
-			ScriptChunk chunk = scriptChunks.get(i);
+//		for (int i = 0; i < 50; i++) {
+			for (ScriptChunk chunk: scriptChunks) {
+//			ScriptChunk chunk = scriptChunks.get(i);
 			// continue if the name is invalid
 			if (!isValidName(chunk.name)) {
 			     prev = null;

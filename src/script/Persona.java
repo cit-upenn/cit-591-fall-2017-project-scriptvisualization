@@ -44,10 +44,11 @@ public class Persona implements Comparable<Persona> {
 	}
 
 	public String toString() {
-		String person = "name = " + name + "\n" + " ocurrance = " + occurrence + "\n";
-		for (String s : lines) {
-			person += s;
-		}
+//		String person = "name = " + name + "\n" + " ocurrance = " + occurrence + "\n";
+//		for (String s : lines) {
+//			person += s;
+//		}
+		String person = name;
 		return person;
 	}
 

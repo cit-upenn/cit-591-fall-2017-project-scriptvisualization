@@ -26,10 +26,12 @@ public class WatsonTester {
 		// "-" + scriptName.split(" ")[1]
 		// + ".html";
 		String urlName = "http://www.imsdb.com/scripts/Pearl-Harbor.html";
+//		String urlName = "http://www.imsdb.com/scripts/La-La-Land.html";
 		ScriptScraper ss = new ScriptScraper();
 //		ScriptReader sr = new ScriptReader(ss.scrapeScript(urlName));
 		ScriptReader sr = new ScriptReader();
 		Script script = sr.readScript(ScriptScraper.scrapeScript(urlName), "Pearl Harbor");
+//		Script script = sr.readScript(ScriptScraper.scrapeScript(urlName), "La La Land");
 //		System.out.println(script.getContent());
 		Set<Persona> characterName = sr.getRelationgraph().getGraph().vertexSet();
 		ArrayList<Persona> characters = new ArrayList<Persona>();
@@ -39,38 +41,65 @@ public class WatsonTester {
 		}
 		Collections.sort(characters);
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 5; i++) {
 			mainRoles.add(characters.get(i));
 		}
 
 		// System.out.println(mainRoles.get(0).getName());
 		// String s = mainRoles.get(0).getLines().get(0).toString();
 
-		HashMap<String, HashMap<String, Double>> lineEmotionTone = new HashMap<String, HashMap<String, Double>>();
+		HashMap<Integer, HashMap<String, Double>> lineEmotionTone = new HashMap<Integer, HashMap<String, Double>>();
 		HashMap<String, HashMap<String, Double>> lineLangTone = new HashMap<String, HashMap<String, Double>>();
 
 		WatsonCaller wc = new WatsonCaller();
 		WatsonAnalyzer wa = new WatsonAnalyzer();
-
+//		System.out.println(mainRoles.get(0));
+		int lineCount = 0;
 		 for (String s : mainRoles.get(0).getLines()) {
+			 
 		 DocumentAnalysis chunkTone = wc.getToneOfLines(s);
 		 HashMap<String, Double> lineEmoScore = wa.lineEmotionToneAnalyzer(chunkTone);
-		 lineEmotionTone.put(s, lineEmoScore);
+		 lineEmotionTone.put(lineCount++, lineEmoScore);
 		 HashMap<String, Double> lineLangScore = wa.lineLangToneAnalyzer(chunkTone);
 		 lineLangTone.put(s, lineLangScore);
 		 }
-		// PrintWriter pw = new PrintWriter("testEmoReport.txt");
-		// PrintWriter pw2 = new PrintWriter("testLangReport.txt");
-		// // to get emotion tone timeline of a character
-		// for (String s : lineEmotionTone.keySet()) {
-		// pw.println(s);
-		// pw.println(lineEmotionTone.get(s));
-		// }
-		// pw.close();
+//		 PrintWriter pw = new PrintWriter("testEmoReport.txt");
+//		 PrintWriter pw2 = new PrintWriter("testLangReport.txt");
+		 // to get emotion tone timeline of a character
+//		 for (String s : lineEmotionTone.keySet()) {
+//		 pw.println(s);
+//		 pw.println(lineEmotionTone.get(s));
+//		 }
+//		 pw.close();
 //		PrintWriter pw1 = new PrintWriter("EmotionTimeline.txt");
-		for (String s: lineEmotionTone.keySet()) {
-			System.out.println(lineEmotionTone.get(s));
-		}
+		 
+//		 for (String s: mainRoles.get(0).getLines()) {
+//			 System.out.println();
+//		 }
+
+		 /*
+		 for (int i: lineEmotionTone.keySet()) {
+			 if (lineEmotionTone.get(i).containsKey("Anger")) {
+				 System.out.println("1" + "\t"+ i + "\t" + lineEmotionTone.get(i).get("Anger") * 100);
+			 } else if (lineEmotionTone.get(i).containsKey("Fear")) {
+				 System.out.println("2" + "\t"+ i + "\t" + lineEmotionTone.get(i).get("Fear") * 100);
+			 }else if (lineEmotionTone.get(i).containsKey("Joy")) {
+				 System.out.println("3" + "\t"+ i + "\t" + lineEmotionTone.get(i).get("Joy") * 100);
+			 }else if (lineEmotionTone.get(i).containsKey("Sadness")) {
+				 System.out.println("4" + "\t"+ i + "\t" + lineEmotionTone.get(i).get("Sadness") * 100);
+			 }else if (lineEmotionTone.get(i).containsKey("Disgust")) {
+				 System.out.println("5" + "\t"+ i + "\t" + lineEmotionTone.get(i).get("Disgust") * 100);
+			 } else {
+				 System.out.println("1" + "\t" + i + "\t" + 0);
+				 System.out.println("2" + "\t" + i + "\t" + 0);
+				 System.out.println("3" + "\t" + i + "\t" + 0);
+				 System.out.println("4" + "\t" + i + "\t" + 0);
+				 System.out.println("5" + "\t" + i + "\t" + 0);
+			 }
+		 }
+		 System.out.println(lineEmotionTone);
+		 */
+
 		
 		// // to get language tone timeline of a character
 		// for (String s : lineLangTone.keySet()) {
