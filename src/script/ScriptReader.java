@@ -1,6 +1,5 @@
 package script;
-
-import java.awt.Image;
+ 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -39,7 +38,6 @@ public class ScriptReader {
 	 * @throws GeneralSecurityException 
 	 */
 	public Script readScript(String content, String scriptName) throws IOException, GeneralSecurityException {
-
 		this.scriptName = scriptName;
 		scriptChunks = new ArrayList<>();
 		splitScriptToChunks(content);
@@ -58,14 +56,14 @@ public class ScriptReader {
 		return script;
 	}
 
-	// sort all characters and get top 10 occurrence
+ 
 	/**
 	 * get top 10 occurrence and set personal image
 	 * @return
 	 * @throws IOException
 	 * @throws GeneralSecurityException
 	 */
-	public ArrayList<Persona> getMainCharacters() throws IOException, GeneralSecurityException {
+	private ArrayList<Persona> getMainCharacters() throws IOException, GeneralSecurityException {
 		Set<Persona> characterName = getRelationgraph().getGraph().vertexSet();
 		ArrayList<Persona> characters = new ArrayList<Persona>();
 		ArrayList<Persona> mainRoles = new ArrayList<Persona>();
@@ -122,13 +120,13 @@ public class ScriptReader {
 			ScriptChunk chunk = scriptChunks.get(i);
 			// continue if the name is invalid
 			if (!isValidName(chunk.name)) {
-				prev = null;
-				continue;
+			     prev = null;
+			     continue;
 			}
 			Persona curr = relationgraph.createVertex(chunk.name);
 			curr.getLines().add(chunk.dialogue);
 			if (prev != null && prev != curr) {
-				double relation;
+				double relation = 0;
 				// need to get relation here.param: chunk.dialogue
 				try {
 						relation = wa.relationshipAnalyzer(wc.getRelationshipIndicator(chunk.dialogue)).get("sentiment")
@@ -160,6 +158,7 @@ public class ScriptReader {
 				return false;
 		}
 		// if contains number, return false;
+		if(lowerName.matches(".*\\d.*")) return false;
 		return true;
 	}
 
@@ -172,52 +171,28 @@ public class ScriptReader {
 	private void splitScriptToChunks(String content) {
 		String[] chunks = content.split("<b>");
 		for (String chunk : chunks) {
-			// System.out.print("==========================\n"+ chunk);
-			if (chunk.length() == 0)
-				continue;
-			chunk = chunk.replaceAll("\\(.+\\)", "").replaceAll("\\n[\\s]+\\n", "\n");
+			if (chunk.length() == 0) continue;
+			chunk = chunk.replaceAll("\\(.+\\)", "");
 			String[] splitChunk = chunk.split("\\n");
+			if(splitChunk.length < 2) continue;
 			String name = splitChunk[0].trim();
 			StringBuilder dialog = new StringBuilder();
 			StringBuilder narra = new StringBuilder();
-			int previousCountSpace = Integer.MIN_VALUE;
 			int linNumber = 1;
+			while(splitChunk[linNumber].length() == 0) linNumber++;
 			for (; linNumber < splitChunk.length; linNumber++) {
-				int countSpace = countSpace(splitChunk[linNumber]);
-				if (countSpace < previousCountSpace)
-					break;
-				dialog.append(splitChunk[linNumber].trim() + " ");
-				previousCountSpace = countSpace;
+				 if(splitChunk[linNumber].length() == 0) break;
+				 dialog.append(splitChunk[linNumber]);
 			}
 			for (; linNumber < splitChunk.length; linNumber++) {
-				narra.append(splitChunk[linNumber].trim() + " ");
+				 narra.append(splitChunk[linNumber]);
 			}
-
 			ScriptChunk schunk = new ScriptChunk(name, dialog.toString(), narra.toString());
 			scriptChunks.add(schunk);
 
 		}
 	}
 
-	/**
-	 * This method count whitespace a string starts with
-	 * 
-	 * @param string
-	 * @return
-	 */
-	private int countSpace(String string) {
-		// TODO Auto-generated method stub
-		int countSpace = 0;
-		for (int i = 0; i < string.length(); i++) {
-			if (string.charAt(i) == ' ')
-				countSpace++;
-			if (string.charAt(i) == '\t')
-				countSpace += 4;
-			else
-				break;
-		}
-		return countSpace;
-	}
 
 	/**
 	 * This class represents a chunk of a script
@@ -237,6 +212,14 @@ public class ScriptReader {
 			this.narrative = narrative;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Object#toString()
+		 */
+		@Override
+		public String toString() {
+			return "name= " + name + "\ndialogue= " + dialogue + "\nnarrative= " + narrative;
+		}
+
 	}
 
 	public Relationships getRelationgraph() {
@@ -246,5 +229,6 @@ public class ScriptReader {
 	public void setRelationgraph(Relationships relationgraph) {
 		this.relationgraph = relationgraph;
 	}
+	
 
 }

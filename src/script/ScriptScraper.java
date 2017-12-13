@@ -16,7 +16,6 @@ import org.jsoup.select.Elements;
  */
 public class ScriptScraper {
 	
-	private String content;
 	private String scriptName;
 	private HashMap<String, String> movieList;
 	private HashMap<String, BufferedImage> moviePosts;
@@ -54,7 +53,7 @@ public class ScriptScraper {
 			scripts.append(script.html());
 		}
 		//clean format
-		return scripts.toString().replaceAll("[\\n]+", "\n").replaceAll("</b>|<pre>|</pre>", "").replaceAll("\\n[\\s]+\\n", "\n").trim(); 
+		return scripts.toString().replaceAll("[\\n]{2,}", "\n\n").replaceAll("</b>|<pre>|</pre>", "").replaceAll("\\n[\\s]+\\n", "\n\n").trim(); 
 	}
 	
 	/**
@@ -135,13 +134,6 @@ public class ScriptScraper {
 		return null;
 	}
 	
-	/**
-	 * @return the content
-	 */
-	public String getContent() {
-		return content;
-	}
-
 
 	/**
 	 * @return the scriptName

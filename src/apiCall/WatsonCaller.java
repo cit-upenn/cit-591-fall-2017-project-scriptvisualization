@@ -21,6 +21,8 @@ import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.DocumentAnalysis;
 import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.ToneAnalysis;
 import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.ToneOptions;
 
+import script.Secret;
+
 public class WatsonCaller {
 	public WatsonCaller() {
 
@@ -30,7 +32,7 @@ public class WatsonCaller {
 
 		final String VERSION_DATE = "2016-05-19";
 		ToneAnalyzer service = new ToneAnalyzer(VERSION_DATE);
-		service.setUsernameAndPassword("028da7b1-3878-4521-8063-3cd09e5684c5", "lFCpPJceVbT4");
+		service.setUsernameAndPassword(Secret.watsonToneUserName, Secret.watsonTonePassword);
 		ToneOptions tonOptions = new ToneOptions.Builder().text(contentToAnalyze).build();
 		ToneAnalysis tone = service.tone(tonOptions).execute();
 		DocumentAnalysis toneDoc = tone.getDocumentTone();
@@ -43,7 +45,7 @@ public class WatsonCaller {
 
 	public Profile getPersonality(String personaLines) {
 		PersonalityInsights service = new PersonalityInsights("2016-10-19");
-		service.setUsernameAndPassword("bc376c0c-56ba-4316-a58f-53e9f410cb06", "b655eZV0Q0bi");
+		service.setUsernameAndPassword(Secret.watsonPersonalityUserName, Secret.watsonPersonalityPassword);
 		ProfileOptions options = new ProfileOptions.Builder().text(personaLines).build();
 		Profile profile = service.profile(options).execute();
 		return profile;
@@ -54,7 +56,7 @@ public class WatsonCaller {
 
 		final String VERSION_DATE = "2017-02-27";
 		NaturalLanguageUnderstanding service = new NaturalLanguageUnderstanding(VERSION_DATE);
-		service.setUsernameAndPassword("c064bda6-1714-41d0-9505-a171205ff5c2", "CLlzzIrsDyK2");
+		service.setUsernameAndPassword(Secret.watsonNatLanUserName, Secret.watsonNatLanPassword);
 
 		// PrintWriter pw1 = new PrintWriter("SampleNaturalLangEntities.txt");
 		// PrintWriter pw2 = new PrintWriter("SampleNaturalLangKeywords.txt");
