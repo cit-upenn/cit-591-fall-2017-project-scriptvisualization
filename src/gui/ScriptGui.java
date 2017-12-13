@@ -210,6 +210,9 @@ public class ScriptGui {
 				Script script = new Script();
 				try {
 					script = sr.readScript(ScriptScraper.scrapeScript(url), movieButton1.getText());
+					
+					
+					
 				} catch (IOException | GeneralSecurityException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

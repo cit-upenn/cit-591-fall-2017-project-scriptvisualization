@@ -14,9 +14,9 @@ public class Test {
 
 	public static void main(String[] args) throws GeneralSecurityException, IOException {
 		// TODO Auto-generated method stub
-	 
-			ScriptReader sr = new ScriptReader();
-			sr.readScript(ScriptScraper.scrapeScript("http://www.imsdb.com/scripts/Titanic.html"), "titanic");
+			System.out.println(ImageScraper.getImageGivenUrl("https://media.defense.gov/2017/Jan/13/2001687103/600/400/0/170106-N-KC128-0092.JPG"));
+			//ScriptReader sr = new ScriptReader();
+			//sr.readScript(ScriptScraper.scrapeScript("http://www.imsdb.com/scripts/Titanic.html"), "titanic");
 			/* String s = " SEBASTIAN (CONT'D)\n" + 
 			 		"                Welcome to Seb's.\n" + 
 			 		"\n" + 
