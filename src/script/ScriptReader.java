@@ -72,19 +72,18 @@ public class ScriptReader {
 		}
 		Collections.sort(characters);
 		
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 8; i++) {
 			Persona curr = characters.get(i);
 			List<String> images = ImageScraper.getImageUrlsFromGoogle(curr.getName() + " " + scriptName);
 			int index = 0;
-			BufferedImage personaImage;
 			while(true) {
 				String url = images.get(index++);
-				personaImage = ImageScraper.getImageGivenUrl(url);
-				if(personaImage != null)  break;
+				if(url!= null) {
+					curr.setImage(url);
+					break;
+				}
 				
 			}
-			
-			curr.setImage(personaImage);
 			mainRoles.add(curr);
 		}
 		return mainRoles;
@@ -116,8 +115,9 @@ public class ScriptReader {
 	 */
 	private void analysizeChunks() throws IOException {
 		Persona prev = null;
-		for (int i = 0; i < 100; i++) {
-			ScriptChunk chunk = scriptChunks.get(i);
+		for (ScriptChunk chunk : scriptChunks) {
+			 
+			//ScriptChunk chunk = scriptChunks.get(i);
 			// continue if the name is invalid
 			if (!isValidName(chunk.name)) {
 			     prev = null;
@@ -128,7 +128,7 @@ public class ScriptReader {
 			if (prev != null && prev != curr) {
 				double relation = 0;
 				// need to get relation here.param: chunk.dialogue
-				try {
+				/*try {
 						relation = wa.relationshipAnalyzer(wc.getRelationshipIndicator(chunk.dialogue)).get("sentiment")
 								.get("general");
 				}
@@ -139,7 +139,7 @@ public class ScriptReader {
 				}
 				catch(com.ibm.watson.developer_cloud.service.exception.ServiceResponseException sre) {
 					relation = 0;
-				}
+				}*/
 
 				relationgraph.createEdge(prev, curr, relation);
 			}
