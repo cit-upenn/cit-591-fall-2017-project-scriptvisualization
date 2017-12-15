@@ -294,7 +294,7 @@ public class ScriptGui {
 		
 		movieButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				sr = new ScriptReader();
+				/*sr = new ScriptReader();
 				String url = ss.getMovieList().get(movieButton1.getText());
 				Script script = new Script();
 				try {
@@ -330,7 +330,7 @@ public class ScriptGui {
 					System.out.println(personalImage);
 					label.setIcon(new ImageIcon(personalImage));
 				}
-				//movieTag.setText(script.getNaturalLangUnderstanding().keySet().toString());
+				//movieTag.setText(script.getNaturalLangUnderstanding().keySet().toString());*/
 				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 				cardLayout.next(frame.getContentPane());
 				
