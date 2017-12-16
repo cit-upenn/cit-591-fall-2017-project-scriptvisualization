@@ -30,9 +30,6 @@
 <h2></h2>
  
      <font color="#666666"> 
-    <p>#sentiment -0.166365 </p>
-    <p>#art and entertainment/humor 0.1941 </p>
-    <p>#law, govt and politics/armed forces/air force 0.47438 #news</p>
     </font>  
  
 <div class="jumbotron">
@@ -61,7 +58,31 @@
     <script type="text/javascript">
     	//read characters
  
-
+var tags;
+    readTextFile("tags.txt");
+    function readTextFile(file){
+      var rawFile = new XMLHttpRequest();
+      rawFile.open("GET", file, false);
+      rawFile.onreadystatechange = function (){
+        if(rawFile.readyState === 4){
+            if(rawFile.status === 200 || rawFile.status == 0){
+                var allText = rawFile.responseText;
+                tags = allText.split(/\r\n|\n/);
+                console.log(tags.length);
+    
+                var list = document.getElementsByTagName("font")[0];
+                for(var i = 0; i< tags.length; i++){
+                    var tag = document.createElement("p");
+                    tag.innerHTML = tags[i];
+                    console.log(tags[i])
+                    list.appendChild(tag);
+                }
+            }
+        }
+    }
+    rawFile.send(null);
+    rawFile.abort();
+}
     var characters;
     readTextFile("characters.txt");
     function readTextFile(file){
@@ -95,6 +116,7 @@
 }
 
     
+
    
 
     
