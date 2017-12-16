@@ -19,6 +19,7 @@ import script.Relationships.Relationship;
 public class Test {
 
 	public static void main(String[] args) throws GeneralSecurityException, IOException {
+<<<<<<< HEAD
 		// TODO Auto-generated method stub
 	 
 			ScriptReader sr = new ScriptReader();
@@ -101,6 +102,14 @@ public class Test {
 			
 		
 			
+=======
+		 ScriptReader sr = new ScriptReader();
+		 String content = ScriptScraper.scrapeScript("http://www.imsdb.com/scripts/No-Country-for-Old-Men.html");
+		 
+		 Script script = sr.readScript(content, "No Country for Old Men");
+		 
+		 ScriptPrinter.printMainCharacters(script);
+>>>>>>> origin
 		 
 	}
 

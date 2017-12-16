@@ -17,10 +17,16 @@ public class Persona implements Comparable<Persona> {
 	private String name; // name of the character
 	private ArrayList<String> lines; // all lines belong to this character
 	private HashMap<String, Double> personality;
+<<<<<<< HEAD
 	private BufferedImage personaImage;
 	private ArrayList<HashMap<String, HashMap<String, Double>>> emotionTimeline;
 	private ArrayList<HashMap<String, HashMap<String, Double>>> langToneTimeline;
 
+=======
+	private String personaImage;
+	 
+	
+>>>>>>> origin
 	public Persona(String name) {
 		// TODO Auto-generated constructor stub
 		lines = new ArrayList<>();
@@ -60,11 +66,20 @@ public class Persona implements Comparable<Persona> {
 		return num2;
 	}
 
+<<<<<<< HEAD
 	public void setImage(BufferedImage image) {
+		personaImage = image;
+	}
+
+	public Image getImage() {
+=======
+	
+	public void setImage(String image) {
 		personaImage = image;
 	}
 	
 	public String getImage() {
+>>>>>>> origin
 		return personaImage;
 	}
 

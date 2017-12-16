@@ -63,8 +63,8 @@ public class Persona implements Comparable<Persona> {
 	public void setImage(BufferedImage image) {
 		personaImage = image;
 	}
-	
-	public String getImage() {
+
+	public Image getImage() {
 		return personaImage;
 	}
 

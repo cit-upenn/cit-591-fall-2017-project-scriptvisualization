@@ -1,0 +1,21 @@
+No Country for Old Men
+MOSS
+https://www.ericdsnider.com/images/moss.jpg
+BELL
+https://www.ericdsnider.com/images/bell.jpg
+CHIGURH
+https://i.ytimg.com/vi/OLCL6OYbSTw/maxresdefault.jpg
+CARLA JEAN
+http://arbitrarynonsense.com/wp-content/uploads/2012/08/Carla-Jean-Moss-Ending.png
+WELLS
+https://www.phactual.com/wp-content/uploads/2015/02/a50.jpg
+WENDELL
+https://garretdillahuntpictures.files.wordpress.com/2010/02/garret-dillahunt-in-no-country-for-old-men.jpg
+MAN
+https://i.ytimg.com/vi/qZL0Ru-55u8/maxresdefault.jpg
+PROPRIETOR
+http://dl9fvu4r30qs1.cloudfront.net/a3/f3/90a9ffce4de297ec9df9bdadd86d/no-country-for-old-men.png
+#sentiment -0.166365 
+#art and entertainment/humor 0.1941
+#law, govt and politics/armed forces/air force 0.47438
+#news
