@@ -15,3 +15,7 @@ MAN
 https://i.ytimg.com/vi/qZL0Ru-55u8/maxresdefault.jpg
 PROPRIETOR
 http://dl9fvu4r30qs1.cloudfront.net/a3/f3/90a9ffce4de297ec9df9bdadd86d/no-country-for-old-men.png
+#sentiment -0.166365 
+#art and entertainment/humor 0.1941
+#law, govt and politics/armed forces/air force 0.47438
+#news
