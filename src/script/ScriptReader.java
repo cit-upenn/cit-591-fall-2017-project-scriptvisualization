@@ -120,7 +120,7 @@ public class ScriptReader {
 	 */
 	private void analysizeChunks() throws IOException {
 		Persona prev = null;
-//		for (int i = 0; i < 50; i++) {
+//		for (int i = 0; i < 60; i++) {
 			for (ScriptChunk chunk: scriptChunks) {
 //			ScriptChunk chunk = scriptChunks.get(i);
 			// continue if the name is invalid
