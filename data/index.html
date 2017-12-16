@@ -3,9 +3,10 @@
 <html>
   <head>
      <title>Script Visualize</title>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <!-- Custom styles for this template-->
+        
+         
   </head>
     <style> 
       div.container {
@@ -26,9 +27,18 @@
       
     <div class="container">
             <!-- Main component for a primary marketing message or call to action-->
-
+<h2></h2>
+ 
+     <font color="#666666"> 
+    <p>#sentiment -0.166365 </p>
+    <p>#art and entertainment/humor 0.1941 </p>
+    <p>#law, govt and politics/armed forces/air force 0.47438 #news</p>
+    </font>  
+ 
 <div class="jumbotron">
-  <div style="width:1000px; background-color:white; height:660px; overflow:scroll; overflow-x: scroll; overflow-y: hidden;">
+  
+
+  <div style="width:1000px; background-color:#ebebeb; height:660px; overflow:scroll; overflow-x: scroll; overflow-y: hidden;">
     <div style="width:1000px;">
       <img style=" float:left; display:inline; margin: 10px" src="" height="200" alt=""/>
       <img style=" float:left; display:inline; margin: 10px"  src=""  height="200" alt="" />
@@ -60,6 +70,7 @@
             if(rawFile.status === 200 || rawFile.status == 0){
                 var allText = rawFile.responseText;
                 characters = allText.split(/\r\n|\n/);
+                document.getElementsByTagName("h2")[0].innerHTML = characters[0];
                 for(var i = 0; i < 8; i++){
                   var image = document.getElementsByTagName("img")[i]
                   image.src = characters[i * 2 + 2];
@@ -113,7 +124,7 @@
 */
       var heatmapChart = function(tsvFile) {
       	if(tsvFile == 'protagonist.tsv'){
-      	 	document.getElementsByTagName("h2")[0].innerHTML = "Emotional Change of " + characters[1];
+      	 	document.getElementsByTagName("h2")[1].innerHTML = "Emotional Change of " + characters[1];
       	 	document.getElementsByTagName("img")[0].style = " float:left; display:inline; margin: 10px; border:solid 1px red; box-shadow:0px 2px 10px 2px #333 ";
       	}
         d3.tsv(tsvFile,

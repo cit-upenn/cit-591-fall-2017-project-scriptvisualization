@@ -15,9 +15,9 @@ public class Test {
 
 	public static void main(String[] args) throws GeneralSecurityException, IOException {
 		 ScriptReader sr = new ScriptReader();
-		 String content = ScriptScraper.scrapeScript("http://www.imsdb.com/scripts/Life-of-Pi.html");
+		 String content = ScriptScraper.scrapeScript("http://www.imsdb.com/scripts/No-Country-for-Old-Men.html");
 		 
-		 Script script = sr.readScript(content, "Life of pi");
+		 Script script = sr.readScript(content, "No Country for Old Men");
 		 
 		 ScriptPrinter.printMainCharacters(script);
 		 
