@@ -40,9 +40,6 @@
        
             <!-- Main component for a primary marketing message or call to action-->
 <h2></h2>
- 
-     <font color="#666666"> 
-    </font> 
       
  
 <div class="jumbotron">
@@ -63,8 +60,53 @@
     <h2></h2>
     <div id="chart"></div>
 </div>
+
+<div class="container">
+    <h2></h2>
+    <div id="personality"></div>
+</div>
+
 </body>  
- 
+ <script>
+
+var width = 960,
+    height = 500;
+
+var color = d3.scale.category20();
+
+var svg = d3.select("#personality").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var partition = d3.layout.partition()
+    .size([width, height])
+    .value(function(d) { return d.size; });
+
+d3.json("personality.json", function(error, root) {
+  if (error) throw error;
+
+  var nodes = partition.nodes(root);
+
+  svg.selectAll(".node")
+      .data(nodes)
+    .enter().append("rect")
+      .attr("class", "node")
+      .attr("x", function(d) { return d.x; })
+      .attr("y", function(d) { return d.y; })
+      .attr("width", function(d) { return d.dx; })
+      .attr("height", function(d) { return d.dy; })
+      .style("fill", function(d) { return color((d.children ? d : d.parent).name); });
+
+  svg.selectAll(".label")
+      .data(nodes.filter(function(d) { return d.dx > 6; }))
+    .enter().append("text")
+      .attr("class", "label")
+      .attr("dy", ".35em")
+      .attr("transform", function(d) { return "translate(" + (d.x + d.dx / 2) + "," + (d.y + d.dy / 2) + ")rotate(90)"; })
+      .text(function(d) { return d.name; });
+});
+
+</script>
     <script type="text/javascript">
     	//read characters
  
@@ -111,13 +153,7 @@
                   image.alt = characters[i * 2 + 1];
                 	console.log(characters[i * 2 + 2]);
                 }
-                var list = document.getElementsByTagName("font")[0];
-                for(var i = 17; i< characters.length; i++){
-                    var tag = document.createElement("p");
-                    tag.innerHTML = characters[i];
-                    console.log(characters[i])
-                    list.appendChild(tag);
-                }
+                 
             }
         }
     }
@@ -171,8 +207,19 @@
       var heatmapChart = function(tsvFile) {
       	if(tsvFile == 'protagonist.tsv'){
       	 	document.getElementsByTagName("h2")[1].innerHTML = "Emotional Change of " + characters[1];
+          document.getElementsByTagName("h2")[2].innerHTML = "Personality of " + characters[1];
       	 	document.getElementsByTagName("img")[0].style = " float:left; display:inline; margin: 10px; border:solid 1px red; box-shadow:0px 2px 10px 2px #333 ";
       	}
+        if(tsvFile == 'SecondMain.tsv'){
+          document.getElementsByTagName("h2")[1].innerHTML = "Emotional Change of " + characters[3];
+          document.getElementsByTagName("h2")[2].innerHTML = "Personality of " + characters[3];
+          document.getElementsByTagName("img")[1].style = " float:left; display:inline; margin: 10px; border:solid 1px red; box-shadow:0px 2px 10px 2px #333 ";
+        }
+        if(tsvFile == 'ThirdMain.tsv'){
+          document.getElementsByTagName("h2")[1].innerHTML = "Emotional Change of " + characters[5];
+          document.getElementsByTagName("h2")[2].innerHTML = "Personality of " + characters[5];
+          document.getElementsByTagName("img")[2].style = " float:left; display:inline; margin: 10px; border:solid 1px red; box-shadow:0px 2px 10px 2px #333 ";
+        }
         d3.tsv(tsvFile,
         function(d) {
           return {
