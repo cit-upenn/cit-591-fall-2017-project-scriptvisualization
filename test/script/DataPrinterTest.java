@@ -17,7 +17,7 @@ public class DataPrinterTest {
 	public static void setUp() throws IOException, GeneralSecurityException {
 		dp = new DataPrinter();
 		ScriptReader sr = new ScriptReader();
-		script = sr.readScript(ScriptScraper.scrapeScript("http://www.imsdb.com/scripts/Titanic.html"), "titanic");
+		script = sr.readScript(ScriptScraper.scrapeScript("http://www.imsdb.com/scripts/Frozen-(Disney).html"), "Frozen-(Disney)");
 	}
  
 	@Test(expected=IllegalArgumentException.class)
