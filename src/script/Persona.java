@@ -17,7 +17,7 @@ public class Persona implements Comparable<Persona> {
 	private String name; // name of the character
 	private ArrayList<String> lines; // all lines belong to this character
 	private HashMap<String, Double> personality;
-	private BufferedImage personaImage;
+	private String personaImage;
 	private ArrayList<HashMap<String, HashMap<String, Double>>> emotionTimeline;
 	private ArrayList<HashMap<String, HashMap<String, Double>>> langToneTimeline;
 
@@ -60,7 +60,7 @@ public class Persona implements Comparable<Persona> {
 		return num2;
 	}
 
-	public void setImage(BufferedImage image) {
+	public void setImage(String image) {
 		personaImage = image;
 	}
 	
