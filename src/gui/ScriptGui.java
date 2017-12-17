@@ -236,9 +236,7 @@ public class ScriptGui {
 		
 		movieButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				loadingGif.setVisible(true);
 				//analyze(movieButton1.getText());
-				loadingGif.setVisible(false);
 				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 				cardLayout.next(frame.getContentPane());
 				
@@ -250,23 +248,17 @@ public class ScriptGui {
 		
 		movieButton2.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				loadingGif.setVisible(true);
-				analyze(movieButton2.getText());
-				loadingGif.setVisible(false);
+				//analyze(movieButton2.getText());
 				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 				cardLayout.next(frame.getContentPane());
 
-				
-				
 				
 			}
 		});
 		
 		movieButton3.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				loadingGif.setVisible(true);
-				analyze(movieButton3.getText());
-				loadingGif.setVisible(false);
+				//analyze(movieButton3.getText());
 				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 				cardLayout.next(frame.getContentPane());
 				
@@ -343,6 +335,8 @@ public class ScriptGui {
 			dp.printMainPhotos(script);
 			
 			dp.printTimeLine(script);
+			
+			dp.printOccurrences(script);
 			
 		} catch (IOException | GeneralSecurityException e1) {
 			// TODO Auto-generated catch block

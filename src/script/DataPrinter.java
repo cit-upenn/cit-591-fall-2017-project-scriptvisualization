@@ -43,6 +43,7 @@ public class DataPrinter {
 	 */
 	@SuppressWarnings({ "unchecked", "resource" })
 	public void printPersonality(Script script) {
+		System.out.println("start printing personality");
 		StringBuilder sb = new StringBuilder();
 		for (String s : script.getMainCharacters().get(0).getLines()) {
 			sb.append(s);
@@ -105,9 +106,11 @@ public class DataPrinter {
 			FileWriter fileWriter = new FileWriter("data/personality.json");
 			fileWriter.write(report.toJSONString());
 			fileWriter.flush();
+			fileWriter.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("finish printing personality");
 	}
 
 	/**
@@ -117,6 +120,7 @@ public class DataPrinter {
 	 */
 	@SuppressWarnings({ "unchecked", "resource" })
 	public void printRelation(Script script) {
+		System.out.println("start printing relation");
 		SimpleGraph<Persona, Relationship> links = script.getRelationgraph().graph;
 		JSONObject tier = new JSONObject();
 		JSONArray nodes = new JSONArray();
@@ -150,9 +154,11 @@ public class DataPrinter {
 			FileWriter fileWriter = new FileWriter("data/relationship.json");
 			fileWriter.write(tier.toJSONString());
 			fileWriter.flush();
+			fileWriter.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("finish printing relation");
 	}
 
 	/**
@@ -163,6 +169,7 @@ public class DataPrinter {
 	 */
 	@SuppressWarnings({ "unchecked", "resource" })
 	public void printKeywords(Script script) throws IOException {
+		System.out.println("start printing keywords");
 		AnalysisResults kwJson = wc.getKeywords(script.getContent());
 
 		JSONArray keywords = new JSONArray();
@@ -182,6 +189,7 @@ public class DataPrinter {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("finish printing keywords");
 
 	}
 
@@ -223,7 +231,7 @@ public class DataPrinter {
 	 */
 
 	public void printTimeLine(Script script) throws IOException {
-		
+		System.out.println("start pringting timeline");
 		
 		for (int i = 0; i < 3; i++) {
 			int lineCount = 0;
@@ -246,6 +254,7 @@ public class DataPrinter {
 				timelineFormat(lineEmotionTone, "data/thirdMain.tsv");
 			}
 		}
+		System.out.println("finish printing timeline");
 	}
 
 	private void timelineFormat(HashMap<Integer, HashMap<String, Double>> lineEmotionTone, String filepath)
@@ -296,12 +305,14 @@ public class DataPrinter {
 	
 	
 	public void printOccurrences(Script script) throws IOException {
+		  System.out.println("start printing occurrences");
 		  PrintWriter pw = new PrintWriter("data/occurrences.csv");
 		  pw.println("name,occurences");
 		  for (Persona p: script.getMainCharacters()) {
 		   pw.println(p.getName() + "," + p.getOccurrence());
 		  }
 		  pw.close();
+		  System.out.println("finish printing occurrences");
 	}
 
 }

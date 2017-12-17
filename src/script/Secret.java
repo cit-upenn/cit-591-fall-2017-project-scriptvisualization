@@ -1,5 +1,9 @@
 package script;
-
+/**
+ * This is a class with all api keys awe used in this program
+ * @author yueyin
+ *
+ */
 public class Secret {
 //	public static final String watsonToneUserName = "028da7b1-3878-4521-8063-3cd09e5684c5";
 //	public static final String watsonTonePassword = "lFCpPJceVbT4";
