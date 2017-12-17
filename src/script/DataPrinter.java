@@ -19,10 +19,7 @@ import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.Ca
 import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.KeywordsResult;
 import com.ibm.watson.developer_cloud.personality_insights.v3.model.Profile;
 import com.ibm.watson.developer_cloud.personality_insights.v3.model.Trait;
-import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.DocumentAnalysis;
 
-import apiCall.WatsonAnalyzer;
-import apiCall.WatsonCaller;
 import script.Relationships.Relationship;
 
 /**
@@ -31,12 +28,8 @@ import script.Relationships.Relationship;
  *
  */
 public class DataPrinter {
-	private static WatsonCaller wc;
-	private static WatsonAnalyzer wa;
 
 	public DataPrinter() {
-		wc = new WatsonCaller();
-		wa = new WatsonAnalyzer();
 	}
 
 	/**
@@ -47,13 +40,12 @@ public class DataPrinter {
 		if (script == null) {
 			throw new IllegalArgumentException();
 		}
-		System.out.println("start printing personality");
+		System.out.println("generating personality");
 		StringBuilder sb = new StringBuilder();
 		for (String s : script.getMainCharacters().get(0).getLines()) {
 			sb.append(s);
 		}
-
-		Profile profile = wc.getPersonality(sb.toString());
+		Profile profile = script.getMainCharacters().get(0).getPersonality();
 		JSONObject report = new JSONObject();
 		report.put("name", "personalityReport");
 		JSONArray reportEntry = new JSONArray();
@@ -127,7 +119,7 @@ public class DataPrinter {
 		if (script == null) {
 			throw new IllegalArgumentException();
 		}
-		System.out.println("start printing relation");
+		System.out.println("generating relation");
 		SimpleGraph<Persona, Relationship> links = script.getRelationgraph().graph;
 		JSONObject tier = new JSONObject();
 		JSONArray nodes = new JSONArray();
@@ -179,11 +171,10 @@ public class DataPrinter {
 		if (script == null) {
 			throw new IllegalArgumentException();
 		}
-		System.out.println("start printing keywords");
-		AnalysisResults kwJson = wc.getKeywords(script.getContent());
+		System.out.println("generating keywords");
 
 		JSONArray keywords = new JSONArray();
-		for (KeywordsResult kr : kwJson.getKeywords()) {
+		for (KeywordsResult kr : script.getKeywords().getKeywords()) {
 			JSONObject entry = new JSONObject();
 			entry.put("size", kr.getRelevance());
 			entry.put("text", kr.getText());
@@ -215,7 +206,7 @@ public class DataPrinter {
 		if (script == null) {
 			throw new IllegalArgumentException();
 		}
-		System.out.println("start print main photos");
+		System.out.println("generating main photos");
 		ArrayList<Persona> mainCharacters = script.getMainCharacters();
 		PrintWriter out = new PrintWriter(new File("data/charactersPhotos.txt"));
 		out.println(script.getName());
@@ -223,10 +214,10 @@ public class DataPrinter {
 			out.println(persona.getName());
 			out.println(persona.getImage());
 		}
-		Double sentiment = wc.getGeneralSentiment(script.getContent());
+		Double sentiment = script.getSentiment();
 		out.print("#sentiment" + "\t");
 		out.println(sentiment);
-		AnalysisResults cgJson = wc.getCategoriess(script.getContent());
+		AnalysisResults cgJson = script.getCategories();
 		for (CategoriesResult cr : cgJson.getCategories()) {
 			out.print("#");
 			out.print(cr.getLabel() + "\t");
@@ -247,7 +238,7 @@ public class DataPrinter {
 		if (script == null) {
 			throw new IllegalArgumentException();
 		}
-		System.out.println("start printing timeline");
+		System.out.println("generating timeline");
 		
 		for (int i = 0; i < 3; i++) {
 			HashMap<Integer, HashMap<String, Double>> lineEmotionTone =  script.getMainCharacters().get(i).getEmotionTimeline();
@@ -314,7 +305,7 @@ public class DataPrinter {
 		if (script == null) {
 			throw new IllegalArgumentException();
 		}
-		  System.out.println("start printing occurrences");
+		  System.out.println("generating occurrences");
 		  PrintWriter pw = new PrintWriter("data/occurrences.csv");
 		  pw.println("name,occurences");
 		  for (Persona p: script.getMainCharacters()) {

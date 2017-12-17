@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.AnalysisResults;
 import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.DocumentAnalysis;
 
 import apiCall.WatsonAnalyzer;
@@ -48,11 +49,15 @@ public class ScriptReader {
 		BufferedImage poster = ImageScraper.getImageGivenUrl(ImageScraper.getPostPathFromTMDB(scriptName));
 		// changed mainCharacters to type ArrayList
 		ArrayList<Persona> mainCharacters = getMainCharacters();
-		Script script = new Script(scriptName, content, relationgraph, poster, mainCharacters);
+		AnalysisResults keywords = wc.getKeywords(content);
+		AnalysisResults categories = wc.getCategoriess(content);
+		Double sentiment = wc.getGeneralSentiment(content);
+		Script script = new Script(scriptName, content, relationgraph, poster, mainCharacters, keywords, categories,sentiment);
 
 		return script;
 	}
 
+	
 	/**
 	 * get top 8 occurrence and set personal image
 	 * 
@@ -71,21 +76,21 @@ public class ScriptReader {
 
 		for (int i = 0; i < 8; i++) {
 			Persona curr = characters.get(i);
-			List<String> images = ImageScraper.getImageUrlsFromGoogle(curr.getName() + " " + scriptName);
+			//List<String> images = ImageScraper.getImageUrlsFromGoogle(curr.getName() + " " + scriptName);
 			int index = 0;
+			/*
 			while (true) {
 				String url = images.get(index++);
 				if (url != null) {
 					curr.setImage(url);
 					break;
 				}
-
 			}
-			
-			
-
+			*/
 			mainRoles.add(curr);
 		}
+		
+		
 		for (int i = 0; i < 3; i++) {
 			int lineCount = 0;
 			HashMap<Integer, HashMap<String, Double>> lineEmotionTone = new HashMap<Integer, HashMap<String, Double>>();
@@ -101,6 +106,14 @@ public class ScriptReader {
 			}
 			characters.get(i).setEmotionTimeline(lineEmotionTone);
 		}
+		
+		Persona protagonist = characters.get(0);
+		StringBuilder protagonistLines = new StringBuilder();
+		for (String s: protagonist.getLines()) {
+			protagonistLines.append(s);
+		}
+		protagonist.setPersonality(wc.getPersonality(protagonistLines.toString()));
+		
 		return mainRoles;
 	}
 

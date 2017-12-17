@@ -13,7 +13,7 @@ public class DataPrinterTester {
 		Script script = sr.readScript(ScriptScraper.scrapeScript(urlName), "Titanic");
 		DataPrinter dp = new DataPrinter();
 		
-//		dp.printPersonality(script);
+		dp.printPersonality(script);
 				
 //		dp.printRelation(script);
 		
@@ -21,7 +21,7 @@ public class DataPrinterTester {
 		
 //		dp.printMainPhotos(script);
 		
-		dp.printTimeLine(script);
+//		dp.printTimeLine(script);
 		
 		
 	}
