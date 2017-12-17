@@ -53,9 +53,15 @@
        
             <!-- Main component for a primary marketing message or call to action-->
 <h2></h2>
-<br>
-    <font color="#666666"> 
-    </font> 
+    <div style="background:transparent !important" class="jumbotron">
+      <div class="row">
+            <div class="col-sm-8"> 
+              <div class="card-block" id="tags">
+              </div>
+            </div>
+       
+      </div> 
+    </div>
 
     <div style="background:transparent !important" class="jumbotron">
       <div class="row">
@@ -179,9 +185,10 @@ d3.csv("occurrences.csv", function(d) {
                 characters = allText.split(/\r\n|\n/);
                 console.log(characters.length);
                 document.getElementsByTagName("h2")[0].innerHTML = characters[0];
-                var list = document.getElementsByTagName("font")[0];
+                var list = document.getElementById("tags");
                 for(var i = 17; i< characters.length; i++){
-                    var tag = document.createElement("h4");
+                    var tag = document.createElement("p");
+                    tag.class="card-text";
                     tag.innerHTML = characters[i];
                     console.log(characters[i])
                     list.appendChild(tag);
