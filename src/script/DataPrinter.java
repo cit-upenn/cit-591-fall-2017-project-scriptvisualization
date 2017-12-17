@@ -1,8 +1,11 @@
 package script;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import org.jgrapht.graph.SimpleGraph;
 import org.json.simple.JSONArray;
@@ -187,5 +190,22 @@ public class DataPrinter {
 			e.printStackTrace();
 		}
 
+	}
+	
+	/**
+	 * This method prints out a txt file 
+	 * @param script
+	 * @throws FileNotFoundException
+	 */
+	public static void printMainPhotos(Script script) throws FileNotFoundException {
+		ArrayList<Persona> mainCharacters = script.getMainCharacters();
+		PrintWriter out = new PrintWriter(new File("data/charactersPhotos.txt"));
+		out.println(script.getName());
+		for(Persona persona : mainCharacters) {
+			out.println(persona.getName());
+			out.println(persona.getImage());
+		}
+		
+		out.close();
 	}
 }

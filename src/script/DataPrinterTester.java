@@ -18,6 +18,10 @@ public class DataPrinterTester {
 		
 //		dp.printRelation(sr);
 		
-		dp.printKeywords(content);
+//		dp.printKeywords(content);
+		
+//		dp.printMainPhotos(script);
+		
+		
 	}
 }
