@@ -203,16 +203,19 @@ public class DataPrinter {
 	}
 
 	public static void printTimeLine(Script script) throws IOException {
-		HashMap<Integer, HashMap<String, Double>> lineEmotionTone = new HashMap<Integer, HashMap<String, Double>>();
-		HashMap<String, HashMap<String, Double>> lineLangTone = new HashMap<String, HashMap<String, Double>>();
-		int lineCount = 0;
+		
+		
 		for (int i = 0; i < 3; i++) {
+			int lineCount = 0;
+			HashMap<Integer, HashMap<String, Double>> lineEmotionTone = new HashMap<Integer, HashMap<String, Double>>();
+			HashMap<String, HashMap<String, Double>> lineLangTone = new HashMap<String, HashMap<String, Double>>();
+			HashMap<String, Double> lineEmoScore;
+			HashMap<String, Double> lineLangScore;
 			for (String s : script.getMainCharacters().get(i).getLines()) {
-
 				DocumentAnalysis chunkTone = wc.getToneOfLines(s);
-				HashMap<String, Double> lineEmoScore = wa.lineEmotionToneAnalyzer(chunkTone);
+				 lineEmoScore = wa.lineEmotionToneAnalyzer(chunkTone);
 				lineEmotionTone.put(lineCount++, lineEmoScore);
-				HashMap<String, Double> lineLangScore = wa.lineLangToneAnalyzer(chunkTone);
+				 lineLangScore = wa.lineLangToneAnalyzer(chunkTone);
 				lineLangTone.put(s, lineLangScore);
 			}
 			if (i == 0) {
