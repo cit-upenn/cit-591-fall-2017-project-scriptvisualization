@@ -26,7 +26,7 @@ public class Script {
 	}
 
 	public Script(String name, String content, Relationships relationgraph, BufferedImage post,
-			ArrayList<Persona> mainCharacters, HashMap<String, HashMap<String, Double>> naturalLangUnderstanding) {
+			ArrayList<Persona> mainCharacters) {
 		super();
 		this.name = name;
 		this.content = content;

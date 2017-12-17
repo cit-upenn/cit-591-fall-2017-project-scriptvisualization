@@ -46,10 +46,7 @@ public class ScriptReader {
 		BufferedImage poster = ImageScraper.getImageGivenUrl(ImageScraper.getPostPathFromTMDB(scriptName));
 		// changed mainCharacters to type ArrayList
 		ArrayList<Persona> mainCharacters = getMainCharacters();
-		HashMap<String, HashMap<String, Double>> naturalLangUnderstanding = wa
-				.naturalLangAnalyzer(wc.NaturalLangUnderstanding(content));
-		Script script = new Script(scriptName, content, relationgraph, poster, mainCharacters,
-				naturalLangUnderstanding);
+		Script script = new Script(scriptName, content, relationgraph, poster, mainCharacters);
 
 		return script;
 	}
