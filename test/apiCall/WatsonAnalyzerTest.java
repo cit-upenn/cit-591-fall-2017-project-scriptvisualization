@@ -6,6 +6,9 @@ import java.io.IOException;
 
 import org.junit.Test;
 
+import script.WatsonAnalyzer;
+import script.WatsonCaller;
+
 public class WatsonAnalyzerTest {
 	
 	String test = "Bullshit.  We've played with each other, pushed each other.  " + 

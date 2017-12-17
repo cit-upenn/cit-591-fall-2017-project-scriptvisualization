@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import apiCall.WatsonCaller;
+import script.WatsonCaller;
 
 public class WatsonCallerTest {
 	

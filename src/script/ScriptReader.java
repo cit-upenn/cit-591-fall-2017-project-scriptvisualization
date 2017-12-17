@@ -12,9 +12,6 @@ import java.util.Set;
 import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.AnalysisResults;
 import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.DocumentAnalysis;
 
-import apiCall.WatsonAnalyzer;
-import apiCall.WatsonCaller;
-
 /**
  * This class takes in content of a script, analyzes the content
  * and insert information needed to Script class
