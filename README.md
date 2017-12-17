@@ -12,4 +12,4 @@ The project is a moive script visualization application. It scratched the data o
 3. Then the user chooses a movie and decides to visualize it. The movie scripts are sent to the Watson Natural language Understanding API, Watson Personality Insights API and Watson Toner Analyzer API, and returns the analysis of the emotion, sentiment and personalities.
 4. The results are displayed in HTML format. The main characters, character's emotional changes, and the relationship between characters will be shown with graphs like circles, lines and bars.
 
-Technologies utilized: IBM Watson API, TMDb API, WindowBuilder, JavaScript
+Technologies utilized: Google Customer Search API, IBM Watson API, TMDb API, WindowBuilder, JavaScript
