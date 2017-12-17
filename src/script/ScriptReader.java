@@ -56,64 +56,62 @@ public class ScriptReader {
 
 	
 	/**
-	 * get top 8 occurrence
-	 * set personal image,emotion timeline and personality
-	 * 
-	 * @return
-	 * @throws IOException
-	 * @throws GeneralSecurityException
-	 */
-	private ArrayList<Persona> getMainCharacters() throws IOException, GeneralSecurityException {
-		Set<Persona> characterName = getRelationgraph().getGraph().vertexSet();
-		ArrayList<Persona> characters = new ArrayList<Persona>();
-		ArrayList<Persona> mainRoles = new ArrayList<Persona>();
-		for (Persona p : characterName) {
-			characters.add(p);
-		}
-		Collections.sort(characters);
+	  * get top 8 occurrence
+	  * set personal image,emotion timeline and personality
+	  * 
+	  * @return
+	  * @throws IOException
+	  * @throws GeneralSecurityException
+	  */
+	 private ArrayList<Persona> getMainCharacters() throws IOException, GeneralSecurityException {
+	  Set<Persona> characterName = getRelationgraph().getGraph().vertexSet();
+	  ArrayList<Persona> characters = new ArrayList<Persona>();
+	  ArrayList<Persona> mainRoles = new ArrayList<Persona>();
+	  for (Persona p : characterName) {
+	   characters.add(p);
+	  }
+	  Collections.sort(characters);
 
-		for (int i = 0; i < 8; i++) {
-			Persona curr = characters.get(i);
-			//List<String> images = ImageScraper.getImageUrlsFromGoogle(curr.getName() + " " + scriptName);
-			int index = 0;
-			/*
-			while (true) {
-				String url = images.get(index++);
-				if (url != null) {
-					curr.setImage(url);
-					break;
-				}
-			}
-			*/
-			mainRoles.add(curr);
-		}
-		
-		
-		for (int i = 0; i < 3; i++) {
-			int lineCount = 0;
-			HashMap<Integer, HashMap<String, Double>> lineEmotionTone = new HashMap<Integer, HashMap<String, Double>>();
-			HashMap<String, HashMap<String, Double>> lineLangTone = new HashMap<String, HashMap<String, Double>>();
-			HashMap<String, Double> lineEmoScore;
-			HashMap<String, Double> lineLangScore;
-			for (String s: characters.get(i).getLines()) {
-				DocumentAnalysis chunkTone = wc.getToneOfLines(s);
-				 lineEmoScore = wa.lineEmotionToneAnalyzer(chunkTone);
-				lineEmotionTone.put(lineCount++, lineEmoScore);
-				 lineLangScore = wa.lineLangToneAnalyzer(chunkTone);
-				lineLangTone.put(s, lineLangScore);
-			}
-			characters.get(i).setEmotionTimeline(lineEmotionTone);
-		}
-		
-		Persona protagonist = characters.get(0);
-		StringBuilder protagonistLines = new StringBuilder();
-		for (String s: protagonist.getLines()) {
-			protagonistLines.append(s);
-		}
-		protagonist.setPersonality(wc.getPersonality(protagonistLines.toString()));
-		
-		return mainRoles;
-	}
+	  for (int i = 0; i < 8; i++) {
+	   Persona curr = characters.get(i);
+	   /*List<String> images = ImageScraper.getImageUrlsFromGoogle(curr.getName() + " " + scriptName);
+	   int index = 0;
+	   while (true) {
+	    String url = images.get(index++);
+	    if (url != null) {
+	     curr.setImage(url);
+	     break;
+	    }
+	   }*/
+	   mainRoles.add(curr);
+	  }
+	  
+	  
+	  for (int i = 0; i < 3; i++) {
+	   int lineCount = 0;
+	   HashMap<Integer, HashMap<String, Double>> lineEmotionTone = new HashMap<Integer, HashMap<String, Double>>();
+	   HashMap<String, HashMap<String, Double>> lineLangTone = new HashMap<String, HashMap<String, Double>>();
+	   HashMap<String, Double> lineEmoScore;
+	   HashMap<String, Double> lineLangScore;
+	   for (String s: characters.get(i).getLines()) {
+	    DocumentAnalysis chunkTone = wc.getToneOfLines(s);
+	     lineEmoScore = wa.lineEmotionToneAnalyzer(chunkTone);
+	    lineEmotionTone.put(lineCount++, lineEmoScore);
+	     lineLangScore = wa.lineLangToneAnalyzer(chunkTone);
+	    lineLangTone.put(s, lineLangScore);
+	   }
+	   characters.get(i).setEmotionTimeline(lineEmotionTone);
+	  }
+	  
+	  Persona protagonist = characters.get(0);
+	  StringBuilder protagonistLines = new StringBuilder();
+	  for (String s: protagonist.getLines()) {
+	   protagonistLines.append(s);
+	  }
+	  protagonist.setPersonality(wc.getPersonality(protagonistLines.toString()));
+	  
+	  return mainRoles;
+	 }
 
 	/**
 	 * This function add some words that are impossible to be a name

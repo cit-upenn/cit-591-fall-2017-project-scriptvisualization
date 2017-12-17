@@ -1,21 +1,21 @@
-La La Land
-MIA
-https://i.ytimg.com/vi/8zscp5a7gk0/maxresdefault.jpg
-SEBASTIAN
-https://cdn-images-1.medium.com/max/640/1*z-e8QqSYLgc0Fgwk45QHpg.png
-LAURA
-https://www.movieinsider.com/images/p/388019_m1478392391.jpg
-KEITH
-https://i.ytimg.com/vi/s5QWzEvzJCQ/maxresdefault.jpg
-TRACY
-https://i.ytimg.com/vi/MRbPhjnoloo/maxresdefault.jpg
-MIA'S MOM
-https://www.gannett-cdn.com/-mm-/070e76122d4daac7cdb3abcbb7d6f730f8441c3e/c=0-244-4800-2956&r=x329&c=580x326/local/-/media/2016/12/21/USATODAY/USATODAY/636179539970239912-XXX-IMG-LLL-D28-05113-R-1-.J-3-1-71GM80PR.JPG
-ALEXIS
-http://6uh9u7hhy8-flywheel.netdna-ssl.com/wp-content/uploads/2016/09/zhang-yuqi-at-la-la-land-premiere-at-2016-venice-film-festival-08-31-2016-alexis-mabille-couture-1-667x1000.jpg
-GREG
-https://tuesdayswithhorry.files.wordpress.com/2017/02/greg.png
-#sentiment
-#art and entertainment/humor 0.1941
-#law, govt and politics/armed forces/air force 0.47438
-#news	
+titanic
+LOVETT
+https://vignette2.wikia.nocookie.net/jamescameronstitanic/images/6/6e/Brock_Lovett.gif/revision/latest?cb=20120615215621
+BODINE
+https://images-na.ssl-images-amazon.com/images/M/MV5BZjJkMDljN2MtMTA0NC00OTZmLThjNjAtNjc5MThhMTUyMTc2XkEyXkFqcGdeQXVyMjkyNzM3MQ@@._V1_.jpg
+BUELL
+https://vignette.wikia.nocookie.net/jamescameronstitanic/images/b/b8/Bobby_Buell.gif/revision/latest?cb=20120623195246
+ANATOLY
+https://vignette3.wikia.nocookie.net/jamescameronstitanic/images/3/31/Anatoly_Sagalevitch.png/revision/latest?cb=20130217103235
+ROSE
+https://vignette.wikia.nocookie.net/jamescameronstitanic/images/d/d3/Rosedewittbukater.jpg/revision/latest/scale-to-width-down/180?cb=20120518041253
+ANNOUNCER
+http://statici.behindthevoiceactors.com/behindthevoiceactors/_img/chars/titanic-announcer-rick-and-morty-32.6.jpg
+CAMERAMAN
+http://www.vorply.com/media/3049/we-can-see-a-cameraman-in-the-glass-reflection-6.jpg
+CNN REPORTER
+http://cdn.cnn.com/cnnnext/dam/assets/170102160510-titanic-mark-full-169.jpg
+#sentiment	0.0481468
+#/art and entertainment/movies and tv/movies	0.509857
+#/automotive and vehicles/boats and watercraft	0.429507
+#/home and garden/gardening and landscaping/yard and patio	0.409941

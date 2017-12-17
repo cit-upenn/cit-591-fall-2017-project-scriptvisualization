@@ -1,4 +1,4 @@
-package apiCall;
+package script;
 
 import static org.junit.Assert.*;
 
@@ -10,7 +10,7 @@ import script.WatsonAnalyzer;
 import script.WatsonCaller;
 
 public class WatsonAnalyzerTest {
-	
+
 	String test = "Bullshit.  We've played with each other, pushed each other.  " + 
 			"This is different. Like you want to prove that you're better than me.  Who's that for -- Evelyn?" + 
 			"I understand how it could happen.  I know why any guy would love her.  And I can't blame you that " +
@@ -33,7 +33,10 @@ public class WatsonAnalyzerTest {
 		assertTrue(wanalyzer.lineLangToneAnalyzer(wcaller.getToneOfLines(test)).size() > 0);
 	}
 
-
+	@Test
+	public void testPersonalityAnalyzer() {
+		 
+	}
 
 
 }
