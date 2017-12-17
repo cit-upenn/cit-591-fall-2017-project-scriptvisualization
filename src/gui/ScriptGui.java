@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
+import script.DataPrinter;
 import script.Genre;
 import script.Persona;
 import script.Script;
@@ -111,7 +112,7 @@ public class ScriptGui {
 		lblNewLabel.setIcon(new ImageIcon("image/happycat.gif"));
 		lblNewLabel.setBounds(251, 32, 191, 190);
 		search.add(lblNewLabel);
-		Image searchImg = frame.getToolkit().getImage("image/search-small.png");
+		 
 		
 		//choose page
 		JPanel choose = new JPanel();
@@ -207,9 +208,16 @@ public class ScriptGui {
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon("image/loading.gif"));
 		lblNewLabel_1.setBounds(97, 6, 489, 329);
-		graph.add(lblNewLabel_1);
+		choose.add(lblNewLabel_1);
 		
-		lblNewLabel_1.setVisible(true);
+		lblNewLabel_1.setVisible(false);
+		
+		JLabel done = new JLabel("");
+		done.setIcon(new ImageIcon("image/script6.png"));
+		done.setBounds(213, 87, 241, 217);
+		graph.add(done);
+		
+		done.setVisible(true);
 		
 		
 		
@@ -263,48 +271,13 @@ public class ScriptGui {
 		
 		movieButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*sr = new ScriptReader();
-				String url = ss.getMovieList().get(movieButton1.getText());
-				Script script = new Script();
-				try {
-					
-					script = sr.readScript(ScriptScraper.scrapeScript(url), movieButton1.getText());
- 
-					JLabel lblNewLabel_1 = new JLabel("");
-					lblNewLabel_1.setIcon(new ImageIcon("/Users/yichaoli/Documents/study/MCIT_1/591project/image/ajax-loader.gif"));
-					lblNewLabel_1.setBounds(140, 108, 176, 87);
-					choose.add(lblNewLabel_1);
- 
-				} catch (IOException | GeneralSecurityException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-				moviePost.setIcon(labels.get(0).getIcon());
-				
-				ArrayList<Persona> mainCharacters = script.getMainCharacters();
-				for(int i = 0; i < 3; i++) {
-					JLabel label = characters.get(i);
-					System.out.println(mainCharacters.get(i).getName());
-					//Image personalImage = mainCharacters.get(i).getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
-					textField = new JTextField();
-					if(i<5) textField.setBounds(25+i*80,100,61,20);
-					else{
-						textField.setBounds(25+(i-5)*80,540,61,20);
-					}
-					textField.setText(mainCharacters.get(i).getName());
-					graph.add(textField);
-					//textField.setColumns(10);
-					
-					
-					System.out.println(personalImage);
-					label.setIcon(new ImageIcon(personalImage));
-				}
-				 */
-				
-			
+				lblNewLabel_1.setVisible(true);
+				analyze(movieButton1.getText());
+				lblNewLabel_1.setVisible(false);
 				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 				cardLayout.next(frame.getContentPane());
+				
+			
 				
 				
 			}
@@ -312,16 +285,29 @@ public class ScriptGui {
 		
 		movieButton2.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				lblNewLabel_1.setVisible(true);
+				analyze(movieButton2.getText());
+				lblNewLabel_1.setVisible(false);
 				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 				cardLayout.next(frame.getContentPane());
+
+				
+				
 				
 			}
 		});
 		
 		movieButton3.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				lblNewLabel_1.setVisible(true);
+				analyze(movieButton3.getText());
+				lblNewLabel_1.setVisible(false);
 				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 				cardLayout.next(frame.getContentPane());
+				
+				
+				
+				
 			}
 		});
 		
@@ -342,7 +328,6 @@ public class ScriptGui {
 		Visualize.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				lblNewLabel_1.setVisible(false);
 				if(Desktop.isDesktopSupported()) {
 					String absolutePath = FileSystems.getDefault().getPath("data/script.html").normalize().toAbsolutePath().toString();
 						    try {
@@ -359,5 +344,24 @@ public class ScriptGui {
 		});
 		
 		
+	}
+	
+	private void analyze(String moviename) {
+		sr = new ScriptReader();
+		String url = ss.getMovieList().get(moviename);
+		
+		try {
+			Script script = sr.readScript(ScriptScraper.scrapeScript(url), moviename);
+			DataPrinter dp = new DataPrinter();
+			/*dp.printKeywords(script);
+			dp.printPersonality(script);
+			dp.printRelation(script);
+			dp.printMainPhotos(script);
+			dp.printTimeLine(script);*/
+			
+		} catch (IOException | GeneralSecurityException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 }

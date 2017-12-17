@@ -46,8 +46,8 @@ public class ScriptReader {
 		BufferedImage poster = ImageScraper.getImageGivenUrl(ImageScraper.getPostPathFromTMDB(scriptName));
 		// changed mainCharacters to type ArrayList
 		ArrayList<Persona> mainCharacters = getMainCharacters();
-		HashMap<String, HashMap<String, Double>> naturalLangUnderstanding = wa
-				.naturalLangAnalyzer(wc.NaturalLangUnderstanding(content));
+		HashMap<String, HashMap<String, Double>> naturalLangUnderstanding = null;/*wa
+				.naturalLangAnalyzer(wc.NaturalLangUnderstanding(content));*/
 		Script script = new Script(scriptName, content, relationgraph, poster, mainCharacters,
 				naturalLangUnderstanding);
 
@@ -130,8 +130,8 @@ public class ScriptReader {
 				double relation = 0;
 				// need to get relation here.param: chunk.dialogue
 				try {
-					relation = wa.relationshipAnalyzer(wc.getRelationshipIndicator(chunk.dialogue)).get("sentiment")
-							.get("general");
+					/*relation = wa.relationshipAnalyzer(wc.getRelationshipIndicator(chunk.dialogue)).get("sentiment")
+							.get("general");*/
 				}
 				// catch something like unsupported text language
 				// e.g. this exception would catch April 14, 1912.

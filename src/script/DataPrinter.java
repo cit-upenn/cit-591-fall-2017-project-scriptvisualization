@@ -178,7 +178,7 @@ public class DataPrinter {
 	 * @param script
 	 * @throws IOException 
 	 */
-	public static void printMainPhotos(Script script) throws IOException {
+	public void printMainPhotos(Script script) throws IOException {
 		ArrayList<Persona> mainCharacters = script.getMainCharacters();
 		PrintWriter out = new PrintWriter(new File("data/charactersPhotos.txt"));
 		out.println(script.getName());
@@ -199,7 +199,7 @@ public class DataPrinter {
 		out.close();
 	}
 	
-	public static void printTimeLine(Script script) {
+	public void printTimeLine(Script script) {
 		
 	}
 }
