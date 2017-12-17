@@ -119,6 +119,11 @@ public class DataPrinter {
 			JSONObject names = new JSONObject();
 
 			names.put("id", p.getName());
+			if (p.equals(script.getMainCharacters().get(0)) || p.equals(script.getMainCharacters().get(1)) || p.equals(script.getMainCharacters().get(2))) {
+				names.put("group", 1);
+			} else if (script.getMainCharacters().contains(p)) {
+				names.put("group", 2);
+			}
 			// names.put("id", links.getEdgeSource(r).getName());
 			nodes.add(names);
 		}
@@ -134,6 +139,7 @@ public class DataPrinter {
 
 		}
 		tier.put("links", linkages);
+//		System.out.println(tier);
 
 		try {
 			FileWriter fileWriter = new FileWriter("data/relationship.json");
