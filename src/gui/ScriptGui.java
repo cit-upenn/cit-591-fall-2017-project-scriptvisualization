@@ -191,7 +191,7 @@ public class ScriptGui {
 	
 		
 		JButton BackButton = new JButton("Back");
-		BackButton.setBounds(281, 413, 117, 29);
+		BackButton.setBounds(281, 398, 117, 29);
 		choose.add(BackButton);
 		
 		ArrayList<JLabel> labels = new ArrayList<>();
@@ -209,7 +209,7 @@ public class ScriptGui {
 		lblNewLabel_1.setBounds(97, 6, 489, 329);
 		graph.add(lblNewLabel_1);
 		
-		lblNewLabel_1.setVisible(false);
+		lblNewLabel_1.setVisible(true);
 		
 		
 		
@@ -240,6 +240,7 @@ public class ScriptGui {
 					e1.printStackTrace();
 				}
 				posts = ss.getMoviePosts();
+			
 				String[] movieNames = new String[posts.keySet().size()];
 				posts.keySet().toArray(movieNames);
 					for(int i = 0; i < Math.min(movieNames.length, 3); i++) {
@@ -255,6 +256,7 @@ public class ScriptGui {
 					 
 					CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 					cardLayout.next(frame.getContentPane());
+					
 				 
 			}
 		});
@@ -312,6 +314,7 @@ public class ScriptGui {
 			public void actionPerformed(ActionEvent e){
 				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 				cardLayout.next(frame.getContentPane());
+				
 			}
 		});
 		
@@ -326,13 +329,20 @@ public class ScriptGui {
 			public void actionPerformed(ActionEvent e) {
 				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 				cardLayout.first(frame.getContentPane());
+				//moviePost1.setVisible(false);
+				moviePost2.setVisible(false);
+				moviePost3.setVisible(false);
+				movieButton2.setVisible(false);
+				movieButton3.setVisible(false);
+			
+				
 			}
 		});
 		
 		Visualize.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				lblNewLabel_1.setVisible(true);
+				lblNewLabel_1.setVisible(false);
 				if(Desktop.isDesktopSupported()) {
 					String absolutePath = FileSystems.getDefault().getPath("data/index.html").normalize().toAbsolutePath().toString();
 						    try {
