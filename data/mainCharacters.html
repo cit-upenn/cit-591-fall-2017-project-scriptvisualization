@@ -209,16 +209,24 @@ d3.json("personality.json", function(error, root) {
       	 	document.getElementsByTagName("h2")[1].innerHTML = "Emotional Change of " + characters[1];
           document.getElementsByTagName("h2")[2].innerHTML = "Personality of " + characters[1];
       	 	document.getElementsByTagName("img")[0].style = " float:left; display:inline; margin: 10px; border:solid 1px red; box-shadow:0px 2px 10px 2px #333 ";
+          document.getElementsByTagName("img")[1].style = " float:left; display:inline; margin: 10px";
+           document.getElementsByTagName("img")[2].style = " float:left; display:inline; margin: 10px";
       	}
         if(tsvFile == 'SecondMain.tsv'){
           document.getElementsByTagName("h2")[1].innerHTML = "Emotional Change of " + characters[3];
           document.getElementsByTagName("h2")[2].innerHTML = "Personality of " + characters[3];
           document.getElementsByTagName("img")[1].style = " float:left; display:inline; margin: 10px; border:solid 1px red; box-shadow:0px 2px 10px 2px #333 ";
+          document.getElementsByTagName("img")[0].style = " float:left; display:inline; margin: 10px";
+           document.getElementsByTagName("img")[2].style = " float:left; display:inline; margin: 10px";
+
+          
         }
         if(tsvFile == 'ThirdMain.tsv'){
           document.getElementsByTagName("h2")[1].innerHTML = "Emotional Change of " + characters[5];
           document.getElementsByTagName("h2")[2].innerHTML = "Personality of " + characters[5];
           document.getElementsByTagName("img")[2].style = " float:left; display:inline; margin: 10px; border:solid 1px red; box-shadow:0px 2px 10px 2px #333 ";
+          document.getElementsByTagName("img")[1].style = " float:left; display:inline; margin: 10px";
+           document.getElementsByTagName("img")[0].style = " float:left; display:inline; margin: 10px";
         }
         d3.tsv(tsvFile,
         function(d) {

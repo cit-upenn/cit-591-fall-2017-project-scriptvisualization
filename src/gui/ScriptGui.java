@@ -300,7 +300,7 @@ public class ScriptGui {
 					System.out.println(personalImage);
 					label.setIcon(new ImageIcon(personalImage));
 				}
-				movieTag.setText(script.getNaturalLangUnderstanding().keySet().toString());*/
+				 */
 				
 			
 				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
@@ -344,7 +344,7 @@ public class ScriptGui {
 				
 				lblNewLabel_1.setVisible(false);
 				if(Desktop.isDesktopSupported()) {
-					String absolutePath = FileSystems.getDefault().getPath("data/index.html").normalize().toAbsolutePath().toString();
+					String absolutePath = FileSystems.getDefault().getPath("data/script.html").normalize().toAbsolutePath().toString();
 						    try {
 								Desktop.getDesktop().browse(new URI("file:///"+absolutePath));
 							} catch (IOException e1) {
