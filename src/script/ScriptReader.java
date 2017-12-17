@@ -72,7 +72,7 @@ public class ScriptReader {
 		}
 		Collections.sort(characters);
 		
-		for (int i = 0; i < 8; i++) {
+		/*for (int i = 0; i < 8; i++) {
 			Persona curr = characters.get(i);
 			List<String> images = ImageScraper.getImageUrlsFromGoogle(curr.getName() + " " + scriptName);
 			int index = 0;
@@ -85,7 +85,7 @@ public class ScriptReader {
 				
 			}
 			mainRoles.add(curr);
-		}
+		}*/
 		return mainRoles;
 	}
 
