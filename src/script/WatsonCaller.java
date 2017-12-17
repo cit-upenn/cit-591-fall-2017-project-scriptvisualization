@@ -109,7 +109,6 @@ public class WatsonCaller {
 	 * @throws IOException
 	 */
 	public AnalysisResults getKeywords(String scriptContent) throws IOException {
-		HashMap<String, AnalysisResults> relationshipIndicator = new HashMap<String, AnalysisResults>();
 
 		final String VERSION_DATE = "2017-02-27";
 		NaturalLanguageUnderstanding service = new NaturalLanguageUnderstanding(VERSION_DATE);
@@ -133,7 +132,6 @@ public class WatsonCaller {
 	 * @throws IOException
 	 */
 	public AnalysisResults getCategoriess(String scriptContent) throws IOException {
-		HashMap<String, AnalysisResults> relationshipIndicator = new HashMap<String, AnalysisResults>();
 
 		final String VERSION_DATE = "2017-02-27";
 		NaturalLanguageUnderstanding service = new NaturalLanguageUnderstanding(VERSION_DATE);
