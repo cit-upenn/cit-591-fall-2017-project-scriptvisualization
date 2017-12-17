@@ -16,7 +16,11 @@ Technologies utilized: Google Customer Search API, IBM Watson API, TMDb API, Win
 
 Visualization dirived from:
 Copyright (c) 2016, Tom May 
+
 Copyright (c) 2013, Jason Davies.
+
 Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+
 Jsoup: Copyright © 2009 - 2017 Jonathan Hedley
+
 JGrapht: Copyright (C) 1991, 1999 Free Software Foundation, Inc.
