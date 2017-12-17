@@ -168,7 +168,7 @@ d3.csv("occurrences.csv", function(d) {
 
  <script type="text/javascript">
   var characters;
-    readTextFile("characters.txt");
+    readTextFile("charactersPhotos.txt");
     function readTextFile(file){
       var rawFile = new XMLHttpRequest();
       rawFile.open("GET", file, false);
@@ -189,7 +189,7 @@ d3.csv("occurrences.csv", function(d) {
             }
         }
     }
-    //rawFile.send(null);
+    rawFile.send(null);
     rawFile.abort();
 }
 

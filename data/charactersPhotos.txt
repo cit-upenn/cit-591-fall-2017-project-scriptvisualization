@@ -15,4 +15,7 @@ ALEXIS
 http://6uh9u7hhy8-flywheel.netdna-ssl.com/wp-content/uploads/2016/09/zhang-yuqi-at-la-la-land-premiere-at-2016-venice-film-festival-08-31-2016-alexis-mabille-couture-1-667x1000.jpg
 GREG
 https://tuesdayswithhorry.files.wordpress.com/2017/02/greg.png
-#sentiment	
+#sentiment
+#art and entertainment/humor 0.1941
+#law, govt and politics/armed forces/air force 0.47438
+#news	
