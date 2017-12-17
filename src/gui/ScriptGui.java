@@ -108,7 +108,7 @@ public class ScriptGui {
 		search.add(comboBox);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("/Users/yichaoli/Documents/study/MCIT_1/591project/image/happycat.gif"));
+		lblNewLabel.setIcon(new ImageIcon("image/happycat.gif"));
 		lblNewLabel.setBounds(251, 32, 191, 190);
 		search.add(lblNewLabel);
 		Image searchImg = frame.getToolkit().getImage("image/search-small.png");
@@ -205,7 +205,7 @@ public class ScriptGui {
 		movieButtons.add(movieButton3);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("/Users/yichaoli/Documents/study/MCIT_1/591project/image/loading.gif"));
+		lblNewLabel_1.setIcon(new ImageIcon("image/loading.gif"));
 		lblNewLabel_1.setBounds(97, 6, 489, 329);
 		graph.add(lblNewLabel_1);
 		
