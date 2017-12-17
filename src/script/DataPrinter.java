@@ -21,8 +21,6 @@ import com.ibm.watson.developer_cloud.personality_insights.v3.model.Profile;
 import com.ibm.watson.developer_cloud.personality_insights.v3.model.Trait;
 import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.DocumentAnalysis;
 
-import apiCall.WatsonAnalyzer;
-import apiCall.WatsonCaller;
 import script.Relationships.Relationship;
 
 /**

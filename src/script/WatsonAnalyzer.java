@@ -1,4 +1,4 @@
-package apiCall;
+package script;
 /**
  * This class analyzes returned JSON object
  * @author syou

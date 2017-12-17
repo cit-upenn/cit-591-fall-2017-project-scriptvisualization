@@ -4,7 +4,7 @@
  * Natural Language Processing, Tone Analyzer, Personality Insight.
  * @author syou
  */
-package apiCall;
+package script;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -26,8 +26,6 @@ import com.ibm.watson.developer_cloud.tone_analyzer.v3.ToneAnalyzer;
 import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.DocumentAnalysis;
 import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.ToneAnalysis;
 import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.ToneOptions;
-
-import script.Secret;
 
 public class WatsonCaller {
 	/**
