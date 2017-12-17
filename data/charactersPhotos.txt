@@ -1,0 +1,21 @@
+La La Land
+MIA
+https://i.ytimg.com/vi/8zscp5a7gk0/maxresdefault.jpg
+SEBASTIAN
+https://cdn-images-1.medium.com/max/640/1*z-e8QqSYLgc0Fgwk45QHpg.png
+LAURA
+https://www.movieinsider.com/images/p/388019_m1478392391.jpg
+KEITH
+https://i.ytimg.com/vi/s5QWzEvzJCQ/maxresdefault.jpg
+TRACY
+https://i.ytimg.com/vi/MRbPhjnoloo/maxresdefault.jpg
+MIA'S MOM
+https://www.gannett-cdn.com/-mm-/070e76122d4daac7cdb3abcbb7d6f730f8441c3e/c=0-244-4800-2956&r=x329&c=580x326/local/-/media/2016/12/21/USATODAY/USATODAY/636179539970239912-XXX-IMG-LLL-D28-05113-R-1-.J-3-1-71GM80PR.JPG
+ALEXIS
+http://6uh9u7hhy8-flywheel.netdna-ssl.com/wp-content/uploads/2016/09/zhang-yuqi-at-la-la-land-premiere-at-2016-venice-film-festival-08-31-2016-alexis-mabille-couture-1-667x1000.jpg
+GREG
+https://tuesdayswithhorry.files.wordpress.com/2017/02/greg.png
+#sentiment
+#art and entertainment/humor 0.1941
+#law, govt and politics/armed forces/air force 0.47438
+#news	

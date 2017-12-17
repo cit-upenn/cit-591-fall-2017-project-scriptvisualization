@@ -52,7 +52,7 @@ public class ScriptReader {
 	}
 
 	/**
-	 * get top 10 occurrence and set personal image
+	 * get top 8 occurrence and set personal image
 	 * 
 	 * @return
 	 * @throws IOException
@@ -67,12 +67,10 @@ public class ScriptReader {
 		}
 		Collections.sort(characters);
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 8; i++) {
 			Persona curr = characters.get(i);
-			//List<String> images = ImageScraper.getImageUrlsFromGoogle(curr.getName() + " " + scriptName);
+			List<String> images = ImageScraper.getImageUrlsFromGoogle(curr.getName() + " " + scriptName);
 			int index = 0;
-			BufferedImage personaImage;
-			/*
 			while (true) {
 				String url = images.get(index++);
 				if (url != null) {
@@ -81,7 +79,6 @@ public class ScriptReader {
 				}
 
 			}
-			*/
 
 			mainRoles.add(curr);
 		}
@@ -114,10 +111,7 @@ public class ScriptReader {
 	 */
 	private void analysizeChunks() throws IOException {
 		Persona prev = null;
-//		 for (int i = 0; i < 60; i++) {
 		for (ScriptChunk chunk : scriptChunks) {
-//			 ScriptChunk chunk = scriptChunks.get(i);
-			// continue if the name is invalid
 			if (!isValidName(chunk.name)) {
 				prev = null;
 				continue;
@@ -126,11 +120,8 @@ public class ScriptReader {
 			curr.getLines().add(chunk.dialogue);
 			if (prev != null && prev != curr) {
 				double relation = 0;
-				// need to get relation here.param: chunk.dialogue
 				try {
-					relation = wc.getRelationshipIndicator(chunk.dialogue).getSentiment().getDocument().getScore();
-//					relation = wa.relationshipAnalyzer(wc.getRelationshipIndicator(chunk.dialogue)).get("sentiment")
-//							.get("general");
+					//relation = wc.getRelationshipIndicator(chunk.dialogue).getSentiment().getDocument().getScore();
 				}
 				// catch something like unsupported text language
 				// e.g. this exception would catch April 14, 1912.

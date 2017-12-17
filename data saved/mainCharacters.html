@@ -55,21 +55,15 @@
     </div>
   </div>
 
-<div style="background:transparent !important" class="jumbotron">
+ 
 <div class="container">
     <h2></h2>
     <div id="chart"></div>
 </div>
-</div>
 
-<div style="background:transparent !important" class="jumbotron">
 <div class="container">
-    <div class="card-block">
-                  <h2 class="card-title"></h2>
-                  <p class="card-text">An icicle graph visualizing the protagonist’s intrinsic personality characteristics, including Big Five, Need and Values. Data derived using Personality Insight API which applies linguistic analytics and personality theory.</p>
-              </div>
+    <h2></h2>
     <div id="personality"></div>
-</div>
 </div>
 
 </body>  
@@ -142,7 +136,7 @@ d3.json("personality.json", function(error, root) {
     rawFile.abort();
 }*/
     var characters;
-    readTextFile("charactersPhotos.txt");
+    readTextFile("characters.txt");
     function readTextFile(file){
     	var rawFile = new XMLHttpRequest();
     	rawFile.open("GET", file, false);
