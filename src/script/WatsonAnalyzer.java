@@ -1,4 +1,7 @@
 package script;
+/**
+ * This class analyzes JSON data
+ */
 import java.io.IOException;
 import java.util.HashMap;
 

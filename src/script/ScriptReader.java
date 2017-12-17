@@ -56,7 +56,8 @@ public class ScriptReader {
 
 	
 	/**
-	 * get top 8 occurrence and set personal image
+	 * get top 8 occurrence
+	 * set personal image,emotion timeline and personality
 	 * 
 	 * @return
 	 * @throws IOException
