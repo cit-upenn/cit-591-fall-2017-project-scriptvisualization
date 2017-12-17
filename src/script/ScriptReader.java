@@ -139,9 +139,9 @@ public class ScriptReader {
 	 */
 	private void analysizeChunks() throws IOException {
 		Persona prev = null;
-		for (int i = 0; i < 60; i++) {
-//		for (ScriptChunk chunk : scriptChunks) {
-			ScriptChunk chunk = scriptChunks.get(i);
+		//for (int i = 0; i < 60; i++) {
+		for (ScriptChunk chunk : scriptChunks) {
+			//ScriptChunk chunk = scriptChunks.get(i);
 			if (!isValidName(chunk.name)) {
 				prev = null;
 				continue;
@@ -151,7 +151,7 @@ public class ScriptReader {
 			if (prev != null && prev != curr) {
 				double relation = 0;
 				try {
-					//relation = wc.getRelationshipIndicator(chunk.dialogue).getSentiment().getDocument().getScore();
+					relation = wc.getRelationshipIndicator(chunk.dialogue).getSentiment().getDocument().getScore();
 				}
 				// catch something like unsupported text language
 				// e.g. this exception would catch April 14, 1912.
