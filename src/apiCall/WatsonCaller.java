@@ -157,4 +157,52 @@ public class WatsonCaller {
 
 		return relationshipIndicator;
 	}
+	
+	public AnalysisResults getKeywords(String scriptContent) throws IOException {
+		HashMap<String, AnalysisResults> relationshipIndicator = new HashMap<String, AnalysisResults>();
+
+		final String VERSION_DATE = "2017-02-27";
+		NaturalLanguageUnderstanding service = new NaturalLanguageUnderstanding(VERSION_DATE);
+		service.setUsernameAndPassword(Secret.watsonNatLanUserName, Secret.watsonNatLanPassword);
+
+
+		KeywordsOptions keywords = new KeywordsOptions.Builder().sentiment(false).emotion(false).limit(60).build();
+		Features kwFeatures = new Features.Builder().keywords(keywords).build();
+		AnalyzeOptions kwParam = new AnalyzeOptions.Builder().text(scriptContent).features(kwFeatures).build();
+		AnalysisResults kwResults = service.analyze(kwParam).execute();
+//		naturalLangResult.put("keywords", kwResults);
+
+
+		return kwResults;
+	}
+	
+	public AnalysisResults getCategoriess(String scriptContent) throws IOException {
+		HashMap<String, AnalysisResults> relationshipIndicator = new HashMap<String, AnalysisResults>();
+
+		final String VERSION_DATE = "2017-02-27";
+		NaturalLanguageUnderstanding service = new NaturalLanguageUnderstanding(VERSION_DATE);
+		service.setUsernameAndPassword(Secret.watsonNatLanUserName, Secret.watsonNatLanPassword);
+
+
+		CategoriesOptions categories = new CategoriesOptions();
+		Features cgFeatures = new Features.Builder().categories(categories).build();
+		AnalyzeOptions cgParam = new AnalyzeOptions.Builder().text(scriptContent).features(cgFeatures).build();
+		AnalysisResults cgResults = service.analyze(cgParam).execute();
+
+		return cgResults;
+	}
+	
+	public double getGeneralSentiment(String scriptContent) throws IOException {
+		final String VERSION_DATE = "2017-02-27";
+		NaturalLanguageUnderstanding service = new NaturalLanguageUnderstanding(VERSION_DATE);
+		service.setUsernameAndPassword(Secret.watsonNatLanUserName, Secret.watsonNatLanPassword);
+		
+		SentimentOptions sentiments = new SentimentOptions.Builder().build();
+		Features stFeatures = new Features.Builder().sentiment(sentiments).build();
+		AnalyzeOptions stParam = new AnalyzeOptions.Builder().text(scriptContent).features(stFeatures).build();
+		AnalysisResults stResults = service.analyze(stParam).execute();
+		
+		return stResults.getSentiment().getDocument().getScore();
+	}
+	
 }

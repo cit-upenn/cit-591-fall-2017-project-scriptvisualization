@@ -1,10 +1,11 @@
 package apiCall;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 
 import org.junit.Test;
+
+import apiCall.WatsonCaller;
 
 public class WatsonCallerTest {
 	

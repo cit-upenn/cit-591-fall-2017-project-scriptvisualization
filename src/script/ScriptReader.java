@@ -1,5 +1,5 @@
 package script;
- 
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -8,8 +8,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
-
- 
 
 import apiCall.WatsonAnalyzer;
 import apiCall.WatsonCaller;
@@ -35,7 +33,7 @@ public class ScriptReader {
 	 * @param content
 	 * @return Script
 	 * @throws IOException
-	 * @throws GeneralSecurityException 
+	 * @throws GeneralSecurityException
 	 */
 	public Script readScript(String content, String scriptName) throws IOException, GeneralSecurityException {
 		this.scriptName = scriptName;
@@ -48,17 +46,17 @@ public class ScriptReader {
 		BufferedImage poster = ImageScraper.getImageGivenUrl(ImageScraper.getPostPathFromTMDB(scriptName));
 		// changed mainCharacters to type ArrayList
 		ArrayList<Persona> mainCharacters = getMainCharacters();
-		HashMap<String, HashMap<String, Double>> naturalLangUnderstanding = null;/*wa
-				.naturalLangAnalyzer(wc.NaturalLangUnderstanding(content));*/
+		HashMap<String, HashMap<String, Double>> naturalLangUnderstanding = wa
+				.naturalLangAnalyzer(wc.NaturalLangUnderstanding(content));
 		Script script = new Script(scriptName, content, relationgraph, poster, mainCharacters,
 				naturalLangUnderstanding);
 
 		return script;
 	}
 
- 
 	/**
 	 * get top 10 occurrence and set personal image
+	 * 
 	 * @return
 	 * @throws IOException
 	 * @throws GeneralSecurityException
@@ -71,19 +69,22 @@ public class ScriptReader {
 			characters.add(p);
 		}
 		Collections.sort(characters);
-		
+ 
 		/*for (int i = 0; i < 8; i++) {
+ 
 			Persona curr = characters.get(i);
 			List<String> images = ImageScraper.getImageUrlsFromGoogle(curr.getName() + " " + scriptName);
 			int index = 0;
-			while(true) {
+			BufferedImage personaImage;
+			while (true) {
 				String url = images.get(index++);
-				if(url!= null) {
+				if (url != null) {
 					curr.setImage(url);
 					break;
 				}
-				
+
 			}
+
 			mainRoles.add(curr);
 		}*/
 		return mainRoles;
@@ -115,31 +116,30 @@ public class ScriptReader {
 	 */
 	private void analysizeChunks() throws IOException {
 		Persona prev = null;
-		for (ScriptChunk chunk : scriptChunks) {
-			 
-			//ScriptChunk chunk = scriptChunks.get(i);
+		 for (int i = 0; i < 60; i++) {
+//		for (ScriptChunk chunk : scriptChunks) {
+			 ScriptChunk chunk = scriptChunks.get(i);
 			// continue if the name is invalid
 			if (!isValidName(chunk.name)) {
-			     prev = null;
-			     continue;
+				prev = null;
+				continue;
 			}
 			Persona curr = relationgraph.createVertex(chunk.name);
 			curr.getLines().add(chunk.dialogue);
 			if (prev != null && prev != curr) {
 				double relation = 0;
 				// need to get relation here.param: chunk.dialogue
-				/*try {
-						relation = wa.relationshipAnalyzer(wc.getRelationshipIndicator(chunk.dialogue)).get("sentiment")
-								.get("general");
+				try {
+					relation = wa.relationshipAnalyzer(wc.getRelationshipIndicator(chunk.dialogue)).get("sentiment")
+							.get("general");
 				}
 				// catch something like unsupported text language
 				// e.g. this exception would catch April 14, 1912.
 				catch (com.ibm.watson.developer_cloud.service.exception.BadRequestException bre) {
 					relation = 0;
-				}
-				catch(com.ibm.watson.developer_cloud.service.exception.ServiceResponseException sre) {
+				} catch (com.ibm.watson.developer_cloud.service.exception.ServiceResponseException sre) {
 					relation = 0;
-				}*/
+				}
 
 				relationgraph.createEdge(prev, curr, relation);
 			}
@@ -158,7 +158,8 @@ public class ScriptReader {
 				return false;
 		}
 		// if contains number, return false;
-		if(lowerName.matches(".*\\d.*")) return false;
+		if (lowerName.matches(".*\\d.*"))
+			return false;
 		return true;
 	}
 
@@ -171,28 +172,31 @@ public class ScriptReader {
 	private void splitScriptToChunks(String content) {
 		String[] chunks = content.split("<b>");
 		for (String chunk : chunks) {
-			if (chunk.length() == 0) continue;
+			if (chunk.length() == 0)
+				continue;
 			chunk = chunk.replaceAll("\\(.+\\)", "");
 			String[] splitChunk = chunk.split("\\n");
-			if(splitChunk.length < 2) continue;
+			if (splitChunk.length < 2)
+				continue;
 			String name = splitChunk[0].trim();
 			StringBuilder dialog = new StringBuilder();
 			StringBuilder narra = new StringBuilder();
 			int linNumber = 1;
-			while(splitChunk[linNumber].length() == 0) linNumber++;
+			while (splitChunk[linNumber].length() == 0)
+				linNumber++;
 			for (; linNumber < splitChunk.length; linNumber++) {
-				 if(splitChunk[linNumber].length() == 0) break;
-				 dialog.append(splitChunk[linNumber]);
+				if (splitChunk[linNumber].length() == 0)
+					break;
+				dialog.append(splitChunk[linNumber]);
 			}
 			for (; linNumber < splitChunk.length; linNumber++) {
-				 narra.append(splitChunk[linNumber]);
+				narra.append(splitChunk[linNumber]);
 			}
 			ScriptChunk schunk = new ScriptChunk(name, dialog.toString(), narra.toString());
 			scriptChunks.add(schunk);
 
 		}
 	}
-
 
 	/**
 	 * This class represents a chunk of a script
@@ -212,7 +216,9 @@ public class ScriptReader {
 			this.narrative = narrative;
 		}
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see java.lang.Object#toString()
 		 */
 		@Override
@@ -229,6 +235,5 @@ public class ScriptReader {
 	public void setRelationgraph(Relationships relationgraph) {
 		this.relationgraph = relationgraph;
 	}
-	
 
 }
