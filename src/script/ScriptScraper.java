@@ -36,6 +36,7 @@ public class ScriptScraper {
 	 * @throws IOException
 	 */
 	public static String scrapeScript(String url) throws IOException {
+		if(!url.contains("html")) return null;
 		Document doc = Jsoup.connect(url).get();
 		//remove empty tags
 		for (Element element : doc.select("*")) {
@@ -70,6 +71,7 @@ public class ScriptScraper {
 	
 	/**
 	 * get all available movies along with their scripts given genre
+	 * @param <Genre>
 	 * @param genre
 	 * @return movie name and script url
 	 * @throws IOException

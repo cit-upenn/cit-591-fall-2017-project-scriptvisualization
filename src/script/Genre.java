@@ -8,7 +8,8 @@ public enum Genre {
 		public String toString() {
 			return "FILM-NOIR";
 		}
-	}, HORROR, MUSICAL, MYSTERY, ROMANCE, 
+	}
+	, HORROR, MUSICAL, MYSTERY, ROMANCE, 
 	SCIFI{
 		public String toString() {
 			return "SCI-FI";
