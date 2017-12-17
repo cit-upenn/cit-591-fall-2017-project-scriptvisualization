@@ -198,4 +198,8 @@ public class DataPrinter {
 		
 		out.close();
 	}
+	
+	public static void printTimeLine(Script script) {
+		
+	}
 }

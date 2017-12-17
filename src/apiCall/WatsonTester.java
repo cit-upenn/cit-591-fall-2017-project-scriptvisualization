@@ -17,6 +17,7 @@ import org.json.simple.JSONObject;
 
 import com.ibm.watson.developer_cloud.personality_insights.v3.model.Profile;
 import com.ibm.watson.developer_cloud.personality_insights.v3.model.Trait;
+import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.DocumentAnalysis;
 
 import script.Persona;
 import script.Script;
@@ -168,15 +169,16 @@ public class WatsonTester {
 		 */
 
 		// System.out.println(mainRoles.get(0));
-		/*
-		 * int lineCount = 0; for (String s : mainRoles.get(0).getLines()) {
-		 * 
-		 * DocumentAnalysis chunkTone = wc.getToneOfLines(s); HashMap<String, Double>
-		 * lineEmoScore = wa.lineEmotionToneAnalyzer(chunkTone);
-		 * lineEmotionTone.put(lineCount++, lineEmoScore); HashMap<String, Double>
-		 * lineLangScore = wa.lineLangToneAnalyzer(chunkTone); lineLangTone.put(s,
-		 * lineLangScore); }
-		 */
+		
+		  int lineCount = 0; for (String s : mainRoles.get(0).getLines()) {
+		  
+		  DocumentAnalysis chunkTone = wc.getToneOfLines(s);
+		  HashMap<String, Double> lineEmoScore = wa.lineEmotionToneAnalyzer(chunkTone);
+		  lineEmotionTone.put(lineCount++, lineEmoScore); 
+		  HashMap<String, Double> lineLangScore = wa.lineLangToneAnalyzer(chunkTone); 
+		  lineLangTone.put(s, lineLangScore); 
+		  }
+		 
 		// PrintWriter pw = new PrintWriter("testEmoReport.txt");
 		// PrintWriter pw2 = new PrintWriter("testLangReport.txt");
 		// to get emotion tone timeline of a character
@@ -191,38 +193,39 @@ public class WatsonTester {
 		// System.out.println();
 		// }
 
-		/*
-		 * for (int i: lineEmotionTone.keySet()) { if
-		 * (lineEmotionTone.get(i).containsKey("Anger")) { System.out.println("1" +
-		 * "\t"+ (i+1) + "\t" + lineEmotionTone.get(i).get("Anger") * 100);
-		 * System.out.println("2" + "\t" + (i+1) + "\t" + 49); System.out.println("3" +
-		 * "\t" + (i+1) + "\t" + 49); System.out.println("4" + "\t" + (i+1) + "\t" +
-		 * 49); System.out.println("5" + "\t" + (i+1) + "\t" + 49); } else if
-		 * (lineEmotionTone.get(i).containsKey("Fear")) { System.out.println("2" + "\t"+
-		 * (i+1) + "\t" + lineEmotionTone.get(i).get("Fear") * 100);
-		 * System.out.println("1" + "\t" + (i+1) + "\t" + 49); System.out.println("3" +
-		 * "\t" + (i+1) + "\t" + 49); System.out.println("4" + "\t" + (i+1) + "\t" +
-		 * 49); System.out.println("5" + "\t" + (i+1) + "\t" + 49); }else if
-		 * (lineEmotionTone.get(i).containsKey("Joy")) { System.out.println("3" + "\t"+
-		 * (i+1) + "\t" + lineEmotionTone.get(i).get("Joy") * 100);
-		 * System.out.println("2" + "\t" + (i+1) + "\t" + 49); System.out.println("1" +
-		 * "\t" + (i+1) + "\t" + 49); System.out.println("4" + "\t" + (i+1) + "\t" +
-		 * 49); System.out.println("5" + "\t" + (i+1) + "\t" + 49); }else if
-		 * (lineEmotionTone.get(i).containsKey("Sadness")) { System.out.println("4" +
-		 * "\t"+ (i+1) + "\t" + lineEmotionTone.get(i).get("Sadness") * 100);
-		 * System.out.println("2" + "\t" + (i+1) + "\t" + 49); System.out.println("3" +
-		 * "\t" + (i+1) + "\t" + 49); System.out.println("1" + "\t" + (i+1) + "\t" +
-		 * 49); System.out.println("5" + "\t" + (i+1) + "\t" + 49); }else if
-		 * (lineEmotionTone.get(i).containsKey("Disgust")) { System.out.println("5" +
-		 * "\t"+ (i+1) + "\t" + lineEmotionTone.get(i).get("Disgust") * 100);
-		 * System.out.println("2" + "\t" + (i+1) + "\t" + 49); System.out.println("3" +
-		 * "\t" + (i+1) + "\t" + 49); System.out.println("4" + "\t" + (i+1) + "\t" +
-		 * 49); System.out.println("1" + "\t" + (i+1) + "\t" + 49); } else {
-		 * System.out.println("1" + "\t" + (i+1) + "\t" + 49); System.out.println("2" +
-		 * "\t" + (i+1) + "\t" + 49); System.out.println("3" + "\t" + (i+1) + "\t" +
-		 * 49); System.out.println("4" + "\t" + (i+1) + "\t" + 49);
-		 * System.out.println("5" + "\t" + (i+1) + "\t" + 49); } }
-		 */
+		
+		  for (int i: lineEmotionTone.keySet()) { 
+			  if(lineEmotionTone.get(i).containsKey("Anger")) { 
+				  System.out.println("1" + "\t"+ (i+1) + "\t" + lineEmotionTone.get(i).get("Anger") * 100);
+				  System.out.println("2" + "\t" + (i+1) + "\t" + 49); 
+				  System.out.println("3" +"\t" + (i+1) + "\t" + 49); 
+				  System.out.println("4" + "\t" + (i+1) + "\t" + 49); 
+				  System.out.println("5" + "\t" + (i+1) + "\t" + 49); 
+			} else if (lineEmotionTone.get(i).containsKey("Fear")) { 
+				System.out.println("2" + "\t"+ (i+1) + "\t" + lineEmotionTone.get(i).get("Fear") * 100);
+		  System.out.println("1" + "\t" + (i+1) + "\t" + 49); System.out.println("3" +
+		  "\t" + (i+1) + "\t" + 49); System.out.println("4" + "\t" + (i+1) + "\t" +
+		  49); System.out.println("5" + "\t" + (i+1) + "\t" + 49); }else if
+		  (lineEmotionTone.get(i).containsKey("Joy")) { System.out.println("3" + "\t"+
+		  (i+1) + "\t" + lineEmotionTone.get(i).get("Joy") * 100);
+		  System.out.println("2" + "\t" + (i+1) + "\t" + 49); System.out.println("1" +
+		  "\t" + (i+1) + "\t" + 49); System.out.println("4" + "\t" + (i+1) + "\t" +
+		  49); System.out.println("5" + "\t" + (i+1) + "\t" + 49); }else if
+		  (lineEmotionTone.get(i).containsKey("Sadness")) { System.out.println("4" +
+		  "\t"+ (i+1) + "\t" + lineEmotionTone.get(i).get("Sadness") * 100);
+		  System.out.println("2" + "\t" + (i+1) + "\t" + 49); System.out.println("3" +
+		  "\t" + (i+1) + "\t" + 49); System.out.println("1" + "\t" + (i+1) + "\t" +
+		  49); System.out.println("5" + "\t" + (i+1) + "\t" + 49); }else if
+		  (lineEmotionTone.get(i).containsKey("Disgust")) { System.out.println("5" +
+		  "\t"+ (i+1) + "\t" + lineEmotionTone.get(i).get("Disgust") * 100);
+		  System.out.println("2" + "\t" + (i+1) + "\t" + 49); System.out.println("3" +
+		  "\t" + (i+1) + "\t" + 49); System.out.println("4" + "\t" + (i+1) + "\t" +
+		  49); System.out.println("1" + "\t" + (i+1) + "\t" + 49); } else {
+		  System.out.println("1" + "\t" + (i+1) + "\t" + 49); System.out.println("2" +
+		  "\t" + (i+1) + "\t" + 49); System.out.println("3" + "\t" + (i+1) + "\t" +
+		  49); System.out.println("4" + "\t" + (i+1) + "\t" + 49);
+		  System.out.println("5" + "\t" + (i+1) + "\t" + 49); } }
+		 
 		// System.out.close();
 		// System.out.println(lineEmotionTone);
 
