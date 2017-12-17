@@ -1,39 +1,15 @@
-Yue Yin:
-scriptScaper: responsible for scraping script.
-functions: 	1.get script given url
-			2.get available moveis given search key
-			3.get available movies given genre
-scriptReader: responsible for analyzing script, return a script after analyzing
-Step1: cut script to chunks
-Step2: cut each chunk to name, dialogue and narrative
-Step3: analyze each chunk, create a Persona if it doesn’t exist, otherwise update it. Create an edge if it doesn’t exist, otherwise update it
-imageScraper: get images of characters from google using Google Customer Search API
-Get movie post from moviedb
-Relationships: maintain a graph that stores all characters and their relationships
+Movie Script Visualization Project
+![alt text](https://github.com/cit-upenn/cit-591-fall-2017-project-scriptvisualization/blob/master/image/screenshot1.png)
 
+This project was created as a final project of CIT 591 Intro to Software Engineering at the University of Pennsylvannia.
 
-Gui: visualize script object
+Authors: Siyang You, Yue Yin, Yichao Li
 
-Siyang:
-Natural Language Understanding Output
-Takes about 40-50 seconds to retrieve result of a movie.
-Refer to SampleNaturalLangReport to see sample output of HashMap<String, HashMap<String, Double>> naturalLangUnderstanding.
+The project is a moive script visualization application. It scratched the data of various movie scripts, then made analysis on them, and finally visualized the results. The basic working flow are listed as the followings:
 
-	sentiment
-		Review the overall sentiment and targeted sentiment of the content.
+1. A user enters a movie name or a movie genre to search.
+2. When the user is doing accurate searching, a corresponding result will be shown up. Or, if it is a partial search, at most three most related movies' name and posters will be displayed.
+3. Then the user chooses a movie and decides to visualize it. The movie scripts are sent to the Watson Natural language Understanding API, Watson Personality Insights API and Watson Toner Analyzer API, and returns the analysis of the emotion, sentiment and personalities.
+4. The results are displayed in HTML format. The main characters, character's emotional changes, and the relationship between characters will be shown with graphs like circles, lines and bars.
 
-	emotion
-		Analyze the overall emotion and the targeted emotion of the content.
-
-	keywords
-		Determine important keywords ranked by relevance.
-
-	concepts
-		Identifies general concepts that may not be directly referenced in the text.
-
-	entities
-		Extract people, companies, organizations, cities, geographic features, and other information from the content.
-
-	categories
-		Classify content into a hierarchy that's five levels deep with a score.
- 
+Technologies utilized: Google Customer Search API, IBM Watson API, TMDb API, WindowBuilder, JavaScript

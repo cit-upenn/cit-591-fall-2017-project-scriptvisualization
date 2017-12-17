@@ -15,7 +15,9 @@ public class Secret {
 //	public static final String watsonNatLanPassword = "CLlzzIrsDyK2";
 	public static final String watsonNatLanUserName = "cd0e97de-2041-41a1-8abb-1d789ed0bfd6";
 	public static final String watsonNatLanPassword = "gMoCDUDZ3Ntv";
-	public static final String searchEngineID = "016310474112609901486:dlk05n5m1fm";
-	public static final String googleAPIkey = "AIzaSyBsUA3Jt08xohiLevUttDAG5SYpg75kCdE";
+//	public static final String searchEngineID = "016310474112609901486:dlk05n5m1fm";
+	public static final String searchEngineID = "018143913057301699228:rzo-lvwlbv4";
+//	public static final String googleAPIkey = "AIzaSyBsUA3Jt08xohiLevUttDAG5SYpg75kCdE";
+	public static final String googleAPIkey = "AIzaSyDDajw8caUam2s9ZVCDdK8UswQHt_Jk3QY";
 	public static final String moviedbKey = "edf1b9d248b7dee1398bb1159e9f19cc";
 }

@@ -1,19 +1,10 @@
 package script;
 /**
- * This class analyzes returned JSON object
- * @author syou
+ * This class analyzes JSON data
  */
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 
-import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.AnalysisResults;
-import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.CategoriesResult;
-import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.ConceptsResult;
-import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.EntitiesResult;
-import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.KeywordsResult;
-import com.ibm.watson.developer_cloud.personality_insights.v3.model.Profile;
 import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.DocumentAnalysis;
 import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.ToneCategory;
 import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.ToneScore;
