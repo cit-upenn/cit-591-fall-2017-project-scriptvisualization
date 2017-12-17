@@ -76,7 +76,7 @@ public class WatsonCaller {
 	 * This method gets the score of sentiments of a chunk of lines.
 	 * This score is used to calculate the relationship between two characters.
 	 * @param scriptContent a chunk of lines between two characters
-	 * @return
+	 * @return JSON object containing sentiment report
 	 * @throws IOException
 	 */
 	public AnalysisResults getRelationshipIndicator(String scriptContent) throws IOException {
@@ -104,6 +104,12 @@ public class WatsonCaller {
 		return stResults;
 	}
 	
+	/**
+	 * This method gets the keywords of a script
+	 * @param scriptContent the whole script
+	 * @return JSON object containing keywords data
+	 * @throws IOException
+	 */
 	public AnalysisResults getKeywords(String scriptContent) throws IOException {
 		HashMap<String, AnalysisResults> relationshipIndicator = new HashMap<String, AnalysisResults>();
 
@@ -122,6 +128,12 @@ public class WatsonCaller {
 		return kwResults;
 	}
 	
+	/**
+	 * This method gets categories of a script
+	 * @param scriptContent the whole script
+	 * @return JSON object containing data of categories
+	 * @throws IOException
+	 */
 	public AnalysisResults getCategoriess(String scriptContent) throws IOException {
 		HashMap<String, AnalysisResults> relationshipIndicator = new HashMap<String, AnalysisResults>();
 
@@ -138,6 +150,12 @@ public class WatsonCaller {
 		return cgResults;
 	}
 	
+	/**
+	 * This method gets the overall sentiment of a script
+	 * @param scriptContent the whole script
+	 * @return JSON object with data of general sentiment
+	 * @throws IOException
+	 */
 	public double getGeneralSentiment(String scriptContent) throws IOException {
 		final String VERSION_DATE = "2017-02-27";
 		NaturalLanguageUnderstanding service = new NaturalLanguageUnderstanding(VERSION_DATE);

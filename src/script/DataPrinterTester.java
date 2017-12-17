@@ -15,13 +15,13 @@ public class DataPrinterTester {
 		
 //		dp.printPersonality(script);
 				
-		dp.printRelation(script);
+//		dp.printRelation(script);
 		
 //		dp.printKeywords(script);
 		
 //		dp.printMainPhotos(script);
 		
-//		dp.printTimeLine(script);
+		dp.printTimeLine(script);
 		
 		
 	}
