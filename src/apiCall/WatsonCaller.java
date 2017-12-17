@@ -132,12 +132,12 @@ public class WatsonCaller {
 		return naturalLangResult;
 	}
 	
-	public HashMap<String, AnalysisResults> getRelationshipIndicator(String scriptContent) throws IOException {
+	public AnalysisResults getRelationshipIndicator(String scriptContent) throws IOException {
 		HashMap<String, AnalysisResults> relationshipIndicator = new HashMap<String, AnalysisResults>();
 
 		final String VERSION_DATE = "2017-02-27";
 		NaturalLanguageUnderstanding service = new NaturalLanguageUnderstanding(VERSION_DATE);
-		service.setUsernameAndPassword("c064bda6-1714-41d0-9505-a171205ff5c2", "CLlzzIrsDyK2");
+		service.setUsernameAndPassword(Secret.watsonNatLanUserName, Secret.watsonNatLanPassword);
 
 
 		// Review the overall sentiment and targeted sentiment of the content.
@@ -145,7 +145,7 @@ public class WatsonCaller {
 		Features stFeatures = new Features.Builder().sentiment(sentiments).build();
 		AnalyzeOptions stParam = new AnalyzeOptions.Builder().text(scriptContent).features(stFeatures).build();
 		AnalysisResults stResults = service.analyze(stParam).execute();
-		relationshipIndicator.put("sentiment", stResults);
+//		relationshipIndicator.put("sentiment", stResults);
 
 		// Analyze the overall emotion and the targeted emotion of the content.
 //		EmotionOptions emotion = new EmotionOptions.Builder().build();
@@ -155,7 +155,7 @@ public class WatsonCaller {
 //		relationshipIndicator.put("emotion", emResult);
 
 
-		return relationshipIndicator;
+		return stResults;
 	}
 	
 	public AnalysisResults getKeywords(String scriptContent) throws IOException {

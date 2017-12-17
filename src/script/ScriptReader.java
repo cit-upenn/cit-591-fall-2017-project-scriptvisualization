@@ -72,9 +72,10 @@ public class ScriptReader {
 
 		for (int i = 0; i < 10; i++) {
 			Persona curr = characters.get(i);
-			List<String> images = ImageScraper.getImageUrlsFromGoogle(curr.getName() + " " + scriptName);
+			//List<String> images = ImageScraper.getImageUrlsFromGoogle(curr.getName() + " " + scriptName);
 			int index = 0;
 			BufferedImage personaImage;
+			/*
 			while (true) {
 				String url = images.get(index++);
 				if (url != null) {
@@ -83,6 +84,7 @@ public class ScriptReader {
 				}
 
 			}
+			*/
 
 			mainRoles.add(curr);
 		}
@@ -129,8 +131,9 @@ public class ScriptReader {
 				double relation = 0;
 				// need to get relation here.param: chunk.dialogue
 				try {
-					relation = wa.relationshipAnalyzer(wc.getRelationshipIndicator(chunk.dialogue)).get("sentiment")
-							.get("general");
+					relation = wc.getRelationshipIndicator(chunk.dialogue).getSentiment().getDocument().getScore();
+//					relation = wa.relationshipAnalyzer(wc.getRelationshipIndicator(chunk.dialogue)).get("sentiment")
+//							.get("general");
 				}
 				// catch something like unsupported text language
 				// e.g. this exception would catch April 14, 1912.
