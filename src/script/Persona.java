@@ -1,9 +1,9 @@
 package script;
 
-import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import com.ibm.watson.developer_cloud.personality_insights.v3.model.Profile;
 
 /**
  * This class represents a character in a script
@@ -16,10 +16,10 @@ public class Persona implements Comparable<Persona> {
 	private int occurrence; // occurrence of the character in the script
 	private String name; // name of the character
 	private ArrayList<String> lines; // all lines belong to this character
-	private HashMap<String, Double> personality;
 	private String personaImage;
 	private HashMap<Integer, HashMap<String, Double>> emotionTimeline;
 	private HashMap<String, HashMap<String, Double>> langToneTimeline;
+	private Profile personality;
 
 	public Persona(String name) {
 		// TODO Auto-generated constructor stub
@@ -82,6 +82,14 @@ public class Persona implements Comparable<Persona> {
 
 	public void setLangToneTimeline(HashMap<String, HashMap<String, Double>> langToneTimeline) {
 		this.langToneTimeline = langToneTimeline;
+	}
+
+	public Profile getPersonality() {
+		return personality;
+	}
+
+	public void setPersonality(Profile personality) {
+		this.personality = personality;
 	}
 
 

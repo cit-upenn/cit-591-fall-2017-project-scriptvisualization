@@ -2,7 +2,8 @@ package script;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.HashMap;
+
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.AnalysisResults;
 
 /**
  * This class represents a script, a script has content and charaters
@@ -18,16 +19,17 @@ public class Script {
 	private BufferedImage poster;
 
 	private ArrayList<Persona> mainCharacters;
-	//keywords
-	//
-	//
+	private AnalysisResults categories;
+	private AnalysisResults keywords;
+	private double sentiment;
+	
 
 	public Script() {
 
 	}
 
 	public Script(String name, String content, Relationships relationgraph, BufferedImage post,
-			ArrayList<Persona> mainCharacters) {
+			ArrayList<Persona> mainCharacters, AnalysisResults keywords, AnalysisResults categories, double sentiment) {
 		super();
 		this.name = name;
 		this.content = content;
@@ -35,6 +37,9 @@ public class Script {
 		this.poster = post;
 
 		this.mainCharacters = mainCharacters;
+		this.keywords = keywords;
+		this.categories = categories;
+		this.sentiment = sentiment;
 	}
 
 	public String getName() {
@@ -96,6 +101,30 @@ public class Script {
 
 	public void setMainCharacters(ArrayList<Persona> mainCharacters) {
 		this.mainCharacters = mainCharacters;
+	}
+
+	public AnalysisResults getKeywords() {
+		return keywords;
+	}
+
+	public void setKeywords(AnalysisResults keywords) {
+		this.keywords = keywords;
+	}
+
+	public AnalysisResults getCategories() {
+		return categories;
+	}
+
+	public void setCategories(AnalysisResults categories) {
+		this.categories = categories;
+	}
+
+	public double getSentiment() {
+		return sentiment;
+	}
+
+	public void setSentiment(double sentiment) {
+		this.sentiment = sentiment;
 	}
 
 }
