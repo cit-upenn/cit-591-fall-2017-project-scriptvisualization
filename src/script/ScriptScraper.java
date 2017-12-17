@@ -70,6 +70,7 @@ public class ScriptScraper {
 	
 	/**
 	 * get all available movies along with their scripts given genre
+	 * @param <Genre>
 	 * @param genre
 	 * @return movie name and script url
 	 * @throws IOException
