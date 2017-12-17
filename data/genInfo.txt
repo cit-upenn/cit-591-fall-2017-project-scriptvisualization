@@ -1,5 +1,0 @@
-La La Land
-#sentiment	-0.1829
-#/art and entertainment/music	0.552108
-#/art and entertainment/movies and tv/movies	0.526767
-#/art and entertainment/humor	0.429507
