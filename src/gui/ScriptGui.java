@@ -193,7 +193,9 @@ public class ScriptGui {
 		done.setBounds(213, 87, 241, 217);
 		result.add(done);
 		
-		
+		/**
+		 * search button takes input from user and output three movies at movies for users to choose from
+		 */
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ss = new ScriptScraper();
@@ -236,19 +238,17 @@ public class ScriptGui {
 		
 		movieButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//analyze(movieButton1.getText());
+				analyze(movieButton1.getText());
 				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 				cardLayout.next(frame.getContentPane());
-				
-			
-				
+
 				
 			}
 		});
 		
 		movieButton2.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				//analyze(movieButton2.getText());
+				analyze(movieButton2.getText());
 				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 				cardLayout.next(frame.getContentPane());
 
@@ -258,7 +258,7 @@ public class ScriptGui {
 		
 		movieButton3.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				//analyze(movieButton3.getText());
+				analyze(movieButton3.getText());
 				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 				cardLayout.next(frame.getContentPane());
 				
