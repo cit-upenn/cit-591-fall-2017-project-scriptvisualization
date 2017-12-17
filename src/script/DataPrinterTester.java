@@ -9,16 +9,13 @@ public class DataPrinterTester {
 		ScriptScraper ss = new ScriptScraper();
 		ScriptReader sr = new ScriptReader();
 		Script script = sr.readScript(ScriptScraper.scrapeScript(urlName), "Pearl Harbor");
-		String content = ss.scrapeScript(urlName);
 		DataPrinter dp = new DataPrinter();
 		
 //		dp.printPersonality(script);
+				
+//		dp.printRelation(script);
 		
-//		dp.printHeader(content);
-		
-//		dp.printRelation(sr);
-		
-//		dp.printKeywords(content);
+//		dp.printKeywords(script);
 		
 //		dp.printMainPhotos(script);
 		

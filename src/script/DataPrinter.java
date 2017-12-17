@@ -21,7 +21,7 @@ import apiCall.WatsonCaller;
 import script.Relationships.Relationship;
 
 public class DataPrinter {
-	private WatsonCaller wc;
+	private static WatsonCaller wc;
 
 	public DataPrinter() {
 		wc = new WatsonCaller();
@@ -99,29 +99,7 @@ public class DataPrinter {
 		}
 	}
 
-	/**
-	 * This method prints out header of a script. #general overall sentiment of a
-	 * given script; #categories, script contents into a hierarchy, each with a
-	 * score.
-	 * 
-	 * @param content
-	 * @throws IOException
-	 */
-	public void printHeader(String content) throws IOException {
 
-		PrintWriter pw = new PrintWriter("data/header.txt");
-		Double sentiment = wc.getGeneralSentiment(content);
-		pw.print("#sentiment" + "\t");
-		pw.println(sentiment);
-		AnalysisResults cgJson = wc.getCategoriess(content);
-		for (CategoriesResult cr : cgJson.getCategories()) {
-			pw.print("#");
-			pw.print(cr.getLabel() + "\t");
-			pw.println(cr.getScore());
-		}
-		pw.close();
-
-	}
 
 	/**
 	 * This method prints out relationship json file.
@@ -129,8 +107,8 @@ public class DataPrinter {
 	 * @param sr
 	 */
 	@SuppressWarnings({ "unchecked", "resource" })
-	public void printRelation(ScriptReader sr) {
-		SimpleGraph<Persona, Relationship> links = sr.getRelationgraph().graph;
+	public void printRelation(Script script) {
+		SimpleGraph<Persona, Relationship> links = script.getRelationgraph().graph;
 
 		JSONObject tier = new JSONObject();
 		JSONArray nodes = new JSONArray();
@@ -170,8 +148,8 @@ public class DataPrinter {
 	 * @throws IOException
 	 */
 	@SuppressWarnings({ "unchecked", "resource" })
-	public void printKeywords(String content) throws IOException {
-		AnalysisResults kwJson = wc.getKeywords(content);
+	public void printKeywords(Script script) throws IOException {
+		AnalysisResults kwJson = wc.getKeywords(script.getContent());
 
 		JSONArray keywords = new JSONArray();
 		for (KeywordsResult kr : kwJson.getKeywords()) {
@@ -194,16 +172,28 @@ public class DataPrinter {
 	
 	/**
 	 * This method prints out a txt file 
+	 * prints out header of a script. #general overall sentiment of a
+	 * given script; #categories, script contents into a hierarchy, each with a
+	 * score.
 	 * @param script
-	 * @throws FileNotFoundException
+	 * @throws IOException 
 	 */
-	public static void printMainPhotos(Script script) throws FileNotFoundException {
+	public static void printMainPhotos(Script script) throws IOException {
 		ArrayList<Persona> mainCharacters = script.getMainCharacters();
 		PrintWriter out = new PrintWriter(new File("data/charactersPhotos.txt"));
 		out.println(script.getName());
 		for(Persona persona : mainCharacters) {
 			out.println(persona.getName());
 			out.println(persona.getImage());
+		}
+		Double sentiment = wc.getGeneralSentiment(script.getContent());
+		out.print("#sentiment" + "\t");
+		out.println(sentiment);
+		AnalysisResults cgJson = wc.getCategoriess(script.getContent());
+		for (CategoriesResult cr : cgJson.getCategories()) {
+			out.print("#");
+			out.print(cr.getLabel() + "\t");
+			out.println(cr.getScore());
 		}
 		
 		out.close();
