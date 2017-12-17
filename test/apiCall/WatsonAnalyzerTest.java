@@ -33,19 +33,7 @@ public class WatsonAnalyzerTest {
 		assertTrue(wanalyzer.lineLangToneAnalyzer(wcaller.getToneOfLines(test)).size() > 0);
 	}
 
-	@Test
-	public void testPersonalityAnalyzer() {
-		 
-	}
 
-	@Test
-	public void testNaturalLangAnalyzer() throws IOException {
-		 assertTrue(wanalyzer.naturalLangAnalyzer(wcaller.NaturalLangUnderstanding(test)).size() > 0);
-	}
 
-	@Test
-	public void testRelationshipAnalyzer() throws IOException {
-		assertTrue(wanalyzer.relationshipAnalyzer(wcaller.getRelationshipIndicator(test)).size() > 0);
-	}
 
 }
