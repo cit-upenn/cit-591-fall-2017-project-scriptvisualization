@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
+import script.Genre;
 import script.Persona;
 import script.Script;
 import script.ScriptReader;
@@ -41,7 +42,6 @@ public class ScriptGui {
 	ScriptReader sr = new ScriptReader();
 	private JFrame frame;
 	private JTextField searchBox;
-	private JTextField movieTag;
 	private JTextField textField;
 	 
 
@@ -73,7 +73,7 @@ public class ScriptGui {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 485, 479);
+		frame.setBounds(100, 100, 678, 470);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new CardLayout(0, 0));
 		
@@ -84,27 +84,32 @@ public class ScriptGui {
 		search.setLayout(null);
 		
 		searchBox = new JTextField();
-		searchBox.setText("Search  for Movie Script");
-		searchBox.setBounds(27, 336, 166, 38);
+		searchBox.setText("                         Search  for Movie Script");
+		searchBox.setBounds(151, 234, 352, 44);
 		search.add(searchBox);
 		searchBox.setColumns(10);
 		
 		JButton searchButton = new JButton("ScriptGo");
-		searchButton.setBounds(175, 386, 129, 35);
+		searchButton.setBounds(264, 313, 129, 35);
 		search.add(searchButton);
 		
 		
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		comboBox.setMaximumRowCount(40);
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Genre", "Action", "Adventure", "Animation", "Comedy", "Crime", "Drama", "Family", "Fantasy", "Film-Noir", "Horror", "Musical", "Mystery", "Romance", "Sci-Fi", "Short", "Thriller", "War", "Western"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Genre", "Action", "Adventure", "Animation", "Comedy", "Crime", "Drama", "Family", "Fantasy", "FilmNoir", "Horror", "Musical", "Mystery", "Romance", "Scifi", "Short", "Thriller", "War", "Western"}));
 		comboBox.setToolTipText("");
-		comboBox.setBounds(287, 336, 104, 34);
+		comboBox.setBounds(277, 377, 104, 34);
 		search.add(comboBox);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("/Users/yichaoli/Desktop/script1edited.jpg"));
-		lblNewLabel.setBounds(0, 0, 489, 337);
+		lblNewLabel.setIcon(new ImageIcon("image/happycat.gif"));
+		lblNewLabel.setBounds(251, 32, 191, 190);
 		search.add(lblNewLabel);
 		Image searchImg = frame.getToolkit().getImage("image/search-small.png");
 		
@@ -114,67 +119,53 @@ public class ScriptGui {
 		choose.setLayout(null);
 		
 		JLabel moviePost1 = new JLabel(" ");
-		moviePost1.setBounds(53, 72, 172, 235);
+		moviePost1.setBounds(51, 72, 172, 235);
 		choose.add(moviePost1);
 		
 		JLabel moviePost2 = new JLabel(" ");
-		moviePost2.setBounds(285, 72, 172, 235);
+		moviePost2.setBounds(281, 72, 172, 235);
 		choose.add(moviePost2);
 		
 		JLabel moviePost3 = new JLabel(" ");
-		moviePost3.setBounds(524, 72, 172, 235);
+		moviePost3.setBounds(500, 72, 172, 235);
 		choose.add(moviePost3);
 		
-		JButton movieButton1 = new JButton("New button");
+		JButton movieButton1 = new JButton("Click");
 		
-		movieButton1.setBounds(77, 338, 117, 29);
+		movieButton1.setBounds(51, 338, 172, 29);
 		choose.add(movieButton1);
 		movieButton1.setVisible(false);
 		
-		JButton movieButton2 = new JButton("New button");
-		movieButton2.setBounds(316, 338, 117, 29);
+		JButton movieButton2 = new JButton("Click");
+		movieButton2.setBounds(281, 338, 172, 29);
 		choose.add(movieButton2);
 		movieButton2.setVisible(false);
 		
-		JButton movieButton3 = new JButton("New button");
-		movieButton3.setBounds(535, 338, 117, 29);
+		JButton movieButton3 = new JButton("Click");
+		movieButton3.setBounds(500, 338, 172, 29);
 		choose.add(movieButton3);
 		movieButton3.setVisible(false);
-		
-		/*
-		//loading page
-		
-		JPanel loading = new JPanel();
-		frame.getContentPane().add(loading, "name_710483185881559");
-		loading.setLayout(null);
-		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("/Users/yichaoli/Documents/study/MCIT_1/591project/image/ajax-loader.gif"));
-		lblNewLabel_1.setBounds(140, 108, 176, 87);
-		loading.add(lblNewLabel_1);
-*/
-		
-	    
-		
+
+			
 		//graph page
 		JPanel graph = new JPanel();
 		frame.getContentPane().add(graph, "name_20177380893280");
 		graph.setLayout(null);
 		
 		
-		JButton btnGraphgo = new JButton("GraphGo!");
+		JButton btnGraphgo = new JButton("Back");
 		btnGraphgo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 				cardLayout.next(frame.getContentPane());
 			}
 		});
-		btnGraphgo.setBounds(42, 379, 117, 29);
+		btnGraphgo.setBounds(93, 379, 117, 29);
 		graph.add(btnGraphgo);
 		
 		JButton Visualize = new JButton("Visualize");
 	
-		Visualize.setBounds(289, 379, 117, 29);
+		Visualize.setBounds(424, 379, 117, 29);
 		graph.add(Visualize);
 		
 		/*
@@ -197,49 +188,10 @@ public class ScriptGui {
 			
 		}
 		
-		//post and keywords page
-		JPanel keywords = new JPanel();
-		frame.getContentPane().add(keywords, "name_787538052254394");
-		keywords.setLayout(null);
-		
-		JLabel moviePost = new JLabel(" ");
-		moviePost.setBounds(33, 18, 152, 213);
-		keywords.add(moviePost);
-		
-		
-		
-		
-		/*
-		JLabel p2 = new JLabel("");
-		p2.setBounds(121, 243, 61, 67);
-		graph.add(p2);
-		*/
-		
-		movieTag = new JTextField();
-		movieTag.setColumns(10);
-		movieTag.setBounds(588, 194, 130, 165);
-		keywords.add(movieTag);
-		
-		/*
-		JLabel p3 = new JLabel("");
-		p3.setBounds(377, 243, 61, 67);
-		graph.add(p3);
-		
-		JLabel p1 = new JLabel(" ");
-		p1.setBounds(243, 51, 61, 67);
-		graph.add(p1);
-		*/
-		
-		
-		
-		JButton backButton2 = new JButton("Back");
-		backButton2.setBounds(172, 395, 132, 37);
-		keywords.add(backButton2);
-		
 	
 		
 		JButton BackButton = new JButton("Back");
-		BackButton.setBounds(316, 443, 117, 29);
+		BackButton.setBounds(281, 413, 117, 29);
 		choose.add(BackButton);
 		
 		ArrayList<JLabel> labels = new ArrayList<>();
@@ -251,6 +203,13 @@ public class ScriptGui {
 		movieButtons.add(movieButton1);
 		movieButtons.add(movieButton2);
 		movieButtons.add(movieButton3);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon("image/loading.gif"));
+		lblNewLabel_1.setBounds(97, 6, 489, 329);
+		graph.add(lblNewLabel_1);
+		
+		lblNewLabel_1.setVisible(false);
 		
 		
 		
@@ -266,8 +225,16 @@ public class ScriptGui {
 			public void actionPerformed(ActionEvent e) {
 				ss = new ScriptScraper();
 				HashMap<String, BufferedImage> posts = new HashMap<>();
+				String x = comboBox.getSelectedItem().toString();
+				
 				try {
-					ss.getMoviesFromSearchKey(searchBox.getText());
+					if(x=="Genre"){
+						ss.getMoviesFromSearchKey(searchBox.getText());	
+					}
+					else{
+						ss.getMoviesFromGenre(Genre.valueOf(x.toUpperCase()));
+						//System.out.println(x);
+					}
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -312,11 +279,12 @@ public class ScriptGui {
 				}
 				
 				moviePost.setIcon(labels.get(0).getIcon());
+				
 				ArrayList<Persona> mainCharacters = script.getMainCharacters();
 				for(int i = 0; i < 3; i++) {
 					JLabel label = characters.get(i);
 					System.out.println(mainCharacters.get(i).getName());
-					Image personalImage = mainCharacters.get(i).getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
+					//Image personalImage = mainCharacters.get(i).getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
 					textField = new JTextField();
 					if(i<5) textField.setBounds(25+i*80,100,61,20);
 					else{
@@ -330,10 +298,27 @@ public class ScriptGui {
 					System.out.println(personalImage);
 					label.setIcon(new ImageIcon(personalImage));
 				}
-				//movieTag.setText(script.getNaturalLangUnderstanding().keySet().toString());*/
+				movieTag.setText(script.getNaturalLangUnderstanding().keySet().toString());*/
+				
+			
 				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 				cardLayout.next(frame.getContentPane());
 				
+				
+			}
+		});
+		
+		movieButton2.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
+				cardLayout.next(frame.getContentPane());
+			}
+		});
+		
+		movieButton3.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
+				cardLayout.next(frame.getContentPane());
 			}
 		});
 		
@@ -344,17 +329,10 @@ public class ScriptGui {
 			}
 		});
 		
-		
-		backButton2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
-				cardLayout.first(frame.getContentPane());
-				
-			}
-		});
-		
 		Visualize.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				lblNewLabel_1.setVisible(true);
 				if(Desktop.isDesktopSupported()) {
 					String absolutePath = FileSystems.getDefault().getPath("data/index.html").normalize().toAbsolutePath().toString();
 						    try {
@@ -372,6 +350,4 @@ public class ScriptGui {
 		
 		
 	}
-	
-	
 }
