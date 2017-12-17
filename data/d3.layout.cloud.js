@@ -13,7 +13,7 @@
             spiral = archimedeanSpiral,
             words = [],
             timeInterval = Infinity,
-            event = d3.dispatch("word", "end"),
+            event = d3d3.dispatch("word", "end"),
             timer = null,
             cloud = {};
 
@@ -143,31 +143,31 @@
 
         cloud.font = function(x) {
             if (!arguments.length) return font;
-            font = d3.functor(x);
+            font = d3d3.functor(x);
             return cloud;
         };
 
         cloud.fontStyle = function(x) {
             if (!arguments.length) return fontStyle;
-            fontStyle = d3.functor(x);
+            fontStyle = d3d3.functor(x);
             return cloud;
         };
 
         cloud.fontWeight = function(x) {
             if (!arguments.length) return fontWeight;
-            fontWeight = d3.functor(x);
+            fontWeight = d3d3.functor(x);
             return cloud;
         };
 
         cloud.rotate = function(x) {
             if (!arguments.length) return rotate;
-            rotate = d3.functor(x);
+            rotate = d3d3.functor(x);
             return cloud;
         };
 
         cloud.text = function(x) {
             if (!arguments.length) return text;
-            text = d3.functor(x);
+            text = d3d3.functor(x);
             return cloud;
         };
 
@@ -179,17 +179,17 @@
 
         cloud.fontSize = function(x) {
             if (!arguments.length) return fontSize;
-            fontSize = d3.functor(x);
+            fontSize = d3d3.functor(x);
             return cloud;
         };
 
         cloud.padding = function(x) {
             if (!arguments.length) return padding;
-            padding = d3.functor(x);
+            padding = d3d3.functor(x);
             return cloud;
         };
 
-        return d3.rebind(cloud, event, "on");
+        return d3d3.rebind(cloud, event, "on");
     }
 
     function cloudText(d) {
@@ -398,5 +398,5 @@
     c.textAlign = "center";
 
     exports.cloud = cloud;
-})(typeof exports === "undefined" ? d3.layout || (d3.layout = {}) : exports);
+})(typeof exports === "undefined" ? d3d3.layout || (d3d3.layout = {}) : exports);
 

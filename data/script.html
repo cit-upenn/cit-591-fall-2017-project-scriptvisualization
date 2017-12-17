@@ -6,10 +6,27 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <!-- Custom styles for this template-->
  
-    <script src="http://d3js.org/d3.v3.js"></script>
-    <script src = "http://d3js.org/d3.v3.min.js"></script>
-   <script src = "d3.layout.cloud.js"></script>
+     
+    <script src = "d3v3.js"></script>
+    <script src = "d3.layout.cloud.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    
+   <style>
+
+.links line {
+  stroke: #999;
+  stroke-opacity: 0.6;
+}
+
+.nodes circle {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+</style>
   </head>
+
+
   <body>
      <nav role="navigation" class="navbar navbar-inverse navbar-extra navbar-fixed-top">
       
@@ -42,10 +59,10 @@
 
     <div style="background:transparent !important" class="jumbotron">
       <div class="row">
-            <div class="col-sm-8"> 
+            <div class="col-sm-10"> 
               <div id="keywords"></div>
             </div>
-            <div class="col-sm-4"> 
+            <div class="col-sm-2"> 
               <div class="card-block">
                   <h2 class="card-title">KeyWords</h2>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -59,17 +76,18 @@
       <div class="row">
             <div class="col-sm-4"> 
               <div class="card-block">
-                  <h2 class="card-title">KeyWords</h2>
+                  <h2 class="card-title">Relation Graph</h2>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
               </div>
             </div>
             <div class="col-sm-8"> 
-              
+              <svg width="960" height="600" id="graph"></svg>
             </div>
        
       </div> 
     </div>
   </div>
+
  <script type="text/javascript">
   var characters;
     readTextFile("characters.txt");
@@ -100,21 +118,19 @@
   var width = 600,
   height = 600;
     var keyword_list;
-    var fill = d3.scale.category20c();
+    var fill = d3d3.scale.category20c();
 
-    var keywordScale = d3.scale.linear().range([10,60]);
-    d3.json("keywords.json", function (json) {
+    var keywordScale = d3d3.scale.linear().range([10,60]);
+    d3d3.json("keywords.json", function (json) {
         keyword_list = json["keywords"]
-      
-
 
         keywordScale.domain([
-          d3.min(keyword_list, function(d) {return d.size;}),
-          d3.max(keyword_list, function(d) {return d.size;})
+          d3d3.min(keyword_list, function(d) {return d.size;}),
+          d3d3.max(keyword_list, function(d) {return d.size;})
           ])
 
 
-        d3.layout.cloud().size([width, height])
+        d3d3.layout.cloud().size([width, height])
             .words(keyword_list)
             .padding(5)
             .rotate(function() {return ~~(Math.random() * 2) * 90;})
@@ -129,7 +145,7 @@
     <span style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;" data-mce-type="bookmark" class="mce_SELRES_start">﻿</span>
     */
     function draw(words) {
-        d3.select("#keywords").append("svg")
+        d3d3.select("#keywords").append("svg")
             .attr("width", width)
             .attr("height", height)
             .append("g")
@@ -146,6 +162,82 @@
             })
             .text(function (d) {return d.text;});
     }
+
+
+
+    var svg = d3.select("#graph"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height");
+
+var color = d3.scaleOrdinal(d3.schemeCategory20);
+
+var simulation = d3.forceSimulation()
+    .force("link", d3.forceLink().id(function(d) { return d.id; }))
+    .force("charge", d3.forceManyBody())
+    .force("center", d3.forceCenter(width / 2, height / 2));
+
+d3.json("relationship.json", function(error, graph) {
+  if (error) throw error;
+
+  var link = svg.append("g")
+      .attr("class", "links")
+    .selectAll("line")
+    .data(graph.links)
+    .enter().append("line")
+      .attr("stroke-width", function(d) { return Math.sqrt(d.value); });
+
+  var node = svg.append("g")
+      .attr("class", "nodes")
+    .selectAll("circle")
+    .data(graph.nodes)
+    .enter().append("circle")
+      .attr("r", 5)
+      //.attr("fill", function(d) { return color(d.group); })
+      .attr("fill", "black")
+      .call(d3.drag()
+          .on("start", dragstarted)
+          .on("drag", dragged)
+          .on("end", dragended));
+
+  node.append("title")
+      .text(function(d) { return d.id; });
+
+  simulation
+      .nodes(graph.nodes)
+      .on("tick", ticked);
+
+  simulation.force("link")
+      .links(graph.links);
+
+  function ticked() {
+    link
+        .attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+    node
+        .attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+  }
+});
+
+function dragstarted(d) {
+  if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+  d.fx = d.x;
+  d.fy = d.y;
+}
+
+function dragged(d) {
+  d.fx = d3.event.x;
+  d.fy = d3.event.y;
+}
+
+function dragended(d) {
+  if (!d3.event.active) simulation.alphaTarget(0);
+  d.fx = null;
+  d.fy = null;
+}
 </script>
   </body>
 </html>
