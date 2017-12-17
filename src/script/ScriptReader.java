@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.DocumentAnalysis;
+
 import apiCall.WatsonAnalyzer;
 import apiCall.WatsonCaller;
 
@@ -79,8 +81,25 @@ public class ScriptReader {
 				}
 
 			}
+			
+			
 
 			mainRoles.add(curr);
+		}
+		for (int i = 0; i < 3; i++) {
+			int lineCount = 0;
+			HashMap<Integer, HashMap<String, Double>> lineEmotionTone = new HashMap<Integer, HashMap<String, Double>>();
+			HashMap<String, HashMap<String, Double>> lineLangTone = new HashMap<String, HashMap<String, Double>>();
+			HashMap<String, Double> lineEmoScore;
+			HashMap<String, Double> lineLangScore;
+			for (String s: characters.get(i).getLines()) {
+				DocumentAnalysis chunkTone = wc.getToneOfLines(s);
+				 lineEmoScore = wa.lineEmotionToneAnalyzer(chunkTone);
+				lineEmotionTone.put(lineCount++, lineEmoScore);
+				 lineLangScore = wa.lineLangToneAnalyzer(chunkTone);
+				lineLangTone.put(s, lineLangScore);
+			}
+			characters.get(i).setEmotionTimeline(lineEmotionTone);
 		}
 		return mainRoles;
 	}
@@ -111,7 +130,9 @@ public class ScriptReader {
 	 */
 	private void analysizeChunks() throws IOException {
 		Persona prev = null;
-		for (ScriptChunk chunk : scriptChunks) {
+		for (int i = 0; i < 60; i++) {
+//		for (ScriptChunk chunk : scriptChunks) {
+			ScriptChunk chunk = scriptChunks.get(i);
 			if (!isValidName(chunk.name)) {
 				prev = null;
 				continue;

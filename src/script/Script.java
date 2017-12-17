@@ -1,6 +1,5 @@
 package script;
 
- 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +18,9 @@ public class Script {
 	private BufferedImage poster;
 
 	private ArrayList<Persona> mainCharacters;
-	private HashMap<String, HashMap<String, Double>> naturalLangUnderstanding;
+	//keywords
+	//
+	//
 
 	public Script() {
 
@@ -34,7 +35,6 @@ public class Script {
 		this.poster = post;
 
 		this.mainCharacters = mainCharacters;
-		this.naturalLangUnderstanding = naturalLangUnderstanding;
 	}
 
 	public String getName() {
@@ -96,14 +96,6 @@ public class Script {
 
 	public void setMainCharacters(ArrayList<Persona> mainCharacters) {
 		this.mainCharacters = mainCharacters;
-	}
-
-	public HashMap<String, HashMap<String, Double>> getNaturalLangUnderstanding() {
-		return naturalLangUnderstanding;
-	}
-
-	public void setNaturalLangUnderstanding(HashMap<String, HashMap<String, Double>> naturalLangUnderstanding) {
-		this.naturalLangUnderstanding = naturalLangUnderstanding;
 	}
 
 }

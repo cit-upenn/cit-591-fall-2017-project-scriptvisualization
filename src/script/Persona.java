@@ -18,8 +18,8 @@ public class Persona implements Comparable<Persona> {
 	private ArrayList<String> lines; // all lines belong to this character
 	private HashMap<String, Double> personality;
 	private String personaImage;
-	private ArrayList<HashMap<String, HashMap<String, Double>>> emotionTimeline;
-	private ArrayList<HashMap<String, HashMap<String, Double>>> langToneTimeline;
+	private HashMap<Integer, HashMap<String, Double>> emotionTimeline;
+	private HashMap<String, HashMap<String, Double>> langToneTimeline;
 
 	public Persona(String name) {
 		// TODO Auto-generated constructor stub
@@ -68,20 +68,22 @@ public class Persona implements Comparable<Persona> {
 		return personaImage;
 	}
 
-	public ArrayList<HashMap<String, HashMap<String, Double>>> getEmotionTimeline() {
+	public HashMap<Integer, HashMap<String, Double>> getEmotionTimeline() {
 		return emotionTimeline;
 	}
 
-	public void setEmotionTimeline(ArrayList<HashMap<String, HashMap<String, Double>>> emotionTimeline) {
+	public void setEmotionTimeline(HashMap<Integer, HashMap<String, Double>> emotionTimeline) {
 		this.emotionTimeline = emotionTimeline;
 	}
 
-	public ArrayList<HashMap<String, HashMap<String, Double>>> getLangToneTimeline() {
+	public HashMap<String, HashMap<String, Double>> getLangToneTimeline() {
 		return langToneTimeline;
 	}
 
-	public void setLangToneTimeline(ArrayList<HashMap<String, HashMap<String, Double>>> langToneTimeline) {
+	public void setLangToneTimeline(HashMap<String, HashMap<String, Double>> langToneTimeline) {
 		this.langToneTimeline = langToneTimeline;
 	}
+
+
 
 }

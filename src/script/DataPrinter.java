@@ -1,5 +1,6 @@
+
 package script;
- 
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -43,6 +44,9 @@ public class DataPrinter {
 	 */
 	@SuppressWarnings({ "unchecked", "resource" })
 	public void printPersonality(Script script) {
+		if (script == null) {
+			throw new IllegalArgumentException();
+		}
 		System.out.println("start printing personality");
 		StringBuilder sb = new StringBuilder();
 		for (String s : script.getMainCharacters().get(0).getLines()) {
@@ -116,10 +120,13 @@ public class DataPrinter {
 	/**
 	 * This method prints out relationship json file.
 	 * 
-	 * @param sr
+	 * @param sr 
 	 */
 	@SuppressWarnings({ "unchecked", "resource" })
 	public void printRelation(Script script) {
+		if (script == null) {
+			throw new IllegalArgumentException();
+		}
 		System.out.println("start printing relation");
 		SimpleGraph<Persona, Relationship> links = script.getRelationgraph().graph;
 		JSONObject tier = new JSONObject();
@@ -169,6 +176,9 @@ public class DataPrinter {
 	 */
 	@SuppressWarnings({ "unchecked", "resource" })
 	public void printKeywords(Script script) throws IOException {
+		if (script == null) {
+			throw new IllegalArgumentException();
+		}
 		System.out.println("start printing keywords");
 		AnalysisResults kwJson = wc.getKeywords(script.getContent());
 
@@ -202,6 +212,9 @@ public class DataPrinter {
 	 * @throws IOException
 	 */
 	public void printMainPhotos(Script script) throws IOException {
+		if (script == null) {
+			throw new IllegalArgumentException();
+		}
 		System.out.println("start print main photos");
 		ArrayList<Persona> mainCharacters = script.getMainCharacters();
 		PrintWriter out = new PrintWriter(new File("data/charactersPhotos.txt"));
@@ -231,21 +244,13 @@ public class DataPrinter {
 	 */
 
 	public void printTimeLine(Script script) throws IOException {
-		System.out.println("start pringting timeline");
+		if (script == null) {
+			throw new IllegalArgumentException();
+		}
+		System.out.println("start printing timeline");
 		
 		for (int i = 0; i < 3; i++) {
-			int lineCount = 0;
-			HashMap<Integer, HashMap<String, Double>> lineEmotionTone = new HashMap<Integer, HashMap<String, Double>>();
-			HashMap<String, HashMap<String, Double>> lineLangTone = new HashMap<String, HashMap<String, Double>>();
-			HashMap<String, Double> lineEmoScore;
-			HashMap<String, Double> lineLangScore;
-			for (String s : script.getMainCharacters().get(i).getLines()) {
-				DocumentAnalysis chunkTone = wc.getToneOfLines(s);
-				 lineEmoScore = wa.lineEmotionToneAnalyzer(chunkTone);
-				lineEmotionTone.put(lineCount++, lineEmoScore);
-				 lineLangScore = wa.lineLangToneAnalyzer(chunkTone);
-				lineLangTone.put(s, lineLangScore);
-			}
+			HashMap<Integer, HashMap<String, Double>> lineEmotionTone =  script.getMainCharacters().get(i).getEmotionTimeline();
 			if (i == 0) {
 			timelineFormat(lineEmotionTone, "data/protagonist.tsv");
 			} else if (i == 1){
@@ -254,6 +259,7 @@ public class DataPrinter {
 				timelineFormat(lineEmotionTone, "data/thirdMain.tsv");
 			}
 		}
+			
 		System.out.println("finish printing timeline");
 	}
 
@@ -305,6 +311,9 @@ public class DataPrinter {
 	
 	
 	public void printOccurrences(Script script) throws IOException {
+		if (script == null) {
+			throw new IllegalArgumentException();
+		}
 		  System.out.println("start printing occurrences");
 		  PrintWriter pw = new PrintWriter("data/occurrences.csv");
 		  pw.println("name,occurences");
