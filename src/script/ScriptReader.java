@@ -16,9 +16,10 @@ import apiCall.WatsonAnalyzer;
 import apiCall.WatsonCaller;
 
 /**
- * This class takes in content of a script and analyze it's content
+ * This class takes in content of a script, analyzes the content
+ * and insert information needed to Script class
  * 
- * @author yueyin
+ * @author yueyin, syou
  *
  */
 public class ScriptReader {
@@ -172,7 +173,11 @@ public class ScriptReader {
 
 	}
 
-	// determine whether the name is valid
+	/**
+	 * this method determines whether or not a given name is valid
+	 * @param name a name
+	 * @return true if valid, false otherwise
+	 */
 	private boolean isValidName(String name) {
 
 		// TODO Auto-generated method stub

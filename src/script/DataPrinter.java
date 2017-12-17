@@ -24,7 +24,7 @@ import script.Relationships.Relationship;
 
 /**
  * This class print out personlaity of mainCharacters, graph of relationship, keywords of whole script and poster address of 8 main characters, emotional time line of three main characters
- * @author yueyin
+ * @author yueyin, syou
  *
  */
 public class DataPrinter {
@@ -230,7 +230,7 @@ public class DataPrinter {
 	
 	/**
 	 * This method print emotional time line of three main characters
-	 * @param script
+	 * @param script the whole script
 	 * @throws IOException
 	 */
 
@@ -254,6 +254,12 @@ public class DataPrinter {
 		System.out.println("finish printing timeline");
 	}
 
+	/**
+	 * This method creates a template to print a character's emotion timeline
+	 * @param lineEmotionTone a character's emotion tone timeline in JSON format
+	 * @param filepath path and name of the file to write
+	 * @throws FileNotFoundException
+	 */
 	private void timelineFormat(HashMap<Integer, HashMap<String, Double>> lineEmotionTone, String filepath)
 			throws FileNotFoundException {
 		PrintWriter pw = new PrintWriter(filepath);
@@ -300,7 +306,11 @@ public class DataPrinter {
 		pw.close();
 	}
 	
-	
+	/**
+	 * This method prints out main characters and their occurrences
+	 * @param script the whole script
+	 * @throws IOException
+	 */
 	public void printOccurrences(Script script) throws IOException {
 		if (script == null) {
 			throw new IllegalArgumentException();

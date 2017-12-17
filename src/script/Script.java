@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.AnalysisResults;
 
 /**
- * This class represents a script, a script has content and charaters
- * 
- * @author yueyin
+ * This class represents a script
+ * A script has all information that is needed for webpage visualization
+ * @author yueyin, syou
  *
  */
 public class Script {
@@ -22,19 +22,41 @@ public class Script {
 	private AnalysisResults categories;
 	private AnalysisResults keywords;
 	private double sentiment;
-	
 
+	/**
+	 * constructor without param
+	 */
 	public Script() {
 
 	}
 
-	public Script(String name, String content, Relationships relationgraph, BufferedImage post,
+	/**
+	 * constructor with fields
+	 * 
+	 * @param name
+	 *            name of the script
+	 * @param content
+	 *            all written words of the script
+	 * @param relationgraph
+	 *            graph of relationships between characters
+	 * @param poster
+	 *            poster of the film
+	 * @param mainCharacters
+	 *            top ten main characters of the script
+	 * @param keywords
+	 *            keywords of the script
+	 * @param categories
+	 *            three categories of the script
+	 * @param sentiment
+	 *            overall sentiment of the script
+	 */
+	public Script(String name, String content, Relationships relationgraph, BufferedImage poster,
 			ArrayList<Persona> mainCharacters, AnalysisResults keywords, AnalysisResults categories, double sentiment) {
 		super();
 		this.name = name;
 		this.content = content;
 		this.relationgraph = relationgraph;
-		this.poster = post;
+		this.poster = poster;
 
 		this.mainCharacters = mainCharacters;
 		this.keywords = keywords;
@@ -50,47 +72,31 @@ public class Script {
 		this.name = name;
 	}
 
-	/**
-	 * @return the content
-	 */
 	public String getContent() {
 		return content;
 	}
 
-	/**
-	 * @param content
-	 *            the content to set
-	 */
+
 	public void setContent(String content) {
 		this.content = content;
 	}
 
-	/**
-	 * @return the relationgraph
-	 */
+
 	public Relationships getRelationgraph() {
 		return relationgraph;
 	}
 
-	/**
-	 * @param relationgraph
-	 *            the relationgraph to set
-	 */
+
 	public void setRelationgraph(Relationships relationgraph) {
 		this.relationgraph = relationgraph;
 	}
 
-	/**
-	 * @return the post
-	 */
+
 	public BufferedImage getPost() {
 		return poster;
 	}
 
-	/**
-	 * @param post
-	 *            the post to set
-	 */
+
 	public void setPost(BufferedImage post) {
 		this.poster = post;
 	}
