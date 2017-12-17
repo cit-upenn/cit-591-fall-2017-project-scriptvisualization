@@ -1,20 +1,20 @@
 titanic
-LOVETT
-https://vignette2.wikia.nocookie.net/jamescameronstitanic/images/6/6e/Brock_Lovett.gif/revision/latest?cb=20120615215621
-BODINE
-https://images-na.ssl-images-amazon.com/images/M/MV5BZjJkMDljN2MtMTA0NC00OTZmLThjNjAtNjc5MThhMTUyMTc2XkEyXkFqcGdeQXVyMjkyNzM3MQ@@._V1_.jpg
-BUELL
-https://vignette.wikia.nocookie.net/jamescameronstitanic/images/b/b8/Bobby_Buell.gif/revision/latest?cb=20120623195246
-ANATOLY
-https://vignette3.wikia.nocookie.net/jamescameronstitanic/images/3/31/Anatoly_Sagalevitch.png/revision/latest?cb=20130217103235
 ROSE
 https://vignette.wikia.nocookie.net/jamescameronstitanic/images/d/d3/Rosedewittbukater.jpg/revision/latest/scale-to-width-down/180?cb=20120518041253
-ANNOUNCER
-http://statici.behindthevoiceactors.com/behindthevoiceactors/_img/chars/titanic-announcer-rick-and-morty-32.6.jpg
-CAMERAMAN
-http://www.vorply.com/media/3049/we-can-see-a-cameraman-in-the-glass-reflection-6.jpg
-CNN REPORTER
-http://cdn.cnn.com/cnnnext/dam/assets/170102160510-titanic-mark-full-169.jpg
+JACK
+https://images.moviepilot.com/image/upload/c_fill,h_470,q_auto:good,w_620/cf2lnsg0o55xcbqyg3gv.jpg
+CAL
+https://vignette.wikia.nocookie.net/villains/images/a/a5/Titanical-main1.jpg/revision/latest?cb=20161118231641
+LOVETT
+https://vignette2.wikia.nocookie.net/jamescameronstitanic/images/6/6e/Brock_Lovett.gif/revision/latest?cb=20120615215621
+RUTH
+https://vignette.wikia.nocookie.net/jamescameronstitanic/images/d/d6/Ruth_DeWitt_Bukater.gif/revision/latest/scale-to-width-down/235?cb=20120608235809
+BODINE
+https://images-na.ssl-images-amazon.com/images/M/MV5BZjJkMDljN2MtMTA0NC00OTZmLThjNjAtNjc5MThhMTUyMTc2XkEyXkFqcGdeQXVyMjkyNzM3MQ@@._V1_.jpg
+MOLLY
+https://vignette.wikia.nocookie.net/jamescameronstitanic/images/f/f0/Molly_Brown.gif/revision/latest/scale-to-width-down/235?cb=20120615215650
+SMITH
+https://upload.wikimedia.org/wikipedia/commons/c/cd/Edward_J._Smith.jpg
 #sentiment	0.0481468
 #/art and entertainment/movies and tv/movies	0.509857
 #/automotive and vehicles/boats and watercraft	0.429507

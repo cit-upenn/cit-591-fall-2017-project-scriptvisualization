@@ -6,6 +6,7 @@ import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.AnalysisResults;
@@ -74,7 +75,7 @@ public class ScriptReader {
 
 	  for (int i = 0; i < 8; i++) {
 	   Persona curr = characters.get(i);
-	   /*List<String> images = ImageScraper.getImageUrlsFromGoogle(curr.getName() + " " + scriptName);
+	   List<String> images = ImageScraper.getImageUrlsFromGoogle(curr.getName() + " " + scriptName);
 	   int index = 0;
 	   while (true) {
 	    String url = images.get(index++);
@@ -82,7 +83,7 @@ public class ScriptReader {
 	     curr.setImage(url);
 	     break;
 	    }
-	   }*/
+	   }
 	   mainRoles.add(curr);
 	  }
 	  
@@ -139,9 +140,9 @@ public class ScriptReader {
 	 */
 	private void analysizeChunks() throws IOException {
 		Persona prev = null;
-		for (int i = 0; i < 60; i++) {
-//		for (ScriptChunk chunk : scriptChunks) {
-			ScriptChunk chunk = scriptChunks.get(i);
+		//for (int i = 0; i < 60; i++) {
+		for (ScriptChunk chunk : scriptChunks) {
+			//ScriptChunk chunk = scriptChunks.get(i);
 			if (!isValidName(chunk.name)) {
 				prev = null;
 				continue;
@@ -151,7 +152,7 @@ public class ScriptReader {
 			if (prev != null && prev != curr) {
 				double relation = 0;
 				try {
-					//relation = wc.getRelationshipIndicator(chunk.dialogue).getSentiment().getDocument().getScore();
+					relation = wc.getRelationshipIndicator(chunk.dialogue).getSentiment().getDocument().getScore();
 				}
 				// catch something like unsupported text language
 				// e.g. this exception would catch April 14, 1912.

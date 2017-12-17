@@ -35,7 +35,7 @@
         </div>
       </nav>
       
-    <div class="container">
+   <div class="container">
       <br><br><br>
        
             <!-- Main component for a primary marketing message or call to action-->
@@ -55,11 +55,11 @@
     </div>
   </div>
 
-<div style="background:transparent !important" class="jumbotron">
-<div class="container">
+<div style="background:transparent; !important" class="jumbotron">
+ <div class="container">
     <h2></h2>
     <div id="chart"></div>
-</div>
+ </div>
 </div>
 
 <div style="background:transparent !important" class="jumbotron">
@@ -70,7 +70,7 @@
               </div>
     <div id="personality"></div>
 </div>
-</div>
+</div> 
 
 </body>  
  <script>
@@ -174,11 +174,11 @@ d3.json("personality.json", function(error, root) {
 
     
       var margin = { top: 50, right: 0, bottom: 100, left: 30 },
-          width = 960 - margin.left - margin.right,
+          width = 1860 - margin.left - margin.right,
           height = 430 - margin.top - margin.bottom,
-          gridSize = Math.floor(width / 100),
-          gridHeight = Math.floor(width/24),
-          legendElementWidth = gridSize*6,
+          gridSize = Math.floor(width / 300),
+          gridHeight = Math.floor(width/50),
+          legendElementWidth = gridSize*10,
           buckets = 9,
           colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"], // alternatively colorbrewer.YlGnBu[9]
           emotions = ["Anger", "Fear", "Joy", "Sadness", "Disgust"],
@@ -278,7 +278,7 @@ d3.json("personality.json", function(error, root) {
 
           legend.append("rect")
             .attr("x", function(d, i) { return legendElementWidth * i; })
-            .attr("y", height)
+            .attr("y", height - 60)
             .attr("width", legendElementWidth)
             .attr("height", gridHeight / 2)
             .style("fill", function(d, i) { return colors[i]; });
@@ -287,7 +287,7 @@ d3.json("personality.json", function(error, root) {
             .attr("class", "mono")
             .text(function(d) { return "≥ " + Math.round(d); })
             .attr("x", function(d, i) { return legendElementWidth * i; })
-            .attr("y", height + gridSize*4);
+            .attr("y", height - gridSize * 5);
 
           legend.exit().remove();
 
