@@ -35,7 +35,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
- 
+/**
+ * This is a gui class. gui interacts with users, gets search key from user and output three movies that match the search key 
+ * for users to choose from. Then backend analyzes the chosen script. User can press visualize button to redirect to website with
+ * all information
+ * @author yueyin
+ *
+ */
 
 public class ScriptGui {
 
@@ -73,6 +79,8 @@ public class ScriptGui {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		//frame
 		frame = new JFrame();
 		frame.setBounds(100, 100, 678, 470);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -93,8 +101,6 @@ public class ScriptGui {
 		JButton searchButton = new JButton("ScriptGo");
 		searchButton.setBounds(264, 313, 129, 35);
 		search.add(searchButton);
-		
-		
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setMaximumRowCount(40);
@@ -148,7 +154,7 @@ public class ScriptGui {
 		choose.add(BackButton);
 
 			
-		//graph page
+		//result page
 		JPanel result = new JPanel();
 		frame.getContentPane().add(result, "name_20177380893280");
 		result.setLayout(null);
@@ -175,19 +181,17 @@ public class ScriptGui {
 		movieButtons.add(movieButton2);
 		movieButtons.add(movieButton3);
 		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("image/loading.gif"));
-		lblNewLabel_1.setBounds(97, 6, 489, 329);
-		choose.add(lblNewLabel_1);
+		JLabel loadingGif = new JLabel("");
+		loadingGif.setIcon(new ImageIcon("image/loading.gif"));
+		loadingGif.setBounds(97, 6, 489, 329);
+		choose.add(loadingGif);
 		
-		lblNewLabel_1.setVisible(false);
+		loadingGif.setVisible(false);
 		
 		JLabel done = new JLabel("");
 		done.setIcon(new ImageIcon("image/script6.png"));
 		done.setBounds(213, 87, 241, 217);
 		result.add(done);
-		
-		done.setVisible(true);
 		
 		
 		searchButton.addActionListener(new ActionListener() {
@@ -232,9 +236,9 @@ public class ScriptGui {
 		
 		movieButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lblNewLabel_1.setVisible(true);
-				analyze(movieButton1.getText());
-				lblNewLabel_1.setVisible(false);
+				loadingGif.setVisible(true);
+				//analyze(movieButton1.getText());
+				loadingGif.setVisible(false);
 				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 				cardLayout.next(frame.getContentPane());
 				
@@ -246,9 +250,9 @@ public class ScriptGui {
 		
 		movieButton2.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				lblNewLabel_1.setVisible(true);
+				loadingGif.setVisible(true);
 				analyze(movieButton2.getText());
-				lblNewLabel_1.setVisible(false);
+				loadingGif.setVisible(false);
 				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 				cardLayout.next(frame.getContentPane());
 
@@ -260,13 +264,11 @@ public class ScriptGui {
 		
 		movieButton3.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				lblNewLabel_1.setVisible(true);
+				loadingGif.setVisible(true);
 				analyze(movieButton3.getText());
-				lblNewLabel_1.setVisible(false);
+				loadingGif.setVisible(false);
 				CardLayout cardLayout = (CardLayout) frame.getContentPane().getLayout();
 				cardLayout.next(frame.getContentPane());
-				
-				
 				
 				
 			}
@@ -331,11 +333,16 @@ public class ScriptGui {
 		try {
 			Script script = sr.readScript(ScriptScraper.scrapeScript(url), moviename);
 			DataPrinter dp = new DataPrinter();
-			/*dp.printKeywords(script);
+			
 			dp.printPersonality(script);
+					
 			dp.printRelation(script);
+			
+			dp.printKeywords(script);
+			
 			dp.printMainPhotos(script);
-			dp.printTimeLine(script);*/
+			
+			dp.printTimeLine(script);
 			
 		} catch (IOException | GeneralSecurityException e1) {
 			// TODO Auto-generated catch block

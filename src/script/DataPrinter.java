@@ -1,4 +1,5 @@
 package script;
+ 
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,6 +24,11 @@ import apiCall.WatsonAnalyzer;
 import apiCall.WatsonCaller;
 import script.Relationships.Relationship;
 
+/**
+ * This class print out personlaity of mainCharacters, graph of relationship, keywords of whole script and poster address of 8 main characters, emotional time line of three main characters
+ * @author yueyin
+ *
+ */
 public class DataPrinter {
 	private static WatsonCaller wc;
 	private static WatsonAnalyzer wa;
@@ -112,7 +118,6 @@ public class DataPrinter {
 	@SuppressWarnings({ "unchecked", "resource" })
 	public void printRelation(Script script) {
 		SimpleGraph<Persona, Relationship> links = script.getRelationgraph().graph;
-
 		JSONObject tier = new JSONObject();
 		JSONArray nodes = new JSONArray();
 		for (Persona p : links.vertexSet()) {
@@ -173,6 +178,7 @@ public class DataPrinter {
 			FileWriter fileWriter = new FileWriter("data/keywords.json");
 			fileWriter.write(list.toJSONString());
 			fileWriter.flush();
+			fileWriter.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -187,7 +193,8 @@ public class DataPrinter {
 	 * @param script
 	 * @throws IOException
 	 */
-	public static void printMainPhotos(Script script) throws IOException {
+	public void printMainPhotos(Script script) throws IOException {
+		System.out.println("start print main photos");
 		ArrayList<Persona> mainCharacters = script.getMainCharacters();
 		PrintWriter out = new PrintWriter(new File("data/charactersPhotos.txt"));
 		out.println(script.getName());
@@ -204,11 +211,18 @@ public class DataPrinter {
 			out.print(cr.getLabel() + "\t");
 			out.println(cr.getScore());
 		}
-
+		System.out.println("end print main photos");
+		
 		out.close();
 	}
+	
+	/**
+	 * This method print emotional time line of three main characters
+	 * @param script
+	 * @throws IOException
+	 */
 
-	public static void printTimeLine(Script script) throws IOException {
+	public void printTimeLine(Script script) throws IOException {
 		
 		
 		for (int i = 0; i < 3; i++) {
@@ -234,7 +248,7 @@ public class DataPrinter {
 		}
 	}
 
-	private static void timelineFormat(HashMap<Integer, HashMap<String, Double>> lineEmotionTone, String filepath)
+	private void timelineFormat(HashMap<Integer, HashMap<String, Double>> lineEmotionTone, String filepath)
 			throws FileNotFoundException {
 		PrintWriter pw = new PrintWriter(filepath);
 		pw.println("emotion" + "\t" + "line" + "\t" + "value");
@@ -278,6 +292,16 @@ public class DataPrinter {
 			}
 		}
 		pw.close();
+	}
+	
+	
+	public void printOccurrences(Script script) throws IOException {
+		  PrintWriter pw = new PrintWriter("data/occurrences.csv");
+		  pw.println("name,occurences");
+		  for (Persona p: script.getMainCharacters()) {
+		   pw.println(p.getName() + "," + p.getOccurrence());
+		  }
+		  pw.close();
 	}
 
 }

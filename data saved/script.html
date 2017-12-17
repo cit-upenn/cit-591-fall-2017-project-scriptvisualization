@@ -95,7 +95,7 @@
             </div>
             <div class="col-sm-4"> 
               <div class="card-block">
-                  <h2 class="card-title">Occurrences</h2>
+                  <h2 class="card-title">Occurences</h2>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
               </div>
             </div>
@@ -115,7 +115,7 @@ var pack = d3.pack()
     .size([width, height])
     .padding(1.5);
 
-d3.csv("occurrences.csv", function(d) {
+d3.csv("occurences.csv", function(d) {
   d.occurences = +d.occurences;
   if (d.occurences) return d;
 }, function(error, classes) {
@@ -189,7 +189,7 @@ d3.csv("occurrences.csv", function(d) {
             }
         }
     }
-    //rawFile.send(null);
+    rawFile.send(null);
     rawFile.abort();
 }
 

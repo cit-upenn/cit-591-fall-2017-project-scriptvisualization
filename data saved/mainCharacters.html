@@ -136,7 +136,7 @@ d3.json("personality.json", function(error, root) {
     rawFile.abort();
 }*/
     var characters;
-    readTextFile("charactersPhotos.txt");
+    readTextFile("characters.txt");
     function readTextFile(file){
     	var rawFile = new XMLHttpRequest();
     	rawFile.open("GET", file, false);
