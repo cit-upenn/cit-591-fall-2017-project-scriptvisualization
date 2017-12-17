@@ -23,5 +23,4 @@ public class ImageScraperTest {
 	public void testGetImageGivenUrl() throws IOException {
 		assertNotNull(ImageScraper.getImageGivenUrl("https://image.tmdb.org/t/p/w1280/ylXCdC106IKiarftHkcacasaAcb.jpg"));
 	}
-
 }
