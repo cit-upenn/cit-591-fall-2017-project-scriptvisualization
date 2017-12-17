@@ -108,7 +108,7 @@ d3.json("personality.json", function(error, root) {
     .enter().append("text")
       .attr("class", "label")
       .attr("dy", ".35em")
-      .attr("transform", function(d) { return "translate(" + (d.x + d.dx / 2) + "," + (d.y + d.dy / 2) + ")rotate(90)"; })
+      .attr("transform", function(d) { return "translate(" + (d.x + d.dx / 2) + "," + (d.y + d.dy / 8) + ")rotate(90)"; })
       .text(function(d) { return d.name; });
 });
 
@@ -287,7 +287,7 @@ d3.json("personality.json", function(error, root) {
             .attr("class", "mono")
             .text(function(d) { return "≥ " + Math.round(d); })
             .attr("x", function(d, i) { return legendElementWidth * i; })
-            .attr("y", height + gridSize);
+            .attr("y", height + gridSize*4);
 
           legend.exit().remove();
 
