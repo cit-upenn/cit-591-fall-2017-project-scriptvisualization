@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>WatsonAnalyzer.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">script (1) (Dec 17, 2017 6:17:52 PM)</a> &gt; <a href="../../index.html" class="el_group">scriptVisualization</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">script</a> &gt; <span class="el_source">WatsonAnalyzer.java</span></div><h1>WatsonAnalyzer.java</h1><pre class="source lang-java linenums">package script;
+/**
+ * This class analyzes JSON data
+ */
+import java.io.IOException;
+import java.util.HashMap;
+
+import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.DocumentAnalysis;
+import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.ToneCategory;
+import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.ToneScore;
+
+public class WatsonAnalyzer {
+<span class="fc" id="L13">	public WatsonAnalyzer() {</span>
+
+<span class="fc" id="L15">	}</span>
+
+	/**
+	 * This method analyzes emotion tone of JSON data
+	 * @param jsonData
+	 * @return
+	 * @throws IOException
+	 */
+	public HashMap&lt;String, Double&gt; lineEmotionToneAnalyzer(DocumentAnalysis jsonData) throws IOException {
+
+		// lineScore. Key: tone name (Anger, Fear). Value: score.
+		// hashmap of a single paragraph of a character's lines
+<span class="fc" id="L27">		HashMap&lt;String, Double&gt; lineScore = new HashMap&lt;String, Double&gt;();</span>
+
+<span class="fc bfc" id="L29" title="All 2 branches covered.">		for (ToneCategory tc : jsonData.getToneCategories()) {</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">			if (tc.getCategoryId().equals(&quot;emotion_tone&quot;)) {</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">				for (ToneScore ts : tc.getTones()) {</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">					if (ts.getScore() &gt;= 0.5) {</span>
+						// System.out.println(ts.getToneName());
+						// System.out.println(ts.getScore());
+<span class="fc" id="L35">						lineScore.put(ts.getToneName(), ts.getScore());</span>
+						// System.out.println(&quot;======&quot;);
+					}
+				}
+			}
+		}
+<span class="fc" id="L41">		return lineScore;</span>
+	}
+
+	/**
+	 * This method analyzes language tone of JSON data
+	 * @param jsonData
+	 * @return
+	 * @throws IOException
+	 */
+	public HashMap&lt;String, Double&gt; lineLangToneAnalyzer(DocumentAnalysis jsonData) throws IOException {
+
+<span class="fc" id="L52">		HashMap&lt;String, Double&gt; lineScore = new HashMap&lt;String, Double&gt;();</span>
+
+<span class="fc bfc" id="L54" title="All 2 branches covered.">		for (ToneCategory tc : jsonData.getToneCategories()) {</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">			if (tc.getCategoryId().equals(&quot;language_tone&quot;)) {</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">				for (ToneScore ts : tc.getTones()) {</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">					if (ts.getScore() &gt;= 0.5) {</span>
+<span class="fc" id="L58">						lineScore.put(ts.getToneName(), ts.getScore());</span>
+					}
+				}
+			}
+		}
+<span class="fc" id="L63">		return lineScore;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span>script (1) (Dec 17, 2017 6:17:52 PM)</div></body></html>

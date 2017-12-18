@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Relationships.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">script (1) (Dec 17, 2017 6:17:52 PM)</a> &gt; <a href="../../index.html" class="el_group">scriptVisualization</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">script</a> &gt; <span class="el_source">Relationships.java</span></div><h1>Relationships.java</h1><pre class="source lang-java linenums">package script;
+
+
+
+import java.util.HashMap;
+
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleGraph;
+/**
+ * This class represents relationships among characters in a movie script. A graph is used to keep track of characterand
+ * relationships between two characters
+ * @author yueyin
+ *
+ */
+
+public class Relationships {
+	
+	SimpleGraph&lt;Persona, Relationship&gt; graph;
+	//assume there are no duplicated names in a movie script
+	HashMap&lt;String, Persona&gt; characterNames;
+	
+	/**
+	 * The constructor initializes graph and hashmap
+	 */
+<span class="fc" id="L25">	public Relationships() {</span>
+<span class="fc" id="L26">		graph = new SimpleGraph&lt;Persona, Relationship&gt;(Relationship.class);</span>
+<span class="fc" id="L27">		characterNames = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L28">	}</span>
+	
+	/**
+	 * This is edge class. Each edge has contacts that records how many times two nodes encounter and relation that 
+	 * records how their relationship is
+	 * @author yueyin
+	 *
+	 */
+	public static class Relationship extends DefaultEdge{
+		private static final long serialVersionUID = 1L;
+		int contacts;
+		double relation;
+<span class="fc" id="L40">		public Relationship(int contacts, double relation) {</span>
+<span class="fc" id="L41">			this.contacts = contacts;</span>
+<span class="fc" id="L42">			this.relation = relation;</span>
+<span class="fc" id="L43">		}</span>
+		
+		public String toString() {
+<span class="nc" id="L46">			return &quot;contacts = &quot; + contacts + &quot; relation = &quot; + relation;</span>
+		}
+	}
+
+	/**
+	 * This class create a vertex of type Persona given name, create a new vertex if it dosen't exist. return the vertex is 
+	 * it exists
+	 * @param name
+	 * @return Persona
+	 */
+	public Persona createVertex(String name) {
+		// TODO Auto-generated method stub
+<span class="fc bfc" id="L58" title="All 2 branches covered.">		if(characterNames.containsKey(name)) {</span>
+<span class="fc" id="L59">			Persona curr = characterNames.get(name);</span>
+<span class="fc" id="L60">			curr.setOccurrence(curr.getOccurrence() + 1);</span>
+<span class="fc" id="L61">			return curr;</span>
+		}
+		else {
+<span class="fc" id="L64">			Persona newPersona = new Persona(name);</span>
+<span class="fc" id="L65">			characterNames.put(name, newPersona);</span>
+<span class="fc" id="L66">			graph.addVertex(newPersona);</span>
+<span class="fc" id="L67">			return newPersona;</span>
+		}
+	}
+
+	/**
+	 * Create edge between two vertex 
+	 * create new one if it doesn't exist, update old one if it exists
+	 * @param prev
+	 * @param curr
+	 * @param relation
+	 */
+	public void createEdge(Persona prev, Persona curr, double relation) {
+		// TODO Auto-generated method stub
+		Relationship edge;
+<span class="fc bfc" id="L81" title="All 2 branches covered.">		if(graph.containsEdge(prev, curr)) {</span>
+<span class="fc" id="L82">			edge = graph.getEdge(prev, curr);</span>
+<span class="fc" id="L83">			edge.contacts++;</span>
+<span class="fc" id="L84">			edge.relation += relation;</span>
+<span class="fc" id="L85">		}else {</span>
+<span class="fc" id="L86">			edge = new Relationship(1, relation);</span>
+<span class="fc" id="L87">			graph.addEdge(prev, curr, edge);</span>
+		}
+		
+<span class="fc" id="L90">	}</span>
+
+	public SimpleGraph&lt;Persona, Relationship&gt; getGraph() {
+<span class="fc" id="L93">		return graph;</span>
+	}
+
+	 
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span>script (1) (Dec 17, 2017 6:17:52 PM)</div></body></html>

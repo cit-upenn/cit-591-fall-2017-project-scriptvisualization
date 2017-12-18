@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ScriptScraper.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">script (1) (Dec 17, 2017 6:17:52 PM)</a> &gt; <a href="../../index.html" class="el_group">scriptVisualization</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">script</a> &gt; <span class="el_source">ScriptScraper.java</span></div><h1>ScriptScraper.java</h1><pre class="source lang-java linenums">package script;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+/**
+ * This class can scrape scripts from http://www.imsdb.com/ 
+ * @author yueyin
+ *
+ */
+public class ScriptScraper {
+	
+	private String scriptName;
+	private HashMap&lt;String, String&gt; movieList;
+	private HashMap&lt;String, BufferedImage&gt; moviePosts;
+
+	/**
+	 * This constructor initializes instance variables
+	 */
+<span class="fc" id="L26">	public ScriptScraper() {</span>
+<span class="fc" id="L27">		movieList = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L28">		moviePosts = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L29">	}</span>
+	
+	
+	/**
+	 * Extract script from given url, return string of the script 
+	 * @param url
+	 * @return
+	 * @throws IOException
+	 */
+	public static String scrapeScript(String url) throws IOException {
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">		if(!url.contains(&quot;html&quot;)) return null;</span>
+<span class="fc" id="L40">		Document doc = Jsoup.connect(url).get();</span>
+		//remove empty tags
+<span class="fc bfc" id="L42" title="All 2 branches covered.">		for (Element element : doc.select(&quot;*&quot;)) {</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">		    if (!element.hasText()) {</span>
+<span class="fc" id="L44">		        element.remove();</span>
+		    }
+		}
+		//remove script tags
+<span class="fc" id="L48">		doc.getElementsByTag(&quot;script&quot;).remove();</span>
+		//remove title tags
+<span class="fc" id="L50">		doc.getElementsByTag(&quot;title&quot;).remove();</span>
+<span class="fc" id="L51">		Elements scriptContent = doc.getElementsByTag(&quot;pre&quot;);</span>
+<span class="fc" id="L52">		StringBuilder scripts = new StringBuilder();</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">		for(Element script : scriptContent) {</span>
+<span class="fc" id="L54">			scripts.append(script.html());</span>
+		}
+		//clean format
+<span class="fc" id="L57">		return scripts.toString().replaceAll(&quot;[\\n]{2,}&quot;, &quot;\n\n&quot;).replaceAll(&quot;&lt;/b&gt;|&lt;pre&gt;|&lt;/pre&gt;&quot;, &quot;&quot;).replaceAll(&quot;\\n[\\s]+\\n&quot;, &quot;\n\n&quot;).trim(); </span>
+	}
+	
+	/**
+	 * get all available movies along with their scripts given searchKey
+	 * @param searchKey
+	 * @return movie name and script url
+	 * @throws IOException
+	 */
+	public void getMoviesFromSearchKey(String searchKey) throws IOException{
+<span class="fc" id="L67">		Document moviesPage = Jsoup.connect(&quot;http://www.imsdb.com/search.php?query=&quot;+ searchKey).get();</span>
+<span class="fc" id="L68">		getAvailableMovies(moviesPage);</span>
+<span class="fc" id="L69">	}</span>
+	
+	
+	/**
+	 * get all available movies along with their scripts given genre
+	 * @param &lt;Genre&gt;
+	 * @param genre
+	 * @return movie name and script url
+	 * @throws IOException
+	 */
+	public void getMoviesFromGenre(Genre genre) throws IOException{
+<span class="fc" id="L80">		Document moviesPage = Jsoup.connect(&quot;http://www.imsdb.com/genre/&quot;+ genre).get();</span>
+<span class="fc" id="L81">		getAvailableMovies(moviesPage);</span>
+<span class="fc" id="L82">	}</span>
+	
+	/**
+	 * this function finds all movies with available scripts from the retrieved html and put the movie name and script url into a hash map
+	 * put movie name and movie poster into another hashmap
+	 * @throws IOException
+	 */
+	private void getAvailableMovies(Document moviesPage) throws IOException {
+<span class="fc" id="L90">		Elements tables = moviesPage.getElementsByAttributeValue(&quot;valign&quot;, &quot;top&quot;);</span>
+<span class="fc" id="L91">		Elements childrenOfTable = tables.last().children();</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">		for(Element child : childrenOfTable) {</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">			if(child.tagName() == &quot;p&quot;) {</span>
+<span class="fc" id="L94">				String url = getUrlFromElement(child);</span>
+<span class="fc" id="L95">				Document doc = Jsoup.connect(url).get();</span>
+<span class="fc" id="L96">				Elements links = doc.getElementsByAttributeValueMatching(&quot;href&quot;, &quot;/(scripts|transcripts)/.+.html&quot;);</span>
+<span class="pc bpc" id="L97" title="1 of 4 branches missed.">				if(links != null &amp;&amp; !links.isEmpty()) {</span>
+<span class="fc" id="L98">					String scriptLink = &quot;http://www.imsdb.com&quot; + links.first().attr(&quot;href&quot;);</span>
+<span class="fc" id="L99">					String scriptName = getScriptName(scriptLink);</span>
+<span class="fc" id="L100">					movieList.put(scriptName, scriptLink);</span>
+<span class="fc" id="L101">					String postpath = ImageScraper.getPostPathFromTMDB(scriptName);</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">					if(postpath == null) continue;</span>
+<span class="fc" id="L103">					BufferedImage post = ImageScraper.getImageGivenUrl(postpath);</span>
+<span class="fc" id="L104">					moviePosts.put(scriptName, post);</span>
+				}
+			}
+		}
+
+<span class="fc" id="L109">	}</span>
+	
+	/**
+	 * Get the name of the movie from given url
+	 * @return
+	 */
+	public static String getScriptName(String url) {
+<span class="fc" id="L116">		String[] splitUrl = url.split(&quot;/&quot;);</span>
+<span class="fc" id="L117">		return splitUrl[splitUrl.length - 1].replaceAll(&quot;.html&quot;, &quot;&quot;).replaceAll(&quot;-&quot;, &quot; &quot;);</span>
+	}
+	
+ 
+
+	/**
+	 * get a url from a &lt;a&gt; tag
+	 * @param child
+	 * @return value of href attribute
+	 * @throws IOException
+	 */
+	private String getUrlFromElement(Element child) throws IOException {
+		// TODO Auto-generated method stub
+<span class="fc" id="L130">		Pattern p = Pattern.compile(&quot;href=\&quot;(.*\\.html)\&quot;&quot;);</span>
+<span class="fc" id="L131">		Matcher match = p.matcher(child.html());</span>
+<span class="pc bpc" id="L132" title="1 of 2 branches missed.">		if(match.find()) {</span>
+<span class="fc" id="L133">			String movieLink = &quot;http://www.imsdb.com&quot; + match.group(1);</span>
+<span class="fc" id="L134">			return movieLink ;</span>
+		}
+<span class="nc" id="L136">		return null;</span>
+	}
+	
+
+	/**
+	 * @return the scriptName
+	 */
+	public String getScriptName() {
+<span class="nc" id="L144">		return scriptName;</span>
+	}
+
+
+	/**
+	 * @return the movieList
+	 */
+	public HashMap&lt;String, String&gt; getMovieList() {
+<span class="fc" id="L152">		return movieList;</span>
+	}
+	
+
+	/**
+	 * @return the moviePosts
+	 */
+	public HashMap&lt;String, BufferedImage&gt; getMoviePosts() {
+<span class="nc" id="L160">		return moviePosts;</span>
+	}
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span>script (1) (Dec 17, 2017 6:17:52 PM)</div></body></html>

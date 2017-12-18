@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>DataPrinterTest.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">script (1) (Dec 17, 2017 6:17:52 PM)</a> &gt; <a href="../../index.html" class="el_group">scriptVisualization</a> &gt; <a href="../index.html" class="el_bundle">test</a> &gt; <a href="index.source.html" class="el_package">script</a> &gt; <span class="el_source">DataPrinterTest.java</span></div><h1>DataPrinterTest.java</h1><pre class="source lang-java linenums">
+package script;
+
+
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+<span class="fc" id="L11">public class DataPrinterTest {</span>
+
+ private static DataPrinter  dp;
+ private static Script script;
+ 
+ @BeforeClass
+	public static void setUp() throws IOException, GeneralSecurityException {
+<span class="fc" id="L18">		dp = new DataPrinter();</span>
+<span class="fc" id="L19">		ScriptReader sr = new ScriptReader();</span>
+<span class="fc" id="L20">		script = sr.readScript(ScriptScraper.scrapeScript(&quot;http://www.imsdb.com/scripts/Frozen-(Disney).html&quot;), &quot;Frozen-(Disney)&quot;);</span>
+<span class="fc" id="L21">	}</span>
+ 
+	@Test(expected=IllegalArgumentException.class)
+	public void testNullPrintPersonality() {
+<span class="nc" id="L25">		dp.printPersonality(null);</span>
+<span class="nc" id="L26">	}</span>
+
+	@Test(expected=IllegalArgumentException.class)
+	public void testNullPrintRelation() {
+<span class="nc" id="L30">		dp.printRelation(null);</span>
+<span class="nc" id="L31">	}</span>
+
+	@Test(expected=IllegalArgumentException.class)
+	public void testNullPrintKeywords() throws IOException {
+<span class="nc" id="L35">		dp.printKeywords(null);</span>
+<span class="nc" id="L36">	}</span>
+
+	@Test(expected=IllegalArgumentException.class)
+	public void testNullPrintMainPhotos() throws IOException {
+<span class="nc" id="L40">		dp.printMainPhotos(null);</span>
+<span class="nc" id="L41">	}</span>
+
+	@Test(expected=IllegalArgumentException.class)
+	public void testNullPrintTimeLine() throws IOException {
+<span class="nc" id="L45">		dp.printTimeLine(null);</span>
+<span class="nc" id="L46">	}</span>
+
+	@Test(expected=IllegalArgumentException.class)
+	public void testNullPrintOccurrences() throws IOException {
+<span class="nc" id="L50">		dp.printOccurrences(null);</span>
+<span class="nc" id="L51">	}</span>
+	
+	@Test
+	public void testPrintPersonality() {
+<span class="fc" id="L55">		dp.printPersonality(script);</span>
+<span class="fc" id="L56">	}</span>
+
+	@Test 
+	public void testPrintRelation() {
+<span class="fc" id="L60">		dp.printRelation(script);</span>
+<span class="fc" id="L61">	}</span>
+
+	@Test
+	public void testPrintKeywords() throws IOException {
+<span class="fc" id="L65">		dp.printKeywords(script);</span>
+<span class="fc" id="L66">	}</span>
+
+	@Test 
+	public void testPrintMainPhotos() throws IOException {
+<span class="fc" id="L70">		dp.printMainPhotos(script);</span>
+<span class="fc" id="L71">	}</span>
+
+	@Test
+	public void testPrintTimeLine() throws IOException {
+<span class="fc" id="L75">		dp.printTimeLine(script);</span>
+<span class="fc" id="L76">	}</span>
+
+	@Test 
+	public void testPrintOccurrences() throws IOException {
+<span class="fc" id="L80">		dp.printOccurrences(script);</span>
+<span class="fc" id="L81">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span>script (1) (Dec 17, 2017 6:17:52 PM)</div></body></html>

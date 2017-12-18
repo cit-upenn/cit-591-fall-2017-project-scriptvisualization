@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>DataPrinter.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">script (1) (Dec 17, 2017 6:17:52 PM)</a> &gt; <a href="../../index.html" class="el_group">scriptVisualization</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">script</a> &gt; <span class="el_source">DataPrinter.java</span></div><h1>DataPrinter.java</h1><pre class="source lang-java linenums">
+package script;
+
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.jgrapht.graph.SimpleGraph;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.AnalysisResults;
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.CategoriesResult;
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.KeywordsResult;
+import com.ibm.watson.developer_cloud.personality_insights.v3.model.Profile;
+import com.ibm.watson.developer_cloud.personality_insights.v3.model.Trait;
+
+import script.Relationships.Relationship;
+
+/**
+ * This class print out personlaity of mainCharacters, graph of relationship, keywords of whole script and poster address of 8 main characters, emotional time line of three main characters
+ * @author yueyin, syou
+ *
+ */
+public class DataPrinter {
+
+<span class="fc" id="L32">	public DataPrinter() {</span>
+<span class="fc" id="L33">	}</span>
+
+	/**
+	 * This method prints out json file of protagonist's personality.
+	 */
+	@SuppressWarnings({ &quot;unchecked&quot;, &quot;resource&quot; })
+	public void printPersonality(Script script) {
+<span class="fc bfc" id="L40" title="All 2 branches covered.">		if (script == null) {</span>
+<span class="fc" id="L41">			throw new IllegalArgumentException();</span>
+		}
+<span class="fc" id="L43">		System.out.println(&quot;generating personality&quot;);</span>
+<span class="fc" id="L44">		StringBuilder sb = new StringBuilder();</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">		for (String s : script.getMainCharacters().get(0).getLines()) {</span>
+<span class="fc" id="L46">			sb.append(s);</span>
+		}
+<span class="fc" id="L48">		Profile profile = script.getMainCharacters().get(0).getPersonality();</span>
+<span class="fc" id="L49">		JSONObject report = new JSONObject();</span>
+<span class="fc" id="L50">		report.put(&quot;name&quot;, &quot;personalityReport&quot;);</span>
+<span class="fc" id="L51">		JSONArray reportEntry = new JSONArray();</span>
+<span class="fc" id="L52">		JSONObject personality = new JSONObject();</span>
+<span class="fc" id="L53">		personality.put(&quot;name&quot;, &quot;personality&quot;);</span>
+<span class="fc" id="L54">		JSONArray children = new JSONArray();</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">		for (Trait t : profile.getPersonality()) {</span>
+<span class="fc" id="L56">			JSONArray gc = new JSONArray();</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">			for (Trait tt : t.getChildren()) {</span>
+<span class="fc" id="L58">				JSONObject gcEntry = new JSONObject();</span>
+<span class="fc" id="L59">				gcEntry.put(&quot;name&quot;, tt.getName());</span>
+<span class="fc" id="L60">				gcEntry.put(&quot;size&quot;, tt.getPercentile());</span>
+<span class="fc" id="L61">				gc.add(gcEntry);</span>
+			}
+<span class="fc" id="L63">			JSONObject cEntry = new JSONObject();</span>
+<span class="fc" id="L64">			cEntry.put(&quot;name&quot;, t.getName());</span>
+<span class="fc" id="L65">			cEntry.put(&quot;children&quot;, gc);</span>
+<span class="fc" id="L66">			children.add(cEntry);</span>
+		}
+<span class="fc" id="L68">		personality.put(&quot;children&quot;, children);</span>
+
+<span class="fc" id="L70">		reportEntry.add(personality);</span>
+
+<span class="fc" id="L72">		JSONObject values = new JSONObject();</span>
+<span class="fc" id="L73">		values.put(&quot;name&quot;, &quot;values&quot;);</span>
+<span class="fc" id="L74">		JSONArray vEntry = new JSONArray();</span>
+
+<span class="fc bfc" id="L76" title="All 2 branches covered.">		for (Trait t2 : profile.getValues()) {</span>
+<span class="fc" id="L77">			JSONObject vChildren = new JSONObject();</span>
+<span class="fc" id="L78">			vChildren.put(&quot;name&quot;, t2.getName());</span>
+<span class="fc" id="L79">			vChildren.put(&quot;size&quot;, t2.getPercentile());</span>
+<span class="fc" id="L80">			vEntry.add(vChildren);</span>
+		}
+
+<span class="fc" id="L83">		values.put(&quot;children&quot;, vEntry);</span>
+<span class="fc" id="L84">		reportEntry.add(values);</span>
+
+<span class="fc" id="L86">		JSONObject needs = new JSONObject();</span>
+<span class="fc" id="L87">		needs.put(&quot;name&quot;, &quot;needs&quot;);</span>
+<span class="fc" id="L88">		JSONArray nEntry = new JSONArray();</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">		for (Trait t3 : profile.getNeeds()) {</span>
+<span class="fc" id="L90">			JSONObject nChildren = new JSONObject();</span>
+<span class="fc" id="L91">			nChildren.put(&quot;name&quot;, t3.getName());</span>
+<span class="fc" id="L92">			nChildren.put(&quot;size&quot;, t3.getPercentile());</span>
+<span class="fc" id="L93">			nEntry.add(nChildren);</span>
+		}
+<span class="fc" id="L95">		needs.put(&quot;children&quot;, nEntry);</span>
+<span class="fc" id="L96">		reportEntry.add(needs);</span>
+
+<span class="fc" id="L98">		report.put(&quot;children&quot;, reportEntry);</span>
+
+		// System.out.println(report);
+		try {
+<span class="fc" id="L102">			FileWriter fileWriter = new FileWriter(&quot;data/personality.json&quot;);</span>
+<span class="fc" id="L103">			fileWriter.write(report.toJSONString());</span>
+<span class="fc" id="L104">			fileWriter.flush();</span>
+<span class="fc" id="L105">			fileWriter.close();</span>
+<span class="pc" id="L106">		} catch (Exception e) {</span>
+<span class="nc" id="L107">			e.printStackTrace();</span>
+		}
+<span class="fc" id="L109">		System.out.println(&quot;finish printing personality&quot;);</span>
+<span class="fc" id="L110">	}</span>
+
+	/**
+	 * This method prints out relationship json file.
+	 * 
+	 * @param sr 
+	 */
+	@SuppressWarnings({ &quot;unchecked&quot;, &quot;resource&quot; })
+	public void printRelation(Script script) {
+<span class="fc bfc" id="L119" title="All 2 branches covered.">		if (script == null) {</span>
+<span class="fc" id="L120">			throw new IllegalArgumentException();</span>
+		}
+<span class="fc" id="L122">		System.out.println(&quot;generating relation&quot;);</span>
+<span class="fc" id="L123">		SimpleGraph&lt;Persona, Relationship&gt; links = script.getRelationgraph().graph;</span>
+<span class="fc" id="L124">		JSONObject tier = new JSONObject();</span>
+<span class="fc" id="L125">		JSONArray nodes = new JSONArray();</span>
+<span class="fc bfc" id="L126" title="All 2 branches covered.">		for (Persona p : links.vertexSet()) {</span>
+<span class="fc" id="L127">			JSONObject names = new JSONObject();</span>
+
+<span class="fc" id="L129">			names.put(&quot;id&quot;, p.getName());</span>
+<span class="fc bfc" id="L130" title="All 6 branches covered.">			if (p.equals(script.getMainCharacters().get(0)) || p.equals(script.getMainCharacters().get(1)) || p.equals(script.getMainCharacters().get(2))) {</span>
+<span class="fc" id="L131">				names.put(&quot;group&quot;, 1);</span>
+<span class="fc bfc" id="L132" title="All 2 branches covered.">			} else if (script.getMainCharacters().contains(p)) {</span>
+<span class="fc" id="L133">				names.put(&quot;group&quot;, 2);</span>
+			}
+			// names.put(&quot;id&quot;, links.getEdgeSource(r).getName());
+<span class="fc" id="L136">			nodes.add(names);</span>
+		}
+<span class="fc" id="L138">		tier.put(&quot;nodes&quot;, nodes);</span>
+<span class="fc" id="L139">		JSONArray linkages = new JSONArray();</span>
+<span class="fc bfc" id="L140" title="All 2 branches covered.">		for (Relationship r : links.edgeSet()) {</span>
+<span class="fc" id="L141">			JSONObject entry = new JSONObject();</span>
+<span class="fc" id="L142">			entry.put(&quot;source&quot;, links.getEdgeSource(r).getName());</span>
+<span class="fc" id="L143">			entry.put(&quot;target&quot;, links.getEdgeTarget(r).getName());</span>
+<span class="fc" id="L144">			entry.put(&quot;value&quot;, r.relation);</span>
+
+<span class="fc" id="L146">			linkages.add(entry);</span>
+
+		}
+<span class="fc" id="L149">		tier.put(&quot;links&quot;, linkages);</span>
+//		System.out.println(tier);
+
+		try {
+<span class="fc" id="L153">			FileWriter fileWriter = new FileWriter(&quot;data/relationship.json&quot;);</span>
+<span class="fc" id="L154">			fileWriter.write(tier.toJSONString());</span>
+<span class="fc" id="L155">			fileWriter.flush();</span>
+<span class="fc" id="L156">			fileWriter.close();</span>
+<span class="pc" id="L157">		} catch (Exception e) {</span>
+<span class="nc" id="L158">			e.printStackTrace();</span>
+		}
+<span class="fc" id="L160">		System.out.println(&quot;finish printing relation&quot;);</span>
+<span class="fc" id="L161">	}</span>
+
+	/**
+	 * This method prints out keywords json file
+	 * 
+	 * @param content
+	 * @throws IOException
+	 */
+	@SuppressWarnings({ &quot;unchecked&quot;, &quot;resource&quot; })
+	public void printKeywords(Script script) throws IOException {
+<span class="fc bfc" id="L171" title="All 2 branches covered.">		if (script == null) {</span>
+<span class="fc" id="L172">			throw new IllegalArgumentException();</span>
+		}
+<span class="fc" id="L174">		System.out.println(&quot;generating keywords&quot;);</span>
+
+<span class="fc" id="L176">		JSONArray keywords = new JSONArray();</span>
+<span class="fc bfc" id="L177" title="All 2 branches covered.">		for (KeywordsResult kr : script.getKeywords().getKeywords()) {</span>
+<span class="fc" id="L178">			JSONObject entry = new JSONObject();</span>
+<span class="fc" id="L179">			entry.put(&quot;size&quot;, kr.getRelevance());</span>
+<span class="fc" id="L180">			entry.put(&quot;text&quot;, kr.getText());</span>
+<span class="fc" id="L181">			keywords.add(entry);</span>
+		}
+<span class="fc" id="L183">		JSONObject list = new JSONObject();</span>
+<span class="fc" id="L184">		list.put(&quot;keywords&quot;, keywords);</span>
+		try {
+<span class="fc" id="L186">			FileWriter fileWriter = new FileWriter(&quot;data/keywords.json&quot;);</span>
+<span class="fc" id="L187">			fileWriter.write(list.toJSONString());</span>
+<span class="fc" id="L188">			fileWriter.flush();</span>
+<span class="fc" id="L189">			fileWriter.close();</span>
+<span class="pc" id="L190">		} catch (Exception e) {</span>
+<span class="nc" id="L191">			e.printStackTrace();</span>
+		}
+<span class="fc" id="L193">		System.out.println(&quot;finish printing keywords&quot;);</span>
+
+<span class="fc" id="L195">	}</span>
+
+	/**
+	 * This method prints out a txt file prints out header of a script. #general
+	 * overall sentiment of a given script; #categories, script contents into a
+	 * hierarchy, each with a score.
+	 * 
+	 * @param script
+	 * @throws IOException
+	 */
+	public void printMainPhotos(Script script) throws IOException {
+<span class="fc bfc" id="L206" title="All 2 branches covered.">		if (script == null) {</span>
+<span class="fc" id="L207">			throw new IllegalArgumentException();</span>
+		}
+<span class="fc" id="L209">		System.out.println(&quot;generating main photos&quot;);</span>
+<span class="fc" id="L210">		ArrayList&lt;Persona&gt; mainCharacters = script.getMainCharacters();</span>
+<span class="fc" id="L211">		PrintWriter out = new PrintWriter(new File(&quot;data/charactersPhotos.txt&quot;));</span>
+<span class="fc" id="L212">		out.println(script.getName());</span>
+<span class="fc bfc" id="L213" title="All 2 branches covered.">		for (Persona persona : mainCharacters) {</span>
+<span class="fc" id="L214">			out.println(persona.getName());</span>
+<span class="fc" id="L215">			out.println(persona.getImage());</span>
+		}
+<span class="fc" id="L217">		Double sentiment = script.getSentiment();</span>
+<span class="fc" id="L218">		out.print(&quot;#sentiment&quot; + &quot;\t&quot;);</span>
+<span class="fc" id="L219">		out.println(sentiment);</span>
+<span class="fc" id="L220">		AnalysisResults cgJson = script.getCategories();</span>
+<span class="fc bfc" id="L221" title="All 2 branches covered.">		for (CategoriesResult cr : cgJson.getCategories()) {</span>
+<span class="fc" id="L222">			out.print(&quot;#&quot;);</span>
+<span class="fc" id="L223">			out.print(cr.getLabel() + &quot;\t&quot;);</span>
+<span class="fc" id="L224">			out.println(cr.getScore());</span>
+		}
+<span class="fc" id="L226">		System.out.println(&quot;end print main photos&quot;);</span>
+		
+<span class="fc" id="L228">		out.close();</span>
+<span class="fc" id="L229">	}</span>
+	
+	/**
+	 * This method print emotional time line of three main characters
+	 * @param script the whole script
+	 * @throws IOException
+	 */
+
+	public void printTimeLine(Script script) throws IOException {
+<span class="fc bfc" id="L238" title="All 2 branches covered.">		if (script == null) {</span>
+<span class="fc" id="L239">			throw new IllegalArgumentException();</span>
+		}
+<span class="fc" id="L241">		System.out.println(&quot;generating timeline&quot;);</span>
+		
+<span class="fc bfc" id="L243" title="All 2 branches covered.">		for (int i = 0; i &lt; 3; i++) {</span>
+<span class="fc" id="L244">			HashMap&lt;Integer, HashMap&lt;String, Double&gt;&gt; lineEmotionTone =  script.getMainCharacters().get(i).getEmotionTimeline();</span>
+<span class="fc bfc" id="L245" title="All 2 branches covered.">			if (i == 0) {</span>
+<span class="fc" id="L246">			timelineFormat(lineEmotionTone, &quot;data/protagonist.tsv&quot;);</span>
+<span class="fc bfc" id="L247" title="All 2 branches covered.">			} else if (i == 1){</span>
+<span class="fc" id="L248">				timelineFormat(lineEmotionTone, &quot;data/secondMain.tsv&quot;);</span>
+<span class="fc" id="L249">			} else {</span>
+<span class="fc" id="L250">				timelineFormat(lineEmotionTone, &quot;data/thirdMain.tsv&quot;);</span>
+			}
+		}
+			
+<span class="fc" id="L254">		System.out.println(&quot;finish printing timeline&quot;);</span>
+<span class="fc" id="L255">	}</span>
+
+	/**
+	 * This method creates a template to print a character's emotion timeline
+	 * @param lineEmotionTone a character's emotion tone timeline in JSON format
+	 * @param filepath path and name of the file to write
+	 * @throws FileNotFoundException
+	 */
+	private void timelineFormat(HashMap&lt;Integer, HashMap&lt;String, Double&gt;&gt; lineEmotionTone, String filepath)
+			throws FileNotFoundException {
+<span class="fc" id="L265">		PrintWriter pw = new PrintWriter(filepath);</span>
+<span class="fc" id="L266">		pw.println(&quot;emotion&quot; + &quot;\t&quot; + &quot;line&quot; + &quot;\t&quot; + &quot;value&quot;);</span>
+<span class="fc bfc" id="L267" title="All 2 branches covered.">		for (int i : lineEmotionTone.keySet()) {</span>
+<span class="fc bfc" id="L268" title="All 2 branches covered.">			if (lineEmotionTone.get(i).containsKey(&quot;Anger&quot;)) {</span>
+<span class="fc" id="L269">				pw.println(&quot;1&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + lineEmotionTone.get(i).get(&quot;Anger&quot;) * 100);</span>
+<span class="fc" id="L270">				pw.println(&quot;2&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+<span class="fc" id="L271">				pw.println(&quot;3&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+<span class="fc" id="L272">				pw.println(&quot;4&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+<span class="fc" id="L273">				pw.println(&quot;5&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+<span class="fc bfc" id="L274" title="All 2 branches covered.">			} else if (lineEmotionTone.get(i).containsKey(&quot;Fear&quot;)) {</span>
+<span class="fc" id="L275">				pw.println(&quot;2&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + lineEmotionTone.get(i).get(&quot;Fear&quot;) * 100);</span>
+<span class="fc" id="L276">				pw.println(&quot;1&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+<span class="fc" id="L277">				pw.println(&quot;3&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+<span class="fc" id="L278">				pw.println(&quot;4&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+<span class="fc" id="L279">				pw.println(&quot;5&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+<span class="fc bfc" id="L280" title="All 2 branches covered.">			} else if (lineEmotionTone.get(i).containsKey(&quot;Joy&quot;)) {</span>
+<span class="fc" id="L281">				pw.println(&quot;3&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + lineEmotionTone.get(i).get(&quot;Joy&quot;) * 100);</span>
+<span class="fc" id="L282">				pw.println(&quot;2&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+<span class="fc" id="L283">				pw.println(&quot;1&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+<span class="fc" id="L284">				pw.println(&quot;4&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+<span class="fc" id="L285">				pw.println(&quot;5&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+<span class="fc bfc" id="L286" title="All 2 branches covered.">			} else if (lineEmotionTone.get(i).containsKey(&quot;Sadness&quot;)) {</span>
+<span class="fc" id="L287">				pw.println(&quot;4&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + lineEmotionTone.get(i).get(&quot;Sadness&quot;) * 100);</span>
+<span class="fc" id="L288">				pw.println(&quot;2&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+<span class="fc" id="L289">				pw.println(&quot;3&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+<span class="fc" id="L290">				pw.println(&quot;1&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+<span class="fc" id="L291">				pw.println(&quot;5&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+<span class="fc bfc" id="L292" title="All 2 branches covered.">			} else if (lineEmotionTone.get(i).containsKey(&quot;Disgust&quot;)) {</span>
+<span class="fc" id="L293">				pw.println(&quot;5&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + lineEmotionTone.get(i).get(&quot;Disgust&quot;) * 100);</span>
+<span class="fc" id="L294">				pw.println(&quot;2&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+<span class="fc" id="L295">				pw.println(&quot;3&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+<span class="fc" id="L296">				pw.println(&quot;4&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+<span class="fc" id="L297">				pw.println(&quot;1&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+<span class="fc" id="L298">			} else {</span>
+<span class="fc" id="L299">				pw.println(&quot;1&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+<span class="fc" id="L300">				pw.println(&quot;2&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+<span class="fc" id="L301">				pw.println(&quot;3&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+<span class="fc" id="L302">				pw.println(&quot;4&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+<span class="fc" id="L303">				pw.println(&quot;5&quot; + &quot;\t&quot; + (i + 1) + &quot;\t&quot; + 0);</span>
+			}
+		}
+<span class="fc" id="L306">		pw.close();</span>
+<span class="fc" id="L307">	}</span>
+	
+	/**
+	 * This method prints out main characters and their occurrences
+	 * @param script the whole script
+	 * @throws IOException
+	 */
+	public void printOccurrences(Script script) throws IOException {
+<span class="fc bfc" id="L315" title="All 2 branches covered.">		if (script == null) {</span>
+<span class="fc" id="L316">			throw new IllegalArgumentException();</span>
+		}
+<span class="fc" id="L318">		  System.out.println(&quot;generating occurrences&quot;);</span>
+<span class="fc" id="L319">		  PrintWriter pw = new PrintWriter(&quot;data/occurrences.csv&quot;);</span>
+<span class="fc" id="L320">		  pw.println(&quot;name,occurences&quot;);</span>
+<span class="fc bfc" id="L321" title="All 2 branches covered.">		  for (Persona p: script.getMainCharacters()) {</span>
+<span class="fc" id="L322">		   pw.println(p.getName() + &quot;,&quot; + p.getOccurrence());</span>
+		  }
+<span class="fc" id="L324">		  pw.close();</span>
+<span class="fc" id="L325">		  System.out.println(&quot;finish printing occurrences&quot;);</span>
+<span class="fc" id="L326">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span>script (1) (Dec 17, 2017 6:17:52 PM)</div></body></html>

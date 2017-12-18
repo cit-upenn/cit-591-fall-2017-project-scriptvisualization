@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Script.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">script (1) (Dec 17, 2017 6:17:52 PM)</a> &gt; <a href="../../index.html" class="el_group">scriptVisualization</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">script</a> &gt; <span class="el_source">Script.java</span></div><h1>Script.java</h1><pre class="source lang-java linenums">package script;
+
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.AnalysisResults;
+
+/**
+ * This class represents a script
+ * A script has all information that is needed for webpage visualization
+ * @author yueyin, syou
+ *
+ */
+public class Script {
+
+	private String name;
+	private String content;
+	private Relationships relationgraph;
+	private BufferedImage poster;
+
+	private ArrayList&lt;Persona&gt; mainCharacters;
+	private AnalysisResults categories;
+	private AnalysisResults keywords;
+	private double sentiment;
+
+	/**
+	 * constructor without param
+	 */
+<span class="nc" id="L29">	public Script() {</span>
+
+<span class="nc" id="L31">	}</span>
+
+	/**
+	 * constructor with fields
+	 * 
+	 * @param name
+	 *            name of the script
+	 * @param content
+	 *            all written words of the script
+	 * @param relationgraph
+	 *            graph of relationships between characters
+	 * @param poster
+	 *            poster of the film
+	 * @param mainCharacters
+	 *            top ten main characters of the script
+	 * @param keywords
+	 *            keywords of the script
+	 * @param categories
+	 *            three categories of the script
+	 * @param sentiment
+	 *            overall sentiment of the script
+	 */
+	public Script(String name, String content, Relationships relationgraph, BufferedImage poster,
+			ArrayList&lt;Persona&gt; mainCharacters, AnalysisResults keywords, AnalysisResults categories, double sentiment) {
+<span class="fc" id="L55">		super();</span>
+<span class="fc" id="L56">		this.name = name;</span>
+<span class="fc" id="L57">		this.content = content;</span>
+<span class="fc" id="L58">		this.relationgraph = relationgraph;</span>
+<span class="fc" id="L59">		this.poster = poster;</span>
+
+<span class="fc" id="L61">		this.mainCharacters = mainCharacters;</span>
+<span class="fc" id="L62">		this.keywords = keywords;</span>
+<span class="fc" id="L63">		this.categories = categories;</span>
+<span class="fc" id="L64">		this.sentiment = sentiment;</span>
+<span class="fc" id="L65">	}</span>
+
+	public String getName() {
+<span class="fc" id="L68">		return name;</span>
+	}
+
+	public void setName(String name) {
+<span class="nc" id="L72">		this.name = name;</span>
+<span class="nc" id="L73">	}</span>
+
+	public String getContent() {
+<span class="nc" id="L76">		return content;</span>
+	}
+
+
+	public void setContent(String content) {
+<span class="nc" id="L81">		this.content = content;</span>
+<span class="nc" id="L82">	}</span>
+
+
+	public Relationships getRelationgraph() {
+<span class="fc" id="L86">		return relationgraph;</span>
+	}
+
+
+	public void setRelationgraph(Relationships relationgraph) {
+<span class="nc" id="L91">		this.relationgraph = relationgraph;</span>
+<span class="nc" id="L92">	}</span>
+
+
+	public BufferedImage getPost() {
+<span class="nc" id="L96">		return poster;</span>
+	}
+
+
+	public void setPost(BufferedImage post) {
+<span class="nc" id="L101">		this.poster = post;</span>
+<span class="nc" id="L102">	}</span>
+
+	public ArrayList&lt;Persona&gt; getMainCharacters() {
+<span class="fc" id="L105">		return mainCharacters;</span>
+	}
+
+	public void setMainCharacters(ArrayList&lt;Persona&gt; mainCharacters) {
+<span class="nc" id="L109">		this.mainCharacters = mainCharacters;</span>
+<span class="nc" id="L110">	}</span>
+
+	public AnalysisResults getKeywords() {
+<span class="fc" id="L113">		return keywords;</span>
+	}
+
+	public void setKeywords(AnalysisResults keywords) {
+<span class="nc" id="L117">		this.keywords = keywords;</span>
+<span class="nc" id="L118">	}</span>
+
+	public AnalysisResults getCategories() {
+<span class="fc" id="L121">		return categories;</span>
+	}
+
+	public void setCategories(AnalysisResults categories) {
+<span class="nc" id="L125">		this.categories = categories;</span>
+<span class="nc" id="L126">	}</span>
+
+	public double getSentiment() {
+<span class="fc" id="L129">		return sentiment;</span>
+	}
+
+	public void setSentiment(double sentiment) {
+<span class="nc" id="L133">		this.sentiment = sentiment;</span>
+<span class="nc" id="L134">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span>script (1) (Dec 17, 2017 6:17:52 PM)</div></body></html>

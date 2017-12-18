@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>WatsonCaller.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">script (1) (Dec 17, 2017 6:17:52 PM)</a> &gt; <a href="../../index.html" class="el_group">scriptVisualization</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">script</a> &gt; <span class="el_source">WatsonCaller.java</span></div><h1>WatsonCaller.java</h1><pre class="source lang-java linenums">/**
+ * This class calls IMB Watson API to analyze contents.
+ * Three APIs are used:
+ * Natural Language Processing, Tone Analyzer, Personality Insight.
+ * @author syou
+ */
+package script;
+
+import java.io.IOException;
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.NaturalLanguageUnderstanding;
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.AnalysisResults;
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.AnalyzeOptions;
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.CategoriesOptions;
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.Features;
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.KeywordsOptions;
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.SentimentOptions;
+import com.ibm.watson.developer_cloud.personality_insights.v3.PersonalityInsights;
+import com.ibm.watson.developer_cloud.personality_insights.v3.model.Profile;
+import com.ibm.watson.developer_cloud.personality_insights.v3.model.ProfileOptions;
+import com.ibm.watson.developer_cloud.tone_analyzer.v3.ToneAnalyzer;
+import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.DocumentAnalysis;
+import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.ToneAnalysis;
+import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.ToneOptions;
+
+public class WatsonCaller {
+	/**
+	 * constructor
+	 */
+<span class="fc" id="L29">	public WatsonCaller() {</span>
+
+<span class="fc" id="L31">	}</span>
+
+	/**
+	 * This method gets the tone of a chunk of lines.
+	 * @param contentToAnalyze a chunk of character's lines
+	 * @return JSON object containing tone analysis results
+	 * @throws IOException 
+	 */
+	public DocumentAnalysis getToneOfLines(String contentToAnalyze) throws IOException {
+
+<span class="fc" id="L41">		final String VERSION_DATE = &quot;2016-05-19&quot;;</span>
+<span class="fc" id="L42">		ToneAnalyzer service = new ToneAnalyzer(VERSION_DATE);</span>
+<span class="fc" id="L43">		service.setUsernameAndPassword(Secret.watsonToneUserName, Secret.watsonTonePassword);</span>
+<span class="fc" id="L44">		ToneOptions tonOptions = new ToneOptions.Builder().text(contentToAnalyze).build();</span>
+<span class="fc" id="L45">		ToneAnalysis tone = service.tone(tonOptions).execute();</span>
+<span class="fc" id="L46">		DocumentAnalysis toneDoc = tone.getDocumentTone();</span>
+		// System.out.println(tone.getDocumentTone());
+		// pw.println(toneDoc);
+		// pw.close();
+<span class="fc" id="L50">		return toneDoc;</span>
+
+	}
+
+	/**
+	 * This method gets the personality analysis of a character
+	 * @param personaLines a character's all lines
+	 * @return JSON object containing a character's personality report
+	 */
+	public Profile getPersonality(String personaLines) {
+<span class="fc" id="L60">		PersonalityInsights service = new PersonalityInsights(&quot;2016-10-19&quot;);</span>
+<span class="fc" id="L61">		service.setUsernameAndPassword(Secret.watsonPersonalityUserName, Secret.watsonPersonalityPassword);</span>
+<span class="fc" id="L62">		ProfileOptions options = new ProfileOptions.Builder().text(personaLines).build();</span>
+<span class="fc" id="L63">		Profile profile = service.profile(options).execute();</span>
+<span class="fc" id="L64">		return profile;</span>
+	}
+
+
+	/**
+	 * This method gets the score of sentiments of a chunk of lines.
+	 * This score is used to calculate the relationship between two characters.
+	 * @param scriptContent a chunk of lines between two characters
+	 * @return JSON object containing sentiment report
+	 * @throws IOException
+	 */
+	public AnalysisResults getRelationshipIndicator(String scriptContent) throws IOException {
+
+<span class="fc" id="L77">		final String VERSION_DATE = &quot;2017-02-27&quot;;</span>
+<span class="fc" id="L78">		NaturalLanguageUnderstanding service = new NaturalLanguageUnderstanding(VERSION_DATE);</span>
+<span class="fc" id="L79">		service.setUsernameAndPassword(Secret.watsonNatLanUserName, Secret.watsonNatLanPassword);</span>
+
+
+		// Review the overall sentiment and targeted sentiment of the content.
+<span class="fc" id="L83">		SentimentOptions sentiments = new SentimentOptions.Builder().build();</span>
+<span class="fc" id="L84">		Features stFeatures = new Features.Builder().sentiment(sentiments).build();</span>
+<span class="fc" id="L85">		AnalyzeOptions stParam = new AnalyzeOptions.Builder().text(scriptContent).features(stFeatures).build();</span>
+<span class="fc" id="L86">		AnalysisResults stResults = service.analyze(stParam).execute();</span>
+//		relationshipIndicator.put(&quot;sentiment&quot;, stResults);
+
+		// Analyze the overall emotion and the targeted emotion of the content.
+//		EmotionOptions emotion = new EmotionOptions.Builder().build();
+//		Features emFeatures = new Features.Builder().emotion(emotion).build();
+//		AnalyzeOptions emParam = new AnalyzeOptions.Builder().text(scriptContent).features(emFeatures).build();
+//		AnalysisResults emResult = service.analyze(emParam).execute();
+//		relationshipIndicator.put(&quot;emotion&quot;, emResult);
+
+
+<span class="fc" id="L97">		return stResults;</span>
+	}
+	
+	/**
+	 * This method gets the keywords of a script
+	 * @param scriptContent the whole script
+	 * @return JSON object containing keywords data
+	 * @throws IOException
+	 */
+	public AnalysisResults getKeywords(String scriptContent) throws IOException {
+
+<span class="fc" id="L108">		final String VERSION_DATE = &quot;2017-02-27&quot;;</span>
+<span class="fc" id="L109">		NaturalLanguageUnderstanding service = new NaturalLanguageUnderstanding(VERSION_DATE);</span>
+<span class="fc" id="L110">		service.setUsernameAndPassword(Secret.watsonNatLanUserName, Secret.watsonNatLanPassword);</span>
+
+
+<span class="fc" id="L113">		KeywordsOptions keywords = new KeywordsOptions.Builder().sentiment(false).emotion(false).limit(60).build();</span>
+<span class="fc" id="L114">		Features kwFeatures = new Features.Builder().keywords(keywords).build();</span>
+<span class="fc" id="L115">		AnalyzeOptions kwParam = new AnalyzeOptions.Builder().text(scriptContent).features(kwFeatures).build();</span>
+<span class="fc" id="L116">		AnalysisResults kwResults = service.analyze(kwParam).execute();</span>
+//		naturalLangResult.put(&quot;keywords&quot;, kwResults);
+
+
+<span class="fc" id="L120">		return kwResults;</span>
+	}
+	
+	/**
+	 * This method gets categories of a script
+	 * @param scriptContent the whole script
+	 * @return JSON object containing data of categories
+	 * @throws IOException
+	 */
+	public AnalysisResults getCategoriess(String scriptContent) throws IOException {
+
+<span class="fc" id="L131">		final String VERSION_DATE = &quot;2017-02-27&quot;;</span>
+<span class="fc" id="L132">		NaturalLanguageUnderstanding service = new NaturalLanguageUnderstanding(VERSION_DATE);</span>
+<span class="fc" id="L133">		service.setUsernameAndPassword(Secret.watsonNatLanUserName, Secret.watsonNatLanPassword);</span>
+
+
+<span class="fc" id="L136">		CategoriesOptions categories = new CategoriesOptions();</span>
+<span class="fc" id="L137">		Features cgFeatures = new Features.Builder().categories(categories).build();</span>
+<span class="fc" id="L138">		AnalyzeOptions cgParam = new AnalyzeOptions.Builder().text(scriptContent).features(cgFeatures).build();</span>
+<span class="fc" id="L139">		AnalysisResults cgResults = service.analyze(cgParam).execute();</span>
+
+<span class="fc" id="L141">		return cgResults;</span>
+	}
+	
+	/**
+	 * This method gets the overall sentiment of a script
+	 * @param scriptContent the whole script
+	 * @return JSON object with data of general sentiment
+	 * @throws IOException
+	 */
+	public double getGeneralSentiment(String scriptContent) throws IOException {
+<span class="fc" id="L151">		final String VERSION_DATE = &quot;2017-02-27&quot;;</span>
+<span class="fc" id="L152">		NaturalLanguageUnderstanding service = new NaturalLanguageUnderstanding(VERSION_DATE);</span>
+<span class="fc" id="L153">		service.setUsernameAndPassword(Secret.watsonNatLanUserName, Secret.watsonNatLanPassword);</span>
+		
+<span class="fc" id="L155">		SentimentOptions sentiments = new SentimentOptions.Builder().build();</span>
+<span class="fc" id="L156">		Features stFeatures = new Features.Builder().sentiment(sentiments).build();</span>
+<span class="fc" id="L157">		AnalyzeOptions stParam = new AnalyzeOptions.Builder().text(scriptContent).features(stFeatures).build();</span>
+<span class="fc" id="L158">		AnalysisResults stResults = service.analyze(stParam).execute();</span>
+		
+<span class="fc" id="L160">		return stResults.getSentiment().getDocument().getScore();</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span>script (1) (Dec 17, 2017 6:17:52 PM)</div></body></html>

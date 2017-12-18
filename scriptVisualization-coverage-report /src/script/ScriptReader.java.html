@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ScriptReader.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">script (1) (Dec 17, 2017 6:17:52 PM)</a> &gt; <a href="../../index.html" class="el_group">scriptVisualization</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">script</a> &gt; <span class="el_source">ScriptReader.java</span></div><h1>ScriptReader.java</h1><pre class="source lang-java linenums">package script;
+
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
+
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.AnalysisResults;
+import com.ibm.watson.developer_cloud.tone_analyzer.v3.model.DocumentAnalysis;
+
+/**
+ * This class takes in content of a script, analyzes the content
+ * and insert information needed to Script class
+ * 
+ * @author yueyin, syou
+ *
+ */
+<span class="fc" id="L22">public class ScriptReader {</span>
+
+	ArrayList&lt;ScriptChunk&gt; scriptChunks;
+	Relationships relationgraph;
+	ArrayList&lt;String&gt; stoplist;
+	String scriptName;
+<span class="fc" id="L28">	WatsonCaller wc = new WatsonCaller();</span>
+<span class="fc" id="L29">	WatsonAnalyzer wa = new WatsonAnalyzer();</span>
+
+	/**
+	 * This function returns an analyzed script
+	 * 
+	 * @param content
+	 * @return Script
+	 * @throws IOException
+	 * @throws GeneralSecurityException
+	 */
+	public Script readScript(String content, String scriptName) throws IOException, GeneralSecurityException {
+<span class="fc" id="L40">		this.scriptName = scriptName;</span>
+<span class="fc" id="L41">		scriptChunks = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L42">		splitScriptToChunks(content);</span>
+<span class="fc" id="L43">		this.relationgraph = new Relationships();</span>
+<span class="fc" id="L44">		stoplist = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L45">		addStoplist();</span>
+<span class="fc" id="L46">		analysizeChunks();</span>
+<span class="fc" id="L47">		BufferedImage poster = ImageScraper.getImageGivenUrl(ImageScraper.getPostPathFromTMDB(scriptName));</span>
+		// changed mainCharacters to type ArrayList
+<span class="fc" id="L49">		ArrayList&lt;Persona&gt; mainCharacters = getMainCharacters();</span>
+<span class="fc" id="L50">		AnalysisResults keywords = wc.getKeywords(content);</span>
+<span class="fc" id="L51">		AnalysisResults categories = wc.getCategoriess(content);</span>
+<span class="fc" id="L52">		Double sentiment = wc.getGeneralSentiment(content);</span>
+<span class="fc" id="L53">		Script script = new Script(scriptName, content, relationgraph, poster, mainCharacters, keywords, categories,sentiment);</span>
+
+<span class="fc" id="L55">		return script;</span>
+	}
+
+	
+	/**
+	  * get top 8 occurrence
+	  * set personal image,emotion timeline and personality
+	  * 
+	  * @return
+	  * @throws IOException
+	  * @throws GeneralSecurityException
+	  */
+	 private ArrayList&lt;Persona&gt; getMainCharacters() throws IOException, GeneralSecurityException {
+<span class="fc" id="L68">	  Set&lt;Persona&gt; characterName = getRelationgraph().getGraph().vertexSet();</span>
+<span class="fc" id="L69">	  ArrayList&lt;Persona&gt; characters = new ArrayList&lt;Persona&gt;();</span>
+<span class="fc" id="L70">	  ArrayList&lt;Persona&gt; mainRoles = new ArrayList&lt;Persona&gt;();</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">	  for (Persona p : characterName) {</span>
+<span class="fc" id="L72">	   characters.add(p);</span>
+	  }
+<span class="fc" id="L74">	  Collections.sort(characters);</span>
+
+<span class="fc bfc" id="L76" title="All 2 branches covered.">	  for (int i = 0; i &lt; 8; i++) {</span>
+<span class="fc" id="L77">	   Persona curr = characters.get(i);</span>
+<span class="fc" id="L78">	   List&lt;String&gt; images = ImageScraper.getImageUrlsFromGoogle(curr.getName() + &quot; &quot; + scriptName);</span>
+<span class="fc" id="L79">	   int index = 0;</span>
+	   while (true) {
+<span class="fc" id="L81">	    String url = images.get(index++);</span>
+<span class="pc bpc" id="L82" title="1 of 2 branches missed.">	    if (url != null) {</span>
+<span class="fc" id="L83">	     curr.setImage(url);</span>
+	     break;
+	    }
+	   }
+<span class="fc" id="L87">	   mainRoles.add(curr);</span>
+	  }
+	  
+	  
+<span class="fc bfc" id="L91" title="All 2 branches covered.">	  for (int i = 0; i &lt; 3; i++) {</span>
+<span class="fc" id="L92">	   int lineCount = 0;</span>
+<span class="fc" id="L93">	   HashMap&lt;Integer, HashMap&lt;String, Double&gt;&gt; lineEmotionTone = new HashMap&lt;Integer, HashMap&lt;String, Double&gt;&gt;();</span>
+<span class="fc" id="L94">	   HashMap&lt;String, HashMap&lt;String, Double&gt;&gt; lineLangTone = new HashMap&lt;String, HashMap&lt;String, Double&gt;&gt;();</span>
+	   HashMap&lt;String, Double&gt; lineEmoScore;
+	   HashMap&lt;String, Double&gt; lineLangScore;
+<span class="fc bfc" id="L97" title="All 2 branches covered.">	   for (String s: characters.get(i).getLines()) {</span>
+<span class="fc" id="L98">	    DocumentAnalysis chunkTone = wc.getToneOfLines(s);</span>
+<span class="fc" id="L99">	     lineEmoScore = wa.lineEmotionToneAnalyzer(chunkTone);</span>
+<span class="fc" id="L100">	    lineEmotionTone.put(lineCount++, lineEmoScore);</span>
+<span class="fc" id="L101">	     lineLangScore = wa.lineLangToneAnalyzer(chunkTone);</span>
+<span class="fc" id="L102">	    lineLangTone.put(s, lineLangScore);</span>
+	   }
+<span class="fc" id="L104">	   characters.get(i).setEmotionTimeline(lineEmotionTone);</span>
+	  }
+	  
+<span class="fc" id="L107">	  Persona protagonist = characters.get(0);</span>
+<span class="fc" id="L108">	  StringBuilder protagonistLines = new StringBuilder();</span>
+<span class="fc bfc" id="L109" title="All 2 branches covered.">	  for (String s: protagonist.getLines()) {</span>
+<span class="fc" id="L110">	   protagonistLines.append(s);</span>
+	  }
+<span class="fc" id="L112">	  protagonist.setPersonality(wc.getPersonality(protagonistLines.toString()));</span>
+	  
+<span class="fc" id="L114">	  return mainRoles;</span>
+	 }
+
+	/**
+	 * This function add some words that are impossible to be a name
+	 */
+	private void addStoplist() {
+		// TODO Auto-generated method stub
+<span class="fc" id="L122">		stoplist.add(&quot;omit&quot;);</span>
+<span class="fc" id="L123">		stoplist.add(&quot;dissovle&quot;);</span>
+<span class="fc" id="L124">		stoplist.add(&quot;fade&quot;);</span>
+<span class="fc" id="L125">		stoplist.add(&quot;ext&quot;);</span>
+<span class="fc" id="L126">		stoplist.add(&quot;int&quot;);</span>
+<span class="fc" id="L127">		stoplist.add(&quot;day&quot;);</span>
+<span class="fc" id="L128">		stoplist.add(&quot;...&quot;);</span>
+<span class="fc" id="L129">		stoplist.add(&quot;cut&quot;);</span>
+<span class="fc" id="L130">		stoplist.add(&quot;close&quot;);</span>
+<span class="fc" id="L131">		stoplist.add(&quot;med&quot;);</span>
+<span class="fc" id="L132">		stoplist.add(&quot;-&quot;);</span>
+<span class="fc" id="L133">		stoplist.add(&quot;shot&quot;);</span>
+<span class="fc" id="L134">	}</span>
+
+	/**
+	 * This function analyzes the script chunk by chunk
+	 * 
+	 * @throws IOException
+	 */
+	private void analysizeChunks() throws IOException {
+<span class="fc" id="L142">		Persona prev = null;</span>
+		//for (int i = 0; i &lt; 60; i++) {
+<span class="fc bfc" id="L144" title="All 2 branches covered.">		for (ScriptChunk chunk : scriptChunks) {</span>
+			//ScriptChunk chunk = scriptChunks.get(i);
+<span class="fc bfc" id="L146" title="All 2 branches covered.">			if (!isValidName(chunk.name)) {</span>
+<span class="fc" id="L147">				prev = null;</span>
+<span class="fc" id="L148">				continue;</span>
+			}
+<span class="fc" id="L150">			Persona curr = relationgraph.createVertex(chunk.name);</span>
+<span class="fc" id="L151">			curr.getLines().add(chunk.dialogue);</span>
+<span class="fc bfc" id="L152" title="All 4 branches covered.">			if (prev != null &amp;&amp; prev != curr) {</span>
+<span class="fc" id="L153">				double relation = 0;</span>
+				try {
+<span class="fc" id="L155">					relation = wc.getRelationshipIndicator(chunk.dialogue).getSentiment().getDocument().getScore();</span>
+<span class="fc" id="L156">				}</span>
+				// catch something like unsupported text language
+				// e.g. this exception would catch April 14, 1912.
+<span class="fc" id="L159">				catch (com.ibm.watson.developer_cloud.service.exception.BadRequestException bre) {</span>
+<span class="fc" id="L160">					relation = 0;</span>
+<span class="nc" id="L161">				} catch (com.ibm.watson.developer_cloud.service.exception.ServiceResponseException sre) {</span>
+<span class="nc" id="L162">					relation = 0;</span>
+				}
+
+<span class="fc" id="L165">				relationgraph.createEdge(prev, curr, relation);</span>
+			}
+<span class="fc" id="L167">			prev = curr;</span>
+		}
+
+<span class="fc" id="L170">	}</span>
+
+	/**
+	 * this method determines whether or not a given name is valid
+	 * @param name a name
+	 * @return true if valid, false otherwise
+	 */
+	private boolean isValidName(String name) {
+
+		// TODO Auto-generated method stub
+<span class="fc" id="L180">		String lowerName = name.toLowerCase();</span>
+<span class="fc bfc" id="L181" title="All 2 branches covered.">		for (String s : stoplist) {</span>
+<span class="fc bfc" id="L182" title="All 2 branches covered.">			if (lowerName.contains(s))</span>
+<span class="fc" id="L183">				return false;</span>
+		}
+		// if contains number, return false;
+<span class="fc bfc" id="L186" title="All 2 branches covered.">		if (lowerName.matches(&quot;.*\\d.*&quot;))</span>
+<span class="fc" id="L187">			return false;</span>
+<span class="fc" id="L188">		return true;</span>
+	}
+
+	/**
+	 * This method but whole script into chunks. Each chunk is composed of name,
+	 * dialogue and narrative
+	 * 
+	 * @param content
+	 */
+	private void splitScriptToChunks(String content) {
+<span class="fc" id="L198">		String[] chunks = content.split(&quot;&lt;b&gt;&quot;);</span>
+<span class="fc bfc" id="L199" title="All 2 branches covered.">		for (String chunk : chunks) {</span>
+<span class="fc bfc" id="L200" title="All 2 branches covered.">			if (chunk.length() == 0)</span>
+<span class="fc" id="L201">				continue;</span>
+<span class="fc" id="L202">			chunk = chunk.replaceAll(&quot;\\(.+\\)&quot;, &quot;&quot;);</span>
+<span class="fc" id="L203">			String[] splitChunk = chunk.split(&quot;\\n&quot;);</span>
+<span class="fc bfc" id="L204" title="All 2 branches covered.">			if (splitChunk.length &lt; 2)</span>
+<span class="fc" id="L205">				continue;</span>
+<span class="fc" id="L206">			String name = splitChunk[0].trim();</span>
+<span class="fc" id="L207">			StringBuilder dialog = new StringBuilder();</span>
+<span class="fc" id="L208">			StringBuilder narra = new StringBuilder();</span>
+<span class="fc" id="L209">			int linNumber = 1;</span>
+<span class="fc bfc" id="L210" title="All 2 branches covered.">			while (splitChunk[linNumber].length() == 0)</span>
+<span class="fc" id="L211">				linNumber++;</span>
+<span class="fc bfc" id="L212" title="All 2 branches covered.">			for (; linNumber &lt; splitChunk.length; linNumber++) {</span>
+<span class="fc bfc" id="L213" title="All 2 branches covered.">				if (splitChunk[linNumber].length() == 0)</span>
+<span class="fc" id="L214">					break;</span>
+<span class="fc" id="L215">				dialog.append(splitChunk[linNumber]);</span>
+			}
+<span class="fc bfc" id="L217" title="All 2 branches covered.">			for (; linNumber &lt; splitChunk.length; linNumber++) {</span>
+<span class="fc" id="L218">				narra.append(splitChunk[linNumber]);</span>
+			}
+<span class="fc" id="L220">			ScriptChunk schunk = new ScriptChunk(name, dialog.toString(), narra.toString());</span>
+<span class="fc" id="L221">			scriptChunks.add(schunk);</span>
+
+		}
+<span class="fc" id="L224">	}</span>
+
+	/**
+	 * This class represents a chunk of a script
+	 * 
+	 * @author yueyin
+	 *
+	 */
+	private class ScriptChunk {
+
+		String name;
+		String dialogue;
+		String narrative;
+
+<span class="fc" id="L238">		public ScriptChunk(String name, String dialogue, String narrative) {</span>
+<span class="fc" id="L239">			this.name = name;</span>
+<span class="fc" id="L240">			this.dialogue = dialogue;</span>
+<span class="fc" id="L241">			this.narrative = narrative;</span>
+<span class="fc" id="L242">		}</span>
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.lang.Object#toString()
+		 */
+		@Override
+		public String toString() {
+<span class="nc" id="L251">			return &quot;name= &quot; + name + &quot;\ndialogue= &quot; + dialogue + &quot;\nnarrative= &quot; + narrative;</span>
+		}
+
+	}
+
+	public Relationships getRelationgraph() {
+<span class="fc" id="L257">		return relationgraph;</span>
+	}
+
+	public void setRelationgraph(Relationships relationgraph) {
+<span class="nc" id="L261">		this.relationgraph = relationgraph;</span>
+<span class="nc" id="L262">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span>script (1) (Dec 17, 2017 6:17:52 PM)</div></body></html>

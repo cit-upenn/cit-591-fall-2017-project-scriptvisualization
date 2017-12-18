@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ImageScraper.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">script (1) (Dec 17, 2017 6:17:52 PM)</a> &gt; <a href="../../index.html" class="el_group">scriptVisualization</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">script</a> &gt; <span class="el_source">ImageScraper.java</span></div><h1>ImageScraper.java</h1><pre class="source lang-java linenums">package script;
+
+ 
+ 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.security.GeneralSecurityException;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.imageio.ImageIO;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.services.customsearch.Customsearch;
+ 
+import com.google.api.services.customsearch.CustomsearchRequestInitializer;
+import com.google.api.services.customsearch.model.Result;
+import com.google.api.services.customsearch.model.Search;
+ 
+import org.jsoup.select.Elements;
+/**
+ * This class retrieves images from Google using Google Customer Search API
+ * @author yueyin
+ *
+ */
+<span class="nc" id="L34">public class ImageScraper {</span>
+	
+	private static final String searchEngineID = Secret.searchEngineID;
+	private static final String googleAPIkey = Secret.googleAPIkey;
+	private static final String moviedbKey = Secret.moviedbKey;
+	
+	
+	/**
+	 * Get a list of images' urls given search key
+	 * @param searchQuery
+	 * @return list of urls
+	 * @throws GeneralSecurityException
+	 * @throws IOException
+	 */
+	public static List&lt;String&gt; getImageUrlsFromGoogle(String searchQuery) throws GeneralSecurityException, IOException {
+		 
+<span class="fc" id="L50">        List&lt;String&gt; images = new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L51">        Customsearch cs = new Customsearch.Builder(GoogleNetHttpTransport.newTrustedTransport(), JacksonFactory.getDefaultInstance(), null) </span>
+<span class="fc" id="L52">        					.setApplicationName(&quot;scriptVisualization&quot;)</span>
+<span class="fc" id="L53">        					.setGoogleClientRequestInitializer(new CustomsearchRequestInitializer(googleAPIkey)) </span>
+<span class="fc" id="L54">        					.build();</span>
+
+        //Set search parameter
+<span class="fc" id="L57">        Customsearch.Cse.List list = cs.cse().list(searchQuery).setCx(searchEngineID).setSearchType(&quot;image&quot;); </span>
+
+        //Execute search
+<span class="fc" id="L60">        Search result = list.execute();</span>
+<span class="fc" id="L61">        List&lt;Result&gt; results = result.getItems();</span>
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">        if(results == null) return null;</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        for(Result r : results) {</span>
+<span class="fc" id="L64">        		images.add(r.getLink());</span>
+        }
+<span class="fc" id="L66">        return images;</span>
+         
+	}
+	
+	/**
+	 * This function get the url of the movie post from the movie db
+	 * @param moviename
+	 * @return
+	 * @throws IOException
+	 */
+	public static String getPostPathFromTMDB(String moviename) throws IOException{
+		
+<span class="fc" id="L78">		String query = &quot;https://api.themoviedb.org/3/search/movie?api_key=&quot; + moviedbKey + &quot;&amp;query=&quot; + moviename;</span>
+<span class="fc" id="L79">		Document doc = Jsoup.connect(query).ignoreContentType(true).get();</span>
+<span class="fc" id="L80">		Elements json = doc.getElementsByTag(&quot;body&quot;);</span>
+<span class="fc" id="L81">		String result = &quot;&quot;;</span>
+<span class="pc bpc" id="L82" title="1 of 2 branches missed.">		if(!json.hasText()) return null;</span>
+<span class="fc" id="L83">		result = json.text();</span>
+<span class="fc" id="L84">		JSONObject o = new JSONObject(result);</span>
+		 
+<span class="fc" id="L86">		JSONArray movies = o.getJSONArray(&quot;results&quot;);</span>
+<span class="fc bfc" id="L87" title="All 2 branches covered.">		if(movies.isNull(0)) return null;</span>
+<span class="fc" id="L88">		JSONObject movie = (JSONObject) movies.get(0);</span>
+<span class="fc" id="L89">		String path = movie.getString(&quot;poster_path&quot;);</span>
+<span class="fc" id="L90">		return &quot;https://image.tmdb.org/t/p/w1280&quot; + path;</span>
+		
+	}
+	
+	/**
+	 * get image given url
+	 * @param link
+	 * @return image
+	 * @throws IOException
+	 */
+	public static BufferedImage getImageGivenUrl(String link) throws IOException {
+<span class="fc" id="L101">		URL url = new URL(link);</span>
+	 
+<span class="fc" id="L103">		 HttpURLConnection httpcon = (HttpURLConnection) url.openConnection(); </span>
+<span class="fc" id="L104">		 httpcon.addRequestProperty(&quot;User-Agent&quot;, &quot;&quot;); </span>
+<span class="fc" id="L105">		 BufferedImage bufferImage = ImageIO.read(httpcon.getInputStream());</span>
+<span class="fc" id="L106">		return bufferImage;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span>script (1) (Dec 17, 2017 6:17:52 PM)</div></body></html>
