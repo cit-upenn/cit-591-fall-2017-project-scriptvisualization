@@ -53,9 +53,19 @@
        
             <!-- Main component for a primary marketing message or call to action-->
 <h2></h2>
-<br>
-    <font color="#666666"> 
-    </font> 
+    <div style="background:transparent !important" class="jumbotron">
+      <div class="row">
+            <div class="col-sm-8"> 
+
+              <div class="card-block" id="tags">
+                <h2 class="card-title">Header</h2>
+                 <p class="card-text">An overall sentiment of a given script with a score.
+Categorize a script into a hierarchy that is 5 levels deep with a relevance score.</p>
+              </div>
+            </div>
+       
+      </div> 
+    </div>
 
     <div style="background:transparent !important" class="jumbotron">
       <div class="row">
@@ -65,7 +75,7 @@
             <div class="col-sm-2"> 
               <div class="card-block">
                   <h2 class="card-title">KeyWords</h2>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <p class="card-text">Important keywords in script sized by relevance.</p>
               </div>
             </div>
        
@@ -76,8 +86,8 @@
       <div class="row">
             <div class="col-sm-4"> 
               <div class="card-block">
-                  <h2 class="card-title">Relation Graph</h2>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <h2 class="card-title">Relationship Graph</h2>
+                  <p class="card-text">Relationship of all characters in a script visualized as a force-directed graph. Each vertex is a character. Top three main characters are of orange, top ten main characters are of light blue, and peripheral characters are of dark blue. Each edge is assigned a force indicator, calculated using the Natural Language Processing API, symbolizing the relationship between two roles.</p>
               </div>
             </div>
             <div class="col-sm-8"> 
@@ -95,8 +105,8 @@
             </div>
             <div class="col-sm-4"> 
               <div class="card-block">
-                  <h2 class="card-title">Occurences</h2>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <h2 class="card-title">Bubble Graph</h2>
+                  <p class="card-text">Names of main characters sized by their occurrences.</p>
               </div>
             </div>
        
@@ -115,7 +125,7 @@ var pack = d3.pack()
     .size([width, height])
     .padding(1.5);
 
-d3.csv("occurences.csv", function(d) {
+d3.csv("occurrences.csv", function(d) {
   d.occurences = +d.occurences;
   if (d.occurences) return d;
 }, function(error, classes) {
@@ -168,7 +178,7 @@ d3.csv("occurences.csv", function(d) {
 
  <script type="text/javascript">
   var characters;
-    readTextFile("characters.txt");
+    readTextFile("charactersPhotos.txt");
     function readTextFile(file){
       var rawFile = new XMLHttpRequest();
       rawFile.open("GET", file, false);
@@ -179,9 +189,10 @@ d3.csv("occurences.csv", function(d) {
                 characters = allText.split(/\r\n|\n/);
                 console.log(characters.length);
                 document.getElementsByTagName("h2")[0].innerHTML = characters[0];
-                var list = document.getElementsByTagName("font")[0];
+                var list = document.getElementById("tags");
                 for(var i = 17; i< characters.length; i++){
-                    var tag = document.createElement("h4");
+                    var tag = document.createElement("p");
+                    tag.class="card-text";
                     tag.innerHTML = characters[i];
                     console.log(characters[i])
                     list.appendChild(tag);

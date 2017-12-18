@@ -1,4 +1,0 @@
-#sentiment	-0.169644
-#/news	0.709062
-#/law, govt and politics/armed forces/air force	0.475799
-#/art and entertainment/humor	0.193475

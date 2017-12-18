@@ -1,6 +1,10 @@
 package script;
 
-
+/**
+ * This enum class represents all genres available
+ * @author yueyin
+ *
+ */
 public enum Genre {
 	
 	ACTION,ADVENTURE, ANIMATION, COMEDY, CRIME, DRAMA, FAMILY, FANTASY, 
