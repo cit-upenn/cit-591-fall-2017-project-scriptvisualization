@@ -18,6 +18,7 @@ The project is a moive script visualization application. It scratches the script
 Technologies utilized: Java, Google Customer Search API, IBM Watson API, TMDb API, WindowBuilder, Jsoup, JGrapht, JavaScript, HTML, Bootstrap
 
 Visualization dirived from:
+
 Copyright (c) 2016, Tom May 
 
 Copyright (c) 2013, Jason Davies.
