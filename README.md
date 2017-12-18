@@ -1,4 +1,5 @@
-Movie Script Visualization Project
+## Movie Script Visualization Project
+
 ![alt text](https://github.com/cit-upenn/cit-591-fall-2017-project-scriptvisualization/blob/master/image/screenshot1.png)
 
 This program was created as a final project of CIT 591 Intro to Software Engineering, University of Pennsylvannia.
