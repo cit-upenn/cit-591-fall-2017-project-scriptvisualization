@@ -22,13 +22,14 @@ WASTON PERSONALITY ANALYZER
 WASTON NATURAL LANGUAGE UNDERSTANDING ANALYZER
 GOOGLE CUSTOM SEARCH ENGINE ID
 GOOGLE CUSTOM SEARCH API 
+MOVIEDB API
 
-Sample results:
+## Sample results:
 
 ![alt text](image/Frozen-Characters.png)
 ![alt text](image/script.jpeg)
 
-Technologies utilized: Java, Google Customer Search API, IBM Watson API, TMDb API, WindowBuilder, Jsoup, JGrapht, JavaScript, HTML, Bootstrap
+Technologies utilized: Java, IBM Watson API, Google Customer Search API,  TMDb API, WindowBuilder, Jsoup, JGrapht, JavaScript, HTML, Bootstrap
 Visualization dirived from:
 
 Copyright (c) 2016, Tom May 
