@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+  <head>
+     <title>Script Visualize</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <!-- Custom styles for this template-->
+ 
+     
+    <script src = "d3js/d3v3.js"></script>
+    <script src = "d3js/d3.layout.cloud.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    
+   <style>
+
+.links line {
+  stroke: #999;
+  stroke-opacity: 0.6;
+}
+
+.nodes circle {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+</style>
+  </head>
+
+
+  <body>
+     <nav role="navigation" class="navbar navbar-inverse navbar-extra navbar-fixed-top">
+      
+        <div class="container">   
+        <a class="navbar-brand" href="#">ScriptVisual</a>  
+          <div class="navbar-header">
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                <li>
+                  <a href="script.html">Script</a>
+                   
+                </li>
+                <li>
+                  <a href="mainCharacters.html">Characters</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+      
+    <div class="container">
+      <br><br><br>
+       
+            <!-- Main component for a primary marketing message or call to action-->
+<h2></h2>
+    <div style="background:transparent !important" class="jumbotron">
+      <div class="row">
+            <div class="col-sm-8"> 
+
+              <div class="card-block" id="tags">
+                <h2 class="card-title">Header</h2>
+                 <p class="card-text">An overall sentiment of a given script with a score.
+Categorize a script into a hierarchy that is 5 levels deep with a relevance score.</p>
+              </div>
+            </div>
+       
+      </div> 
+    </div>
+
+    <div style="background:transparent !important" class="jumbotron">
+      <div class="row">
+            <div class="col-sm-10"> 
+              <div id="keywords"></div>
+            </div>
+            <div class="col-sm-2"> 
+              <div class="card-block">
+                  <h2 class="card-title">KeyWords</h2>
+                  <p class="card-text">Important keywords in script sized by relevance.</p>
+              </div>
+            </div>
+       
+      </div> 
+    </div>
+
+<div style="background:transparent !important" class="jumbotron">
+      <div class="row">
+            <div class="col-sm-4"> 
+              <div class="card-block">
+                  <h2 class="card-title">Relationship Graph</h2>
+                  <p class="card-text">Relationship of all characters in a script visualized as a force-directed graph. Each vertex is a character. Top three main characters are of orange, top ten main characters are of light blue, and peripheral characters are of dark blue. Each edge is assigned a force indicator, calculated using the Natural Language Processing API, symbolizing the relationship between two roles.</p>
+              </div>
+            </div>
+            <div class="col-sm-8"> 
+              <svg width="960" height="600" id="graph"></svg>
+            </div>
+       
+     
+    </div>
+  </div>
+
+ <div style="background:transparent !important" class="jumbotron">
+      <div class="row">
+            <div class="col-sm-8"> 
+              <svg id="occurences" width="600" height="600" font-family="sans-serif" font-size="10" text-anchor="middle"></svg>
+            </div>
+            <div class="col-sm-4"> 
+              <div class="card-block">
+                  <h2 class="card-title">Bubble Graph</h2>
+                  <p class="card-text">Names of main characters sized by their occurrences.</p>
+              </div>
+            </div>
+       
+      </div> 
+    </div>
+<script>
+var sv = d3.select("#occurences"),
+    width = +sv.attr("width"),
+    height = +sv.attr("height");
+
+var format = d3.format(",d");
+
+var color = d3.scaleOrdinal(d3.schemeCategory20c);
+
+var pack = d3.pack()
+    .size([width, height])
+    .padding(1.5);
+
+d3.csv("occurrences.csv", function(d) {
+  d.occurences = +d.occurences;
+  if (d.occurences) return d;
+}, function(error, classes) {
+  if (error) throw error;
+
+  var root = d3.hierarchy({children: classes})
+      .sum(function(d) { return d.occurences; })
+      .each(function(d) {
+        if (name = d.data.name) {
+          var name, i = name.lastIndexOf(".");
+          d.name = name;
+          d.package = name.slice(0, i);
+          d.class = name.slice(i + 1);
+        }
+      });
+
+  var node = sv.selectAll(".node")
+    .data(pack(root).leaves())
+    .enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+  node.append("circle")
+      .attr("name", function(d) { return d.name; })
+      .attr("occurences", function(d) {return d.occurences;})
+      .attr("r", function(d) { return d.r; })
+      .style("fill", function(d) { return color(d.package); });
+
+
+
+  node.append("clipPath")
+      .attr("name", function(d) { return "clip-" + d.name; })
+    .append("use")
+      .attr("xlink:href", function(d) { return "#" + d.name; });
+
+  node.append("text")
+      .attr("clip-path", function(d) { return "url(#clip-" + d.name + ")"; })
+    .selectAll("tspan")
+    .data(function(d) { return d.class.split(/(?=[A-Z][^A-Z])/g); })
+    .enter().append("tspan")
+      .attr("x", 0)
+      .attr("y", function(d, i, nodes) { return 13 + (i - nodes.length / 2 - 0.5) * 10; })
+      .text(function(d) { return d; });
+
+  node.append("title")
+      .text(function(d) { return d.name + "\n" + format(d.occurences); });
+});
+
+</script>
+
+ <script type="text/javascript">
+  var characters;
+    readTextFile("charactersPhotos.txt");
+    function readTextFile(file){
+      var rawFile = new XMLHttpRequest();
+      rawFile.open("GET", file, false);
+      rawFile.onreadystatechange = function (){
+        if(rawFile.readyState === 4){
+            if(rawFile.status === 200 || rawFile.status == 0){
+                var allText = rawFile.responseText;
+                characters = allText.split(/\r\n|\n/);
+                console.log(characters.length);
+                document.getElementsByTagName("h2")[0].innerHTML = characters[0];
+                var list = document.getElementById("tags");
+                for(var i = 17; i< characters.length; i++){
+                    var tag = document.createElement("p");
+                    tag.class="card-text";
+                    tag.innerHTML = characters[i];
+                    console.log(characters[i])
+                    list.appendChild(tag);
+                }
+            }
+        }
+    }
+    rawFile.send(null);
+    rawFile.abort();
+}
+
+  var width = 600,
+  height = 600;
+    var keyword_list;
+    var fill = d3d3.scale.category20c();
+
+    var keywordScale = d3d3.scale.linear().range([10,60]);
+    d3d3.json("keywords.json", function (json) {
+        keyword_list = json["keywords"]
+
+        keywordScale.domain([
+          d3d3.min(keyword_list, function(d) {return d.size;}),
+          d3d3.max(keyword_list, function(d) {return d.size;})
+          ])
+
+
+        d3d3.layout.cloud().size([width, height])
+            .words(keyword_list)
+            .padding(5)
+            .rotate(function() {return ~~(Math.random() * 2) * 90;})
+            .font("Impact")
+            .fontSize(function (d) {
+                return keywordScale(d.size);
+            })
+            .on("end", draw)
+            .start();
+    });
+/*
+    <span style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;" data-mce-type="bookmark" class="mce_SELRES_start">﻿</span>
+    */
+    function draw(words) {
+        d3d3.select("#keywords").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate("+(width)/2+","+(height/2)+")")
+            .selectAll("text")
+            .data(words)
+            .enter().append("text")
+            .style("font-size", function (d) {return d.size  + "px";})
+            .style("font-family", "Impact")
+            .style("fill", function (d,i) {return fill(i);})
+            .attr("text-anchor", "middle")
+            .attr("transform", function (d) {
+              return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+            })
+            .text(function (d) {return d.text;});
+    }
+
+
+
+    var svg = d3.select("#graph"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height");
+
+var color = d3.scaleOrdinal(d3.schemeCategory20);
+
+var simulation = d3.forceSimulation()
+    .force("link", d3.forceLink().id(function(d) { return d.id; }))
+    .force("charge", d3.forceManyBody())
+    .force("center", d3.forceCenter(width / 2, height / 2));
+
+d3.json("relationship.json", function(error, graph) {
+  if (error) throw error;
+
+  var link = svg.append("g")
+      .attr("class", "links")
+    .selectAll("line")
+    .data(graph.links)
+    .enter().append("line")
+      .attr("stroke-width", function(d) { return Math.sqrt(d.value); });
+
+  var node = svg.append("g")
+      .attr("class", "nodes")
+    .selectAll("circle")
+    .data(graph.nodes)
+    .enter().append("circle")
+      .attr("r", 5)
+      .attr("fill", function(d) { return color(d.group); })
+      //.attr("fill", "black")
+      .call(d3.drag()
+          .on("start", dragstarted)
+          .on("drag", dragged)
+          .on("end", dragended));
+
+  node.append("title")
+      .text(function(d) { return d.id; });
+
+  simulation
+      .nodes(graph.nodes)
+      .on("tick", ticked);
+
+  simulation.force("link")
+      .links(graph.links);
+
+  function ticked() {
+    link
+        .attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+    node
+        .attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+  }
+});
+
+function dragstarted(d) {
+  if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+  d.fx = d.x;
+  d.fy = d.y;
+}
+
+function dragged(d) {
+  d.fx = d3.event.x;
+  d.fy = d3.event.y;
+}
+
+function dragended(d) {
+  if (!d3.event.active) simulation.alphaTarget(0);
+  d.fx = null;
+  d.fy = null;
+}
+</script>
+  </body>
+</html>

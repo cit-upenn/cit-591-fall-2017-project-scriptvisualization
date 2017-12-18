@@ -1,0 +1,21 @@
+Frozen-(Disney)
+ANNA
+https://vignette.wikia.nocookie.net/disney/images/9/97/Anna_Render2.png/revision/latest?cb=20160211030147
+KRISTOFF
+http://simplywallpaper.net/pictures/2013/12/05/Disney-Frozen-Movie-kristoff-wallpaper.jpg
+OLAF
+https://vignette4.wikia.nocookie.net/disney/images/f/f7/Olaf_transparent_pose.png/revision/latest?cb=20160301215157
+HANS
+http://simplywallpaper.net/pictures/2013/12/04/Disney-Frozen-Movie-hans-wallpaper.jpg
+ELSA
+https://vignette.wikia.nocookie.net/disney/images/5/52/Disney-Frozen-Movie-Elsa-HD-Wallpapers1.jpg/revision/latest?cb=20140111062940
+DUKE
+http://simplywallpaper.net/pictures/2013/12/04/Disney-Frozen-Movie-duke-wallpaper.jpg
+OAKEN
+https://vignette.wikia.nocookie.net/disney/images/9/95/OakenFrozen.jpg/revision/latest?cb=20151006091553
+KAI
+https://vignette.wikia.nocookie.net/disney/images/9/9f/Kai_Frozen.jpg/revision/latest/scale-to-width-down/516?cb=20170817021100
+#sentiment	0.00681484
+#/religion and spirituality/christianity	0.637585
+#/food and drink/food/frozen food	0.544058
+#/family and parenting/children	0.415411

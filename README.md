@@ -9,13 +9,18 @@ The project is a moive script visualization application. It scratches the script
 
 1. User searches by typing in a movie name or by choosing a movie genre.
 2. When user makes an accurate search, if a script for that movie exists, that result will show up. When user makes a partial search, up to three related movies will be displayed.
-3. Then user chooses a movie to visualize . The movie script is cut into chunks and character name, dialogue and narrative are extracted from each chunk. Then the script is analyzed chunk by chunk and a graph with characters as vertex and relationships between two characters as edge. Content of the Script is sent to the Watson Natural language Understanding API, Watson Personality Insights API and Watson Toner Analyzer API. After the program finishes analyzing, it out put a series of files locally with data analysis of keywords, emotion, sentiment, personalities and so on, which are futher visualized using Javascript and HTML
-4. The results are displayed on webpage. The main characters, character's emotional changes, and the relationship between characters will be shown with graphs like circles, lines and bars.
-
-![alt text](image/script.jpeg)
-![alt text](image/characters.jpeg)
+3. Then user chooses a movie to visualize . The movie script is cut into chunks and character name, dialogue and narrative are extracted from each chunk. Then the script is analyzed chunk by chunk and a graph with characters as vertex and relationship between two characters as edge. Content of the Script is sent to the Watson Natural language Understanding API, Watson Personality Insights API and Watson Toner Analyzer API. After the program finishes analyzing, it out put a series of files locally with data analysis of keywords, emotion, sentiment, personalities and so on, which are futher visualized using Javascript and HTML
+4. The results are displayed on webpage. Profile pictures of main characters are scraped using Google Customer Search API. The main characters, character's emotional changes, and the relationship between characters will be shown with graphs like circles, lines and bars.
 
 Technologies utilized: Java, Google Customer Search API, IBM Watson API, TMDb API, WindowBuilder, Jsoup, JGrapht, JavaScript, HTML, Bootstrap
+
+For more information about how to use this program, please refer to the User Manual
+
+Sample results:
+
+![alt text](image/Frozen-Characters.png)
+![alt text](image/script.jpeg)
+
 
 Visualization dirived from:
 Copyright (c) 2016, Tom May 
