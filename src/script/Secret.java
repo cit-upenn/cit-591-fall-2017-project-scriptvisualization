@@ -7,8 +7,10 @@ package script;
 public class Secret {
 //	public static final String watsonToneUserName = "028da7b1-3878-4521-8063-3cd09e5684c5";
 //	public static final String watsonTonePassword = "lFCpPJceVbT4";
-	public static final String watsonToneUserName = "822d2493-9a7d-4c58-9e86-22b06c65c5dc";
-	public static final String watsonTonePassword = "7yL6awUBafG3";
+//	public static final String watsonToneUserName = "822d2493-9a7d-4c58-9e86-22b06c65c5dc";
+//	public static final String watsonTonePassword = "7yL6awUBafG3";
+	public static final String watsonToneUserName = "134cc1dc-c5cd-4e63-be48-9bc5e47515e7";
+	public static final String watsonTonePassword = "ClsF4pFta83Q";
 	public static final String watsonPersonalityUserName = "bc376c0c-56ba-4316-a58f-53e9f410cb06";
 	public static final String watsonPersonalityPassword = "b655eZV0Q0bi";
 //	public static final String watsonNatLanUserName = "c064bda6-1714-41d0-9505-a171205ff5c2";
