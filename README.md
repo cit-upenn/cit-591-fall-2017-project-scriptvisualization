@@ -13,7 +13,7 @@ The project is a moive script visualization application. It scratches the script
 4. The results are displayed on webpage. The main characters, character's emotional changes, and the relationship between characters will be shown with graphs like circles, lines and bars.
 
 ![alt text](image/script.jpeg)
-![alt text](image/characters.jpeg)
+![alt text](image/characters.jpg)
 
 Technologies utilized: Java, Google Customer Search API, IBM Watson API, TMDb API, WindowBuilder, Jsoup, JGrapht, JavaScript, HTML, Bootstrap
 
