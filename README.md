@@ -15,7 +15,7 @@ The project is a moive script visualization application. It scratches the script
 
 For more information about how to use this program, please refer to the User Manual
 
-##You need to apply for your own keys!!
+## You need to apply for your own keys!!
 Keys needed to run this program:
 WASTON TONE ANALYZER
 WASTON PERSONALITY ANALYZER
